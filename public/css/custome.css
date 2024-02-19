@@ -1,0 +1,36 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+/* sidebar admin*/
+.sidebar {
+    position: fixed;
+    width: 221px;
+    background-color: blue;
+    height: 100vh;
+}
+.sidebar a {
+    text-decoration: none;
+    color: white;
+}
+.sidebar a:hover {
+    color: blue;
+}
+.sidebar li {
+    list-style: none;
+    padding: 8px 5px;
+}
+.sidebar li:hover {
+    background-color: white;
+    border-radius: 10px;
+    margin: 0;
+}
+.sidebar h5 {
+    font-size: 24px;
+    font-weight: 800;
+    color: white;
+    text-align: center;
+    white-space: nowrap;
+}
+
