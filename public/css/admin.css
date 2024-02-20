@@ -26,6 +26,7 @@ body {
 
 .wrapper {
     display: flex;
+    position: relative;
 }
 
 .main {
@@ -34,18 +35,22 @@ body {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     background-color: #fafbfe;
+    margin-left: 70px;
 }
+
 /*sidebar */
 #sidebar {
     /* width: 220px;
     min-width: 220px; */
+    position: fixed;
     width: 70px;
     min-width: 70px;
-    z-index: 1000;
+    z-index: 2000;
     transition: all .25s ease-in-out;
     background-color: #0e2238;
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 #sidebar.expand {
@@ -161,4 +166,5 @@ a.sidebar-link:hover {
   border: solid rgba(0, 0, 0, 0.125);
   border-radius: 0.75rem;
 }
+
   
