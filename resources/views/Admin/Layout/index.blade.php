@@ -18,7 +18,9 @@
     <div class="wrapper">
         @include('Admin.Component.sidebar') 
         <div class="main">
-            @include('Admin.Component.navbar') 
+            <div style="padding: 22px 22px 0 22px;">
+                @include('Admin.Component.navbar') 
+            </div>
             <div class="container-fluid p-4">
                 @yield('content')
             </div>
