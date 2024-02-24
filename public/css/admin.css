@@ -34,7 +34,7 @@ body {
     width: 100%;
     overflow: hidden;
     transition: all 0.35s ease-in-out;
-    background-color: #fafbfe;
+    background-color: #EDECEA;
     margin-left: 70px;
 }
 
@@ -167,4 +167,15 @@ a.sidebar-link:hover {
   border-radius: 0.75rem;
 }
 
+/* pelanggan */
+    #Pelanggan {
+        background-color: #FFF;
+        min-height: 100vh;
+        border-radius: 6px;
+    }
+    .table-bordered th,
+    .table-bordered td {
+        border: 2px solid #b6b6b6;
+        background-color: #f0efef;
+    }
   
