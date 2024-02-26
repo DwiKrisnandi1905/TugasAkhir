@@ -26,7 +26,7 @@
           <th scope="col" class="col-4">Nama</th>
           <th scope="col" class="col-4">Alamat</th>
           <th scope="col" class="col-2">Telepon</th>
-          <th scope="col" class="col-2">Aksi</th>
+          <th scope="col" class="col-1">Aksi</th>
         </tr>
       </thead>
       <tbody>
@@ -36,8 +36,7 @@
           <td>123 Main St, City</td>
           <td>123-456-7890</td>
           <td>
-            <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-danger">Hapus</button>
+            <button class="btn btn-primary">Detail</button>
           </td>
         </tr>
         <tr>
@@ -46,8 +45,7 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-danger">Hapus</button>
+            <button class="btn btn-primary">Detail</button>
           </td>
         </tr>
         <tr>
@@ -56,8 +54,7 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-danger">Hapus</button>
+            <button class="btn btn-primary">Detail</button>
           </td>
         </tr>
         <tr>
@@ -66,8 +63,7 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-danger">Hapus</button>
+            <button class="btn btn-primary">Detail</button>
           </td>
         </tr>
         <tr>
@@ -76,8 +72,7 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-danger">Hapus</button>
+            <button class="btn btn-primary">Detail</button>
           </td>
         </tr>
         <tr>
@@ -86,8 +81,7 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-danger">Hapus</button>
+            <button class="btn btn-primary">Detail</button>
           </td>
         </tr>
         <tr>
@@ -96,8 +90,7 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-danger">Hapus</button>
+            <button class="btn btn-primary">Detail</button>
           </td>
         </tr>
         <tr>
@@ -106,8 +99,7 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-danger">Hapus</button>
+            <button class="btn btn-primary">Detail</button>
           </td>
         </tr>
         <tr>
@@ -116,8 +108,7 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-danger">Hapus</button>
+            <button class="btn btn-primary">Detail</button>
           </td>
         </tr>
         <tr>
@@ -126,8 +117,7 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-danger">Hapus</button>
+            <button class="btn btn-primary">Detail</button>
           </td>
         </tr>
       </tbody>
