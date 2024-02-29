@@ -50,7 +50,7 @@
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer p-3">
-          <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2% </span>dibanding kemarin</p>
+          <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2% </span>Dibanding kemarin</p>
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer p-3">
-          <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>dibanding kemarin</p>
+          <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>Dibanding kemarin</p>
         </div> 
       </div>
     </div>
