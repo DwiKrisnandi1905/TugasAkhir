@@ -11,6 +11,8 @@
             </button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">A - Z</a></li>
+              <li><a class="dropdown-item" href="#">Harga Tertinggi - Harga Terendah</a></li>
+              <li><a class="dropdown-item" href="#">Status</a></li>
             </ul>
           </div>
         </div>
@@ -22,7 +24,7 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th scope="col">No</th>
+            <th scope="col">Id</th>
             <th scope="col" class="col-2">Tgl. Transaksi</th>
             <th scope="col" class="col-1">Pembayaran</th>
             <th scope="col" class="col-2">Pelanggan</th>

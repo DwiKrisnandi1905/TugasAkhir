@@ -22,10 +22,10 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th scope="col">No</th>
+          <th scope="col">Id</th>
           <th scope="col" class="col-4">Nama</th>
           <th scope="col" class="col-4">Alamat</th>
-          <th scope="col" class="col-2">Telepon</th>
+          <th scope="col" class="col-4">Telepon</th>
           <th scope="col" class="col-1">Aksi</th>
         </tr>
       </thead>
