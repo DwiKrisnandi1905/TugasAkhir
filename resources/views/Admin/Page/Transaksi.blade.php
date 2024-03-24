@@ -15,6 +15,10 @@
               <li><a class="dropdown-item" href="#">Status</a></li>
             </ul>
           </div>
+          <div class="filter d-flex flex-lg-row gap-2">
+            <input type="date" class="form-control" name="tgl">
+            <button class="btn btn-primary text-nowrap">Cari Tanggal</button>
+        </div>
         </div>
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -28,129 +32,140 @@
             <th scope="col" class="col-2">Tgl. Transaksi</th>
             <th scope="col" class="col-1">Pembayaran</th>
             <th scope="col" class="col-2">Pelanggan</th>
-            <th scope="col" class="col-3">Produk</th>
-            <th scope="col" class="col-2.5">Status</th>
-            <th scope="col" class="col-3">Total</th>
+            <th scope="col" class="col-3">Produk/Layanan</th>
+            <th scope="col" class="col-1">Status</th>
+            <th scope="col" class="col-2">Total</th>  
+            <th scope="col" class="col-1">Jumlah</th>  
             <th scope="col" class="col-2">Aksi</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row">1</th>
-            <td>24 Febuari 2024</td>
+            <td>24/02/2024</td>
             <td>Belum Lunas</td>
             <td>John Krammer</td>
             <td>konveksi jersey futsal</td>
             <td>diproses</td>
             <td>Rp 200.000</td>
+            <td>10</td>
             <td>
               <button class="btn btn-primary">Detail</button>
             </td>
           </tr>
           <tr>
             <th scope="row">2</th>
-            <td>24 Febuari 2024</td>
+            <td>24/02/2024</td>
             <td>Belum Lunas</td>
             <td>John Krammer</td>
             <td>konveksi jersey futsal</td>
             <td>diproses</td>
             <td>Rp 200.000</td>
+            <td>10</td>
             <td>
               <button class="btn btn-primary">Detail</button>
             </td>
           </tr>
           <tr>
             <th scope="row">3</th>
-            <td>24 Febuari 2024</td>
+            <td>24/02/2024</td>
             <td>Belum Lunas</td>
             <td>John Krammer</td>
             <td>konveksi jersey futsal</td>
             <td>diproses</td>
             <td>Rp 200.000</td>
+            <td>10</td>
             <td>
               <button class="btn btn-primary">Detail</button>
             </td>
           </tr>
           <tr>
             <th scope="row">4</th>
-            <td>24 Febuari 2024</td>
+            <td>24/02/2024</td>
             <td>Belum Lunas</td>
             <td>John Krammer</td>
             <td>konveksi jersey futsal</td>
             <td>diproses</td>
             <td>Rp 200.000</td>
+            <td>10</td>
             <td>
               <button class="btn btn-primary">Detail</button>
             </td>
           </tr>
           <tr>
             <th scope="row">5</th>
-            <td>24 Febuari 2024</td>
+            <td>24/02/2024</td>
             <td>Belum Lunas</td>
             <td>John Krammer</td>
             <td>konveksi jersey futsal</td>
             <td>diproses</td>
             <td>Rp 200.000</td>
+            <td>10</td>
             <td>
               <button class="btn btn-primary">Detail</button>
             </td>
           </tr>
           <tr>
             <th scope="row">6</th>
-            <td>24 Febuari 2024</td>
+            <td>24/02/2024</td>
             <td>Belum Lunas</td>
             <td>John Krammer</td>
             <td>konveksi jersey futsal</td>
             <td>diproses</td>
             <td>Rp 200.000</td>
+            <td>10</td>
             <td>
               <button class="btn btn-primary">Detail</button>
             </td>
           </tr>
           <tr>
             <th scope="row">7</th>
-            <td>24 Febuari 2024</td>
+            <td>24/02/2024</td>
             <td>Belum Lunas</td>
             <td>John Krammer</td>
             <td>konveksi jersey futsal</td>
             <td>diproses</td>
             <td>Rp 200.000</td>
+            <td>10</td>
             <td>
               <button class="btn btn-primary">Detail</button>
             </td>
           </tr>
           <tr>
             <th scope="row">8</th>
-            <td>24 Febuari 2024</td>
+            <td>24/02/2024</td>
             <td>Belum Lunas</td>
             <td>John Krammer</td>
             <td>konveksi jersey futsal</td>
             <td>diproses</td>
             <td>Rp 200.000</td>
+            <td>10</td>
             <td>
               <button class="btn btn-primary">Detail</button>
             </td>
           </tr>
           <tr>
             <th scope="row">9</th>
-            <td>24 Febuari 2024</td>
+            <td>24/02/2024</td>
             <td>Belum Lunas</td>
             <td>John Krammer</td>
             <td>konveksi jersey futsal</td>
             <td>diproses</td>
             <td>Rp 200.000</td>
+            <td>10</td>
             <td>
               <button class="btn btn-primary">Detail</button>
             </td>
           </tr>
           <tr>
             <th scope="row">10</th>
-            <td>24 Febuari 2024</td>
+            <td>24/02/2024</td>
             <td>Belum Lunas</td>
             <td>John Krammer</td>
             <td>konveksi jersey futsal</td>
             <td>diproses</td>
             <td>Rp 200.000</td>
+            <td>10</td>
             <td>
               <button class="btn btn-primary">Detail</button>
             </td>

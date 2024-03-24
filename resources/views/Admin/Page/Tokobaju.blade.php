@@ -1,11 +1,11 @@
 @extends('Admin.Layout.index')
 
 @section('content')
-<div class="card" id="Filter-TokoBaju">
+<div class="card mb-3" id="Filter-TokoBaju">
     <div class="card-body d-flex flex-row justify-content-between">
         <div class="filter d-flex flex-lg-row gap-3">
             <input type="date" class="form-control" name="tgl">
-            <button class="btn btn-primary">Filter</button>
+            <button class="btn btn-primary text-nowrap">Cari Tanggal</button>
         </div>
         <div class="search d-flex flex-lg-row gap-2">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search">
@@ -15,10 +15,14 @@
 </div>
 <div class="card" id="Table-TokoBaju">
   <div class="card-body">
-    <div class="d-flex justify-content-start mb-3">
+    <div class="d-flex justify-content-start mb-3 gap-2">
         <button class="btn btn-info fw-bold text-white">
             <i class="fa fa-plus"></i>
             Tambak Produk
+        </button>
+        <button class="btn btn-success fw-bold text-white">
+            <i class="fa fa-plus"></i>
+            Tambak Kategori
         </button>
     </div>
     {{-- <div class="d-flex justify-content-between mb-3">

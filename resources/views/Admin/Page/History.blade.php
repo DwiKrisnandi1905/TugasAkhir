@@ -15,6 +15,10 @@
               <li><a class="dropdown-item" href="#">Status</a></li>
             </ul>
           </div>
+          <div class="filter d-flex flex-lg-row gap-2">
+            <input type="date" class="form-control" name="tgl">
+            <button class="btn btn-primary text-nowrap">Cari Tanggal</button>
+        </div>
         </div>
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -36,7 +40,7 @@
         <tbody>
           <tr>
             <th scope="row">1</th>
-            <td>24 Febuari 2024</td>
+            <td>24/02/2024</td>
             <td>John Krammer</td>
             <td>konveksi jersey futsal</td>
             <td>Dibatalkan</td>
@@ -45,7 +49,7 @@
           </tr>
           <tr>
             <th scope="row">2</th>
-            <td>24 Febuari 2024</td>
+            <td>24/02/2024</td>
             <td>John Krammer</td>
             <td>konveksi jersey futsal</td>
             <td>Selesai</td>
