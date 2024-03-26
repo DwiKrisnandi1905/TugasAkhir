@@ -16,11 +16,11 @@
 <div class="card" id="Table-TokoBaju">
   <div class="card-body">
     <div class="d-flex justify-content-start mb-3 gap-2">
-        <button class="btn btn-info fw-bold text-white">
+        <button class="btn btn-info fw-bold text-white" onclick="window.location='{{ route('produkKonveksi') }}';">
             <i class="fa fa-plus"></i>
             Tambak Produk
         </button>
-        <button class="btn btn-success fw-bold text-white">
+        <button class="btn btn-success fw-bold text-white" onclick="window.location='{{ route('kategoriKonveksi') }}';">
             <i class="fa fa-plus"></i>
             Tambak Kategori
         </button>

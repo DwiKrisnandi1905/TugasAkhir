@@ -27,16 +27,44 @@ class Controller extends BaseController
     }
     public function konveksi ()
     {
-        return view('admin.page.Konveksi',[
+        return view('admin.page.Konveksi.Konveksi',[
             'name' => 'Konveksi',
             'title' => 'Konveksi',
         ]);
     }
+    public function kategoriKonveksi ()
+    {
+        return view('admin.page.Konveksi.TambahKategori',[
+            'name' => 'Tambah Kategori Konveksi',
+            'title' => ' Tambah Kategori Konveksi',
+        ]);
+    }
+    public function produkKonveksi ()
+    {
+        return view('admin.page.Konveksi.TambahProduk',[
+            'name' => 'Tambah Produk Konveksi',
+            'title' => 'Tambah Produk Konveksi',
+        ]);
+    }
     public function tokobaju ()
     {
-        return view('admin.page.Tokobaju',[
+        return view('admin.page.TokoBaju.Tokobaju',[
             'name' => 'Toko Baju',
             'title' => 'Toko Baju',
+        ]);
+    }
+    public function kategoriTokobaju ()
+    {
+        return view('admin.page.TokoBaju.TambahKategori',[
+            'name' => 'Tambah Kategori Toko Baju',
+            'title' => 'Tambah Kategori Toko Baju',
+        ]);
+    }
+    public function produkTokobaju ()
+    {
+        return view('admin.page.TokoBaju.TambahProduk',[
+            'name' => 'Tambah Produk Toko Baju',
+            'title' => 'Tambah Produk Toko Baju',
         ]);
     }
     public function transaksi ()
