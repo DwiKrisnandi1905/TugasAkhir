@@ -69,9 +69,16 @@ class Controller extends BaseController
     }
     public function transaksi ()
     {
-        return view('admin.page.Transaksi',[
+        return view('admin.page.Transaksi.Transaksi',[
             'name' => 'Transaksi',
             'title' => 'Transaksi',
+        ]);
+    }
+    public function metodeTransaksi ()
+    {
+        return view('admin.page.Transaksi.metodeTransaksi',[
+            'name' => 'Metode Transaksi',
+            'title' => 'Metode Transaksi',
         ]);
     }
     public function history ()

@@ -32,6 +32,8 @@ Route::get('/tokobaju/kategoriTokobaju', [Controller::class, 'kategoriTokobaju']
 Route::get('/tokobaju/produkTokobaju', [Controller::class, 'produkTokobaju'])->name('produkTokobaju');
 
 Route::get('/transaksi', [Controller::class, 'transaksi'])->name('transaksi');
+Route::get('/transaksi/metodeTransaksi', [Controller::class, 'metodeTransaksi'])->name('metodeTransaksi');
+
 Route::get('/history', [Controller::class, 'history'])->name('history');
 Route::get('/notifikasi', [Controller::class, 'notifikasi'])->name('notifikasi');
 Route::get('/setting', [Controller::class, 'setting'])->name('setting');

@@ -18,6 +18,10 @@
           <div class="filter d-flex flex-lg-row gap-2">
             <input type="date" class="form-control" name="tgl">
             <button class="btn btn-primary text-nowrap">Cari Tanggal</button>
+            <button class="btn btn-info fw-bold text-white text-nowrap" onclick="window.location='{{ route('metodeTransaksi') }}';">
+              <i class="fa fa-plus"></i>
+              Metode Transaksi
+            </button>
         </div>
         </div>
         <form class="d-flex" role="search">
