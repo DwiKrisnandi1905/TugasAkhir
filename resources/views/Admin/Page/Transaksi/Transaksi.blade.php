@@ -1,7 +1,19 @@
 @extends('Admin.Layout.index')
 
 @section('content')
-<div class="card" id="Pelanggan">
+<div class="card mb-3" id="Filter-TokoBaju">
+  <div class="card-body d-flex flex-row justify-content-between">
+      <div class="filter d-flex flex-lg-row gap-3">
+          <input type="date" class="form-control" name="tgl">
+          <button class="btn btn-primary text-nowrap">Cari Tanggal</button>
+      </div>
+      <div class="search d-flex flex-lg-row gap-2">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+      </div>
+  </div>
+</div>
+<div class="card" id="Transaksi">
     <div class="card-body">
       <div class="d-flex justify-content-between mb-3">
         <div class="d-flex align-items-center"> 
@@ -16,18 +28,13 @@
             </ul>
           </div>
           <div class="filter d-flex flex-lg-row gap-2">
-            <input type="date" class="form-control" name="tgl">
-            <button class="btn btn-primary text-nowrap">Cari Tanggal</button>
             <button class="btn btn-info fw-bold text-white text-nowrap" onclick="window.location='{{ route('metodeTransaksi') }}';">
               <i class="fa fa-plus"></i>
               Metode Transaksi
             </button>
+          </div>
         </div>
-        </div>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <button class="btn btn-danger fw-bold text-white ms-auto">Export</button>
       </div>
       <table class="table table-bordered">
         <thead>

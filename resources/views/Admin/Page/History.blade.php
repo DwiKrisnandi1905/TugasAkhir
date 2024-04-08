@@ -18,7 +18,8 @@
           <div class="filter d-flex flex-lg-row gap-2">
             <input type="date" class="form-control" name="tgl">
             <button class="btn btn-primary text-nowrap">Cari Tanggal</button>
-        </div>
+          </div>
+          <button class="btn btn-danger fw-bold text-white mx-2">Export</button>
         </div>
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

@@ -24,6 +24,7 @@
             <i class="fa fa-plus"></i>
             Tambak Kategori
         </button>
+        <button class="btn btn-danger fw-bold text-white ms-auto">Export</button>
     </div>
     {{-- <div class="d-flex justify-content-between mb-3">
       <div class="d-flex align-items-center"> 
