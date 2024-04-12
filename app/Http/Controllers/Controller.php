@@ -81,6 +81,13 @@ class Controller extends BaseController
             'title' => 'Metode Transaksi',
         ]);
     }
+    public function detailTransaksi ()
+    {
+        return view('admin.page.Transaksi.detailTransaksi',[
+            'name' => 'Detail Transaksi',
+            'title' => 'Detail Transaksi',
+        ]);
+    }
     public function history ()
     {
         return view('admin.page.History',[

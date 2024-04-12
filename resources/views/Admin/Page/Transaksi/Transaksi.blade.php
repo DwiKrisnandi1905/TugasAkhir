@@ -41,10 +41,10 @@
           <tr>
             <th scope="col">Id</th>
             <th scope="col" class="col-2">Tgl. Transaksi</th>
-            <th scope="col" class="col-1">Pembayaran</th>
+            <th scope="col" class="col-1">Status Pembayaran</th>
             <th scope="col" class="col-2">Pelanggan</th>
             <th scope="col" class="col-3">Produk/Layanan</th>
-            <th scope="col" class="col-1">Status</th>
+            <th scope="col" class="col-1">Status Pengiriman</th>
             <th scope="col" class="col-2">Total</th>  
             <th scope="col" class="col-1">Jumlah</th>  
             <th scope="col" class="col-2">Aksi</th>
@@ -61,7 +61,7 @@
             <td>Rp 200.000</td>
             <td>10</td>
             <td>
-              <button class="btn btn-primary">Detail</button>
+              <button class="btn btn-primary"onclick="window.location='{{ route('detailTransaksi') }}';">Detail</button>
             </td>
           </tr>
           <tr>

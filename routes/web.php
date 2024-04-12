@@ -33,6 +33,7 @@ Route::get('/tokobaju/produkTokobaju', [Controller::class, 'produkTokobaju'])->n
 
 Route::get('/transaksi', [Controller::class, 'transaksi'])->name('transaksi');
 Route::get('/transaksi/metodeTransaksi', [Controller::class, 'metodeTransaksi'])->name('metodeTransaksi');
+Route::get('/transaksi/detailTransaksi', [Controller::class, 'detailTransaksi'])->name('detailTransaksi');
 
 Route::get('/history', [Controller::class, 'history'])->name('history');
 Route::get('/notifikasi', [Controller::class, 'notifikasi'])->name('notifikasi');

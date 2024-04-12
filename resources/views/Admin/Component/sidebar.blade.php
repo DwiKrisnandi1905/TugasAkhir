@@ -21,14 +21,14 @@
             </ul>
         </li>
         <li class="sidebar-item {{ Request::path() == 'pelanggan' ? 'active' : '' }}">
-            <a href="pelanggan" class="sidebar-link collapsed has-dropdown" 
+            <a href="{{ route('pelanggan') }}" class="sidebar-link collapsed has-dropdown" 
                 data-bs-target="#pelanggan" aria-expanded="false" aria-controls="pelanggan">
                 <i class="lni lni lni-users"></i>
                 <span style="margin-left: 3px;">Pelanggan</span>
             </a>
             <ul id="pelanggan" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                 <li class="sidebar-item">
-                    <a href="pelanggan" class="sidebar-link">Pelanggan</a>
+                    <a href="{{ route('pelanggan') }}" class="sidebar-link">Pelanggan</a>
                 </li>
             </ul>
         </li>
@@ -52,58 +52,58 @@
             </a>
             <ul id="produk" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                 <li class="sidebar-item {{ Request::path() == 'konveksi' ? 'active' : '' }}">
-                    <a href="konveksi" class="sidebar-link"> <span class="fw-bold mx-2">-</span>Konveksi</a>
+                    <a href="{{ route('konveksi') }}" class="sidebar-link"> <span class="fw-bold mx-2">-</span>Konveksi</a>
                 </li>
                 <li class="sidebar-item {{ Request::path() == 'tokobaju' ? 'active' : '' }}">
-                    <a href="tokobaju" class="sidebar-link"><span class="fw-bold mx-2">-</span>Toko Baju</a>
+                    <a href="{{ route('tokobaju') }}" class="sidebar-link"><span class="fw-bold mx-2">-</span>Toko Baju</a>
                 </li>
             </ul>
         </li>
         <li class="sidebar-item {{ Request::path() == 'transaksi' ? 'active' : '' }}">
-            <a href="transaksi" class="sidebar-link collapsed has-dropdown" 
+            <a href="{{ route('transaksi') }}" class="sidebar-link collapsed has-dropdown" 
                 data-bs-target="#transaksi" aria-expanded="false" aria-controls="transaksi">
                 <i class="fas fa-credit-card"></i>
                 <span>Transaksi</span>
             </a>
             <ul id="transaksi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                 <li class="sidebar-item">
-                    <a href="transaksi" class="sidebar-link">Transaksi</a>
+                    <a href="{{ route('transaksi') }}" class="sidebar-link">Transaksi</a>
                 </li>
             </ul>
         </li>
         <li class="sidebar-item {{ Request::path() == 'history' ? 'active' : '' }}">
-            <a href="history" class="sidebar-link collapsed has-dropdown" 
+            <a href="{{ route('history') }}" class="sidebar-link collapsed has-dropdown" 
                 data-bs-target="#history" aria-expanded="false" aria-controls="history">
                 <i class="fas fa-history"></i>
                 <span style="margin-left: 3.5px;">History</span>
             </a>
             <ul id="history" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                 <li class="sidebar-item">
-                    <a href="history" class="sidebar-link">History</a>
+                    <a href="{{ route('history') }}" class="sidebar-link">History</a>
                 </li>
             </ul>
         </li>
         <li class="sidebar-item {{ Request::path() == 'notifikasi' ? 'active' : '' }}">
-            <a href="notifikasi" class="sidebar-link collapsed has-dropdown" 
+            <a href="{{ route('notifikasi') }}" class="sidebar-link collapsed has-dropdown" 
                 data-bs-target="#notifikasi" aria-expanded="false" aria-controls="notifikasi">
                 <i class="lni lni-popup"></i>
                 <span style="margin-left: 3px;">Notifikasi</span>
             </a>
             <ul id="notifikasi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                 <li class="sidebar-item">
-                    <a href="notifikasi" class="sidebar-link">Notifikasi</a>
+                    <a href="{{ route('notifikasi') }}" class="sidebar-link">Notifikasi</a>
                 </li>
             </ul>
         </li>
         <li class="sidebar-item {{ Request::path() == 'setting' ? 'active' : '' }}">
-            <a href="setting" class="sidebar-link collapsed has-dropdown" 
+            <a href="{{ route('setting') }}" class="sidebar-link collapsed has-dropdown" 
                 data-bs-target="#setting" aria-expanded="false" aria-controls="setting">
                 <i class="lni lni-cog"></i>
                 <span style="margin-left: 3px;">Setting</span>
             </a>
             <ul id="setting" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                 <li class="sidebar-item">
-                    <a href="setting" class="sidebar-link">Setting</a>
+                    <a href="{{ route('setting') }}" class="sidebar-link">Setting</a>
                 </li>
             </ul>
         </li>
