@@ -33,3 +33,23 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 // end notifikasi
+
+  function confirmDelete() {
+    Swal.fire({
+      title: 'Apakah anda yakin?',
+      text: "Data akan terhapus secara permanen!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Ya, hapus!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Data terhapus!',
+          'Data telah dihapus.',
+          'success'
+        );
+      }
+    });
+  }

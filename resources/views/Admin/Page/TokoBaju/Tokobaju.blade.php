@@ -63,7 +63,10 @@
           <td>Rp 80.000,00</td>
           <td>30</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
+              </div>
           </td>
         </tr>
         <tr>
@@ -74,7 +77,10 @@
           <td>Rp 80.000,00</td>
           <td>30</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
+              </div>
           </td>
         </tr>
         <tr>
@@ -85,7 +91,10 @@
           <td>Rp 80.000,00</td>
           <td>30</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
+              </div>
           </td>
         </tr>
         <tr>
@@ -96,7 +105,10 @@
           <td>Rp 80.000,00</td>
           <td>30</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
+              </div>
           </td>
         </tr>
         <tr>
@@ -107,7 +119,10 @@
           <td>Rp 80.000,00</td>
           <td>30</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
+              </div>
           </td>
         </tr>
         <tr>
@@ -118,7 +133,10 @@
           <td>Rp 80.000,00</td>
           <td>30</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
+              </div>
           </td>
         </tr>
         <tr>
@@ -129,7 +147,10 @@
           <td>Rp 80.000,00</td>
           <td>30</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
+              </div>
           </td>
         </tr>
         <tr>
@@ -140,7 +161,10 @@
           <td>Rp 80.000,00</td>
           <td>30</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
+              </div>
           </td>
         </tr>
         <tr>
@@ -151,7 +175,10 @@
           <td>Rp 80.000,00</td>
           <td>30</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
+              </div>
           </td>
         </tr>
       </tbody>

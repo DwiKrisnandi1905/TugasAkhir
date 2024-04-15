@@ -47,7 +47,7 @@
           </tr> 
         </tbody>
       </table>
-      <div class="mb-3 text-end justify-content-center d-flex">
+      <div class="mb-3 justify-content-center d-flex">
         <button type="button" class="btn btn-primary w-75 fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
       </div>
       <table class="table table-bordered">
