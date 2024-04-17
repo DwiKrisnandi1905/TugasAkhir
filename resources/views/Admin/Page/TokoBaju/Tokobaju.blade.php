@@ -64,7 +64,7 @@
           <td>30</td>
           <td>
             <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukTokobaju') }}';"></i>
                 <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
               </div>
           </td>
@@ -78,7 +78,7 @@
           <td>30</td>
           <td>
             <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukTokobaju') }}';"></i>
                 <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
               </div>
           </td>
@@ -92,7 +92,7 @@
           <td>30</td>
           <td>
             <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukTokobaju') }}';"></i>
                 <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
               </div>
           </td>
@@ -106,7 +106,7 @@
           <td>30</td>
           <td>
             <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukTokobaju') }}';"></i>
                 <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
               </div>
           </td>
@@ -120,7 +120,7 @@
           <td>30</td>
           <td>
             <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukTokobaju') }}';"></i>
                 <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
               </div>
           </td>
@@ -134,7 +134,7 @@
           <td>30</td>
           <td>
             <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukTokobaju') }}';"></i>
                 <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
               </div>
           </td>
@@ -148,7 +148,7 @@
           <td>30</td>
           <td>
             <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukTokobaju') }}';"></i>
                 <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
               </div>
           </td>
@@ -162,7 +162,7 @@
           <td>30</td>
           <td>
             <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukTokobaju') }}';"></i>
                 <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
               </div>
           </td>
@@ -176,7 +176,7 @@
           <td>30</td>
           <td>
             <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukTokobaju') }}';"></i>
                 <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
               </div>
           </td>

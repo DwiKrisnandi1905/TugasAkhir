@@ -26,10 +26,12 @@ Route::get('/pelanggan', [Controller::class, 'pelanggan'])->name('pelanggan');
 Route::get('/konveksi', [Controller::class, 'konveksi'])->name('konveksi');
 Route::get('/konveksi/kategoriKonveksi', [Controller::class, 'kategoriKonveksi'])->name('kategoriKonveksi');
 Route::get('/konveksi/produkKonveksi', [Controller::class, 'produkKonveksi'])->name('produkKonveksi');
+Route::get('/konveksi/detailProdukKonveksi', [Controller::class, 'detailProdukKonveksi'])->name('detailProdukKonveksi');
 
 Route::get('/tokobaju', [Controller::class, 'tokobaju'])->name('tokobaju');
 Route::get('/tokobaju/kategoriTokobaju', [Controller::class, 'kategoriTokobaju'])->name('kategoriTokobaju');
 Route::get('/tokobaju/produkTokobaju', [Controller::class, 'produkTokobaju'])->name('produkTokobaju');
+Route::get('/tokobaju/detailProdukTokobaju', [Controller::class, 'detailProdukTokobaju'])->name('detailProdukTokobaju');
 
 Route::get('/transaksi', [Controller::class, 'transaksi'])->name('transaksi');
 Route::get('/transaksi/metodeTransaksi', [Controller::class, 'metodeTransaksi'])->name('metodeTransaksi');

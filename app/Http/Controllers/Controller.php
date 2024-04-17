@@ -46,6 +46,13 @@ class Controller extends BaseController
             'title' => 'Tambah Produk Konveksi',
         ]);
     }
+    public function detailProdukKonveksi ()
+    {
+        return view('admin.page.Konveksi.DetailProduk',[
+            'name' => 'Detail Produk Konveksi',
+            'title' => 'Detail Produk Konveksi',
+        ]);
+    }
     public function tokobaju ()
     {
         return view('admin.page.TokoBaju.Tokobaju',[
@@ -65,6 +72,13 @@ class Controller extends BaseController
         return view('admin.page.TokoBaju.TambahProduk',[
             'name' => 'Tambah Produk Toko Baju',
             'title' => 'Tambah Produk Toko Baju',
+        ]);
+    }
+    public function detailProdukTokobaju ()
+    {
+        return view('admin.page.TokoBaju.DetailProduk',[
+            'name' => 'Detail Produk Toko Baju',
+            'title' => 'Detail Produk Toko Baju',
         ]);
     }
     public function transaksi ()
