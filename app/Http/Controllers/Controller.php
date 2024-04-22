@@ -32,13 +32,13 @@ class Controller extends BaseController
             'title' => 'Konveksi',
         ]);
     }
-    public function kategoriKonveksi ()
-    {
-        return view('admin.page.Konveksi.TambahKategori',[
-            'name' => 'Tambah Kategori Konveksi',
-            'title' => ' Tambah Kategori Konveksi',
-        ]);
-    }
+    // public function kategoriKonveksi ()
+    // {
+    //     return view('admin.page.Konveksi.TambahKategori',[
+    //         'name' => 'Tambah Kategori Konveksi',
+    //         'title' => ' Tambah Kategori Konveksi',
+    //     ]);
+    // }
     public function produkKonveksi ()
     {
         return view('admin.page.Konveksi.TambahProduk',[
@@ -60,13 +60,13 @@ class Controller extends BaseController
             'title' => 'Toko Baju',
         ]);
     }
-    public function kategoriTokobaju ()
-    {
-        return view('admin.page.TokoBaju.TambahKategori',[
-            'name' => 'Tambah Kategori Toko Baju',
-            'title' => 'Tambah Kategori Toko Baju',
-        ]);
-    }
+    // public function kategoriTokobaju ()
+    // {
+    //     return view('admin.page.TokoBaju.TambahKategori',[
+    //         'name' => 'Tambah Kategori Toko Baju',
+    //         'title' => 'Tambah Kategori Toko Baju',
+    //     ]);
+    // }
     public function produkTokobaju ()
     {
         return view('admin.page.TokoBaju.TambahProduk',[

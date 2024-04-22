@@ -1,8 +1,19 @@
 @extends('Admin.Layout.index')
 
 @section('content')
-<div class="card mb-3" id="Filter-TokoBaju">
+<style>
+    .gambar-produk {
+        max-width: 200px;
+        max-height: 200px;
+        width: auto;
+        height: auto;
+    }
+</style>
+<div class="card mb-3">
     <div class="card-body">
+        <div class="mb-3 text-primary" onclick="window.location='{{ route('konveksi') }}';">
+            <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
+        </div>
         <div class="mb-3">
             <label for="nama_produk" class="form-label">Nama Produk:</label>
             <input type="text" class="form-control" id="nama_produk" name="nama_produk">
@@ -20,8 +31,17 @@
             <input type="text" class="form-control" id="jenis" name="jenis">
         </div>
         <div class="mb-3">
+            <label for="harga" class="form-label">Harga Persatuan:</label>
+            <input type="number" class="form-control" id="harga" name="harga" min="0" placeholder="contoh: 30.000">
+        </div>
+        <div class="mb-3">
+            <label for="fotoBahan" class="form-label">Upload Foto Contoh Produk Jadi:</label>
+            <input type="file" class="form-control" id="fotoBahan" name="fotoBahan" accept="image/*">
+        </div>
+        <div class="mb-3">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalWarnaBahan">Tambahkan Warna Bahan</button>
         </div>
+        <div id="tambahProdukButton" class="mb-3"></div>
         <div class="mb-3">
             <label for="ukuran" class="form-label">Pilih Ukuran:</label>
             <div class="form-check">
@@ -45,6 +65,10 @@
                 <label class="form-check-label" for="ukuran_M">M</label>
             </div>
         </div>
+        <div class="mb-3">
+            <label for="deskripsi" class="form-label">Deskripsi Produk:</label>
+            <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>
+        </div>
     </div>
     <div class="d-flex justify-content-center mb-3">
         <button type="button" class="btn btn-success">Simpan</button>
@@ -66,18 +90,107 @@
                 </div>
                 <div class="mb-3">
                     <label for="stock_bahan" class="form-label">Stock Bahan:</label>
-                    <input type="text" class="form-control" id="stock_bahan" name="stock_bahan">
+                    <input type="number" class="form-control" id="stock_produk" name="stock_produk" min="0" placeholder="contoh: 30">
                 </div>
                 <div class="mb-3">
-                    <label for="foto_bahan" class="form-label">Upload Foto Bahan:</label>
+                    <label for="foto_bahan" class="form-label">Upload Foto Bahan Berdasarkan Warna:</label>
                     <input type="file" class="form-control" id="foto_bahan" name="foto_bahan" accept="image/*">
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary">Simpan</button>
+                <button type="button" class="btn btn-primary" onclick="simpanDataBahan()" data-bs-dismiss="modal">Simpan</button>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function simpanDataBahan() {
+        // Tangkap data dari modal
+        var warnaBahan = document.getElementById('warna_bahan').value;
+        var stockBahan = document.getElementById('stock_produk').value;
+        var fotoBahan = document.getElementById('foto_bahan').files[0]; // Ambil file foto
+
+        // Simpan data ke dalam objek
+        var data = {
+            warnaBahan: warnaBahan,
+            stockBahan: stockBahan,
+            fotoBahan: fotoBahan // Sisipkan file foto ke dalam objek data
+        };
+
+        // Tampilkan data dalam card baru
+        tampilkanDataBahanCard(data);
+    }
+
+    function tampilkanDataBahanCard(data) {
+        // Buat card baru dengan data yang ditangkap
+        var card = document.createElement('div');
+        card.classList.add('card', 'mb-3');
+        card.style.width = '100%'; // Atur lebar card menjadi 100%
+        var cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
+        var cardContent = `
+            <p class="card-text">Warna Bahan: ${data.warnaBahan}</p>
+            <p class="card-text">Stock Bahan: ${data.stockBahan}</p>`;
+        // Tampilkan gambar produk jika ada
+        if (data.fotoBahan) {
+            var imageURL = URL.createObjectURL(data.fotoBahan); // Buat URL objek untuk file foto
+            cardContent += `<img src="${imageURL}" class="gambar-produk img-fluid" alt="Foto Bahan">`; // Tampilkan gambar
+        }
+        cardBody.innerHTML = cardContent;
+
+        // Tambahkan tombol close (X) ke dalam card header
+        var cardHeader = document.createElement('div');
+        cardHeader.classList.add('card-header', 'd-flex', 'justify-content-end'); // Menggunakan justify-content-between
+        var closeButton = document.createElement('button');
+        closeButton.classList.add('btn-close');
+        closeButton.setAttribute('aria-label', 'Close');
+        closeButton.onclick = function() {
+            hapusCard(card); // Panggil fungsi hapusCard saat tombol close diklik
+        };
+        cardHeader.appendChild(closeButton);
+
+        // Gabungkan card header dan card body
+        card.appendChild(cardHeader);
+        card.appendChild(cardBody);
+        // Tentukan jumlah maksimal card per baris
+        var cardPerBaris = 2; // Misalnya, dua card per baris
+
+        // Cek apakah ada elemen div dengan class "row" yang merupakan baris
+        var rows = document.querySelectorAll('.row');
+        var currentRow = null;
+
+        // Iterasi melalui baris-baris yang ada
+        rows.forEach(function(row) {
+            // Periksa jumlah card di dalam baris
+            var cardsInRow = row.querySelectorAll('.card').length;
+            if (cardsInRow < cardPerBaris) {
+                // Jika masih ada slot kosong di dalam baris saat ini, gunakan baris tersebut
+                currentRow = row;
+            }
+        });
+
+        // Jika tidak ada baris dengan slot kosong, buat baris baru
+        if (!currentRow) {
+            currentRow = document.createElement('div');
+            currentRow.classList.add('row');
+            // Tambahkan baris baru ke dalam dokumen
+            var tambahProdukButton = document.getElementById('tambahProdukButton');
+            tambahProdukButton.insertAdjacentElement('afterend', currentRow);
+        }
+
+        // Buat kolom untuk card
+        var col = document.createElement('div');
+        col.classList.add('col-6'); // Atur lebar col menjadi 50% dari lebar baris
+        col.appendChild(card);
+
+        // Tambahkan kolom ke dalam baris
+        currentRow.appendChild(col);
+        }
+
+        function hapusCard(card) {
+            card.parentNode.removeChild(card);
+        }
+    </script>
+
 @endsection

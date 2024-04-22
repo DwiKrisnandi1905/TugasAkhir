@@ -19,7 +19,7 @@
         cursor: pointer;
     }
 </style>
-<div class="card" id="Notifikasi">
+<div class="card mb-3" id="Notifikasi">
   <div class="card-body">
     <div class="d-flex justify-content-spacebetween mb-3">
       <h5 class="fw-bold">Pesanan Masuk</h5>

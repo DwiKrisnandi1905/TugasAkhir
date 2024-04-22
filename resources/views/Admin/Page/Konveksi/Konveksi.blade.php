@@ -1,7 +1,7 @@
 @extends('Admin.Layout.index')
 
 @section('content')
-<div class="card mb-3" id="Filter-TokoBaju">
+<div class="card mb-3" id="Filter-Konveksi">
     <div class="card-body d-flex flex-row justify-content-between">
         <div class="filter d-flex flex-lg-row gap-3">
             <input type="date" class="form-control" name="tgl">
@@ -13,7 +13,7 @@
         </div>
     </div>
 </div>
-<div class="card" id="Table-TokoBaju">
+<div class="card" id="Table-Konveksi">
   <div class="card-body">
     <div class="d-flex justify-content-start mb-3 gap-2">
         <button class="btn btn-info fw-bold text-white" onclick="window.location='{{ route('produkKonveksi') }}';">

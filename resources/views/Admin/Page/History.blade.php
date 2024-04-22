@@ -1,7 +1,7 @@
 @extends('Admin.Layout.index')
 
 @section('content')
-<div class="card" id="Pelanggan">
+<div class="card" id="History">
     <div class="card-body">
       <div class="d-flex justify-content-between mb-3">
         <div class="d-flex align-items-center"> 

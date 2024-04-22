@@ -1,8 +1,11 @@
 @extends('Admin.Layout.index')
 
 @section('content')
-<div class="card" id="Transaksi">
+<div class="card" id="detailTransaksi">
     <div class="card-body">
+      <div class="mb-3 text-primary" onclick="window.location='{{ route('transaksi') }}';">
+        <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
+      </div>
       <table class="table table-bordered">
         <tbody>
           <tr>
@@ -78,7 +81,7 @@
           <tr>
             <td colspan="4" class="text-center bg-secondary text-white">Total Pesanan</td>
             <td>Rp 400.000</td>
-        </tr>
+          </tr>
         </tbody>
       </table>
     </div>

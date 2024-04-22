@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\kategoriTokobajuController;
+use App\Http\Controllers\kategoriKonveksiController;
 
 
 /*
@@ -24,12 +26,20 @@ Route::get('/', [Controller::class, 'dashboard'])->name('dashboard');
 Route::get('/pelanggan', [Controller::class, 'pelanggan'])->name('pelanggan');
 
 Route::get('/konveksi', [Controller::class, 'konveksi'])->name('konveksi');
-Route::get('/konveksi/kategoriKonveksi', [Controller::class, 'kategoriKonveksi'])->name('kategoriKonveksi');
+// kategori tokobaju 
+Route::get('/konveksi/kategoriKonveksi', [kategoriKonveksiController::class, 'kategoriKonveksi'])->name('kategoriKonveksi');
+Route::post('/konveksi/storeeKategori', [kategoriKonveksiController::class, 'storee'])->name('storeeKategori');
+Route::delete('/konveksi/deleteeKategori/{id}', [kategoriKonveksiController::class, 'deletee'])->name('deleteeKategori');
+// kategori toko baju end 
 Route::get('/konveksi/produkKonveksi', [Controller::class, 'produkKonveksi'])->name('produkKonveksi');
 Route::get('/konveksi/detailProdukKonveksi', [Controller::class, 'detailProdukKonveksi'])->name('detailProdukKonveksi');
 
 Route::get('/tokobaju', [Controller::class, 'tokobaju'])->name('tokobaju');
-Route::get('/tokobaju/kategoriTokobaju', [Controller::class, 'kategoriTokobaju'])->name('kategoriTokobaju');
+// kategori tokobaju 
+Route::get('/tokobaju/kategoriTokobaju', [kategoriTokobajuController::class, 'kategoriTokobaju'])->name('kategoriTokobaju');
+Route::post('/tokobaju/storeKategori', [kategoriTokobajuController::class, 'store'])->name('storeKategori');
+Route::delete('/tokobaju/deleteKategori/{id}', [kategoriTokobajuController::class, 'delete'])->name('deleteKategori');
+// kategori toko baju end 
 Route::get('/tokobaju/produkTokobaju', [Controller::class, 'produkTokobaju'])->name('produkTokobaju');
 Route::get('/tokobaju/detailProdukTokobaju', [Controller::class, 'detailProdukTokobaju'])->name('detailProdukTokobaju');
 
