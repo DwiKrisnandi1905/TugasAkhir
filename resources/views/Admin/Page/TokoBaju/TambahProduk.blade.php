@@ -21,9 +21,9 @@
         <div class="mb-3">
             <label for="kategori" class="form-label">Kategori:</label>
             <select class="form-select" id="kategoriTokobaju">
-                <option value="pending" selected>Pakaian Pria</option>
-                <option value="diproses">Pakaian Wanita</option>
-                <option value="selesai">Pakaian Anak-Anak</option>
+                @foreach($kategoriTokobaju as $kategori)
+                    <option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
+                @endforeach
             </select>
         </div>
         <div class="mb-3">
