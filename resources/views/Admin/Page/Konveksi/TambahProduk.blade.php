@@ -14,183 +14,175 @@
         <div class="mb-3 text-primary" onclick="window.location='{{ route('konveksi') }}';">
             <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
         </div>
-        <div class="mb-3">
-            <label for="nama_produk" class="form-label">Nama Produk:</label>
-            <input type="text" class="form-control" id="nama_produk" name="nama_produk">
-        </div>
-        <div class="mb-3">
-            <label for="kategori" class="form-label">Kategori:</label>
-            <select class="form-select" id="kategoriKonveksi">
-                @foreach($kategoriKonveksi as $kategori)
-                    <option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="jenis" class="form-label">Jenis Bahan:</label>
-            <input type="text" class="form-control" id="jenis" name="jenis">
-        </div>
-        <div class="mb-3">
-            <label for="harga" class="form-label">Harga Persatuan:</label>
-            <input type="number" class="form-control" id="harga" name="harga" min="0" placeholder="contoh: 30.000">
-        </div>
-        <div class="mb-3">
-            <label for="fotoBahan" class="form-label">Upload Foto Contoh Produk Jadi:</label>
-            <input type="file" class="form-control" id="fotoBahan" name="fotoBahan" accept="image/*">
-        </div>
-        <div class="mb-3">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalWarnaBahan">Tambahkan Warna Bahan</button>
-        </div>
-        <div id="tambahProdukButton" class="mb-3"></div>
-        <div class="mb-3">
-            <label for="ukuran" class="form-label">Pilih Ukuran:</label>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="ukuran" id="ukuran_xxxl" value="xxxl">
-                <label class="form-check-label" for="ukuran_xxxl">XXXL</label>
+        <form action="{{ route('simpanProdukKonveksi') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-3">
+                <label for="nama_produk" class="form-label">Nama Produk:</label>
+                <input type="text" class="form-control" id="nama_produk" name="nama_produk">
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="ukuran" id="ukuran_xxl" value="xxl">
-                <label class="form-check-label" for="ukuran_xxl">XXL</label>
+            <div class="mb-3">
+                <label for="kategori_id" class="form-label">Kategori:</label>
+                <select class="form-select" id="kategori_id" name="kategori_id">
+                    @foreach($kategoriKonveksi as $kategori)
+                        <option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
+                    @endforeach
+                </select>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="ukuran" id="ukuran_XL" value="XL">
-                <label class="form-check-label" for="ukuran_XL">XL</label>
+            <div class="mb-3">
+                <label for="jenis" class="form-label">Jenis Bahan:</label>
+                <input type="text" class="form-control" id="jenis" name="jenis">
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="ukuran" id="ukuran_L" value="L">
-                <label class="form-check-label" for="ukuran_L">L</label>
+            <div class="mb-3">
+                <label for="foto_produk" class="form-label">Upload Foto Contoh Produk Jadi:</label>
+                <input type="file" class="form-control" id="foto_produk" name="foto_produk" accept="image/*">
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="ukuran" id="ukuran_M" value="M">
-                <label class="form-check-label" for="ukuran_M">M</label>
+            <div class="mb-3">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalWarnaBahan">Tambahkan Variasi</button>
             </div>
-        </div>
-        <div class="mb-3">
-            <label for="deskripsi" class="form-label">Deskripsi Produk:</label>
-            <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>
-        </div>
-    </div>
-    <div class="d-flex justify-content-center mb-3">
-        <button type="button" class="btn btn-success">Simpan</button>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="modalWarnaBahan" tabindex="-1" aria-labelledby="modalWarnaBahanLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalWarnaBahanLabel">Tambahkan Warna Bahan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div id="cardContainer" class="mb-3"></div>
+            <div class="mb-3">
+                <label for="deskripsi" class="form-label">Deskripsi Produk:</label>
+                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>
             </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label for="warna_bahan" class="form-label">Warna Bahan:</label>
-                    <input type="text" class="form-control" id="warna_bahan" name="warna_bahan">
-                </div>
-                <div class="mb-3">
-                    <label for="stock_bahan" class="form-label">Stock Bahan:</label>
-                    <input type="number" class="form-control" id="stock_produk" name="stock_produk" min="0" placeholder="contoh: 30">
-                </div>
-                <div class="mb-3">
-                    <label for="foto_bahan" class="form-label">Upload Foto Bahan Berdasarkan Warna:</label>
-                    <input type="file" class="form-control" id="foto_bahan" name="foto_bahan" accept="image/*">
+            <div class="d-flex justify-content-center mb-3">
+                <button type="submit" class="btn btn-success">Simpan</button>
+            </div>
+            <div class="modal fade" id="modalWarnaBahan" tabindex="-1" aria-labelledby="modalWarnaProdukLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalWarnaProdukLabel">Tambahkan Produk</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="foto_produk_modal" class="form-label">Upload Foto Bahan:</label>
+                                <input type="file" class="form-control mb-3" id="foto_produk_modal" name="foto_produk_modal" accept="image/*">
+                                <img id="preview_foto_produk" src="#" alt="Preview Foto Produk" class="gambar-produk" style="display: none;">
+                                <div id="warnaBaju">
+                                    <input type="text" class="form-control mb-3" placeholder="Warna" id="warna_produks[]" name="warna_produks[]">
+                                </div>
+                                <div id="stockBaju">
+                                    <input type="number" class="form-control" placeholder="Stock Bahan" id="stocks[]" name="stocks[]">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="variasi_produk" class="form-label">Variasi Produk</label>
+                                <div id="variasi_produk">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Ukuran" id="ukurans[]" name="ukurans[]">
+                                        <input type="number" class="form-control" placeholder="Harga" id="hargas[]" name="hargas[]">
+                                        <button class="btn btn-outline-secondary" type="button" id="tambah_variasi">Tambah Variasi</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="button" class="btn btn-primary" onclick="simpanData()" data-bs-dismiss="modal">Simpan</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary" onclick="simpanDataBahan()" data-bs-dismiss="modal">Simpan</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
-<script>
-    function simpanDataBahan() {
-        // Tangkap data dari modal
-        var warnaBahan = document.getElementById('warna_bahan').value;
-        var stockBahan = document.getElementById('stock_produk').value;
-        var fotoBahan = document.getElementById('foto_bahan').files[0]; // Ambil file foto
+<script> 
+    document.getElementById('tambah_variasi').addEventListener('click', function() {
+        var variasi_produk = document.getElementById('variasi_produk');
+        var new_variasi = document.createElement('div');
+        new_variasi.classList.add('input-group', 'mb-3');
+        new_variasi.innerHTML = `
+            <input type="text" class="form-control" placeholder="Ukuran" name="ukurans[]">
+            <input type="number" class="form-control" placeholder="Harga" name="hargas[]">
+            <button class="btn btn-outline-secondary" type="button" onclick="hapus_variasi(this)">Hapus</button>
+        `;
+        variasi_produk.appendChild(new_variasi);
+    });
 
-        // Simpan data ke dalam objek
-        var data = {
-            warnaBahan: warnaBahan,
-            stockBahan: stockBahan,
-            fotoBahan: fotoBahan // Sisipkan file foto ke dalam objek data
-        };
-
-        // Tampilkan data dalam card baru
-        tampilkanDataBahanCard(data);
+    function hapus_variasi(btn) {
+        btn.parentNode.remove();
     }
 
-    function tampilkanDataBahanCard(data) {
-        // Buat card baru dengan data yang ditangkap
-        var card = document.createElement('div');
-        card.classList.add('card', 'mb-3');
-        card.style.width = '100%'; // Atur lebar card menjadi 100%
+    function displayDataInCard() {
+        var namaProduk = document.getElementById('nama_produk').value;
+        var deskripsiProduk = document.getElementById('deskripsi').value;
+        var kategoriId = document.getElementById('kategori_id').value;
+        var jenisId = document.getElementById('jenis').value;
+        
+        var fotoProdukInput = document.getElementById('foto_produk_modal');
+        var fotoProduk = '';
+        if(fotoProdukInput.files.length > 0) {
+            fotoProduk = fotoProdukInput.files[0].name;
+        }
+
+        var variasiProduk = document.querySelectorAll('#warnaBaju input[name="warna_produks[]"]');
+        var ukuranProduk = document.querySelectorAll('#variasi_produk input[name="ukurans[]"]');
+        var hargaProduk = document.querySelectorAll('#variasi_produk input[name="hargas[]"]');
+        var stockProduk = document.querySelectorAll('#stockBaju input[name="stocks[]"]');
+
+        var cardContainer = document.createElement('div');
+        cardContainer.classList.add('card', 'mb-3');
         var cardBody = document.createElement('div');
         cardBody.classList.add('card-body');
-        var cardContent = `
-            <p class="card-text">Warna Bahan: ${data.warnaBahan}</p>
-            <p class="card-text">Stock Bahan: ${data.stockBahan}</p>`;
-        // Tampilkan gambar produk jika ada
-        if (data.fotoBahan) {
-            var imageURL = URL.createObjectURL(data.fotoBahan); // Buat URL objek untuk file foto
-            cardContent += `<img src="${imageURL}" class="gambar-produk img-fluid" alt="Foto Bahan">`; // Tampilkan gambar
-        }
-        cardBody.innerHTML = cardContent;
 
-        // Tambahkan tombol close (X) ke dalam card header
-        var cardHeader = document.createElement('div');
-        cardHeader.classList.add('card-header', 'd-flex', 'justify-content-end'); // Menggunakan justify-content-between
-        var closeButton = document.createElement('button');
-        closeButton.classList.add('btn-close');
-        closeButton.setAttribute('aria-label', 'Close');
-        closeButton.onclick = function() {
-            hapusCard(card); // Panggil fungsi hapusCard saat tombol close diklik
-        };
-        cardHeader.appendChild(closeButton);
+        cardBody.innerHTML = `
+            
+            <p class="card-text">Foto Produk: ${fotoProduk}</p>
+            <img src="" alt="Foto Produk" id="foto_produk_card" class="gambar-produk">
+            <h6 class="card-subtitle mb-2 text-muted">Variasi Produk:</h6>
+        `;
 
-        // Gabungkan card header dan card body
-        card.appendChild(cardHeader);
-        card.appendChild(cardBody);
-        // Tentukan jumlah maksimal card per baris
-        var cardPerBaris = 2; // Misalnya, dua card per baris
-
-        // Cek apakah ada elemen div dengan class "row" yang merupakan baris
-        var rows = document.querySelectorAll('.row');
-        var currentRow = null;
-
-        // Iterasi melalui baris-baris yang ada
-        rows.forEach(function(row) {
-            // Periksa jumlah card di dalam baris
-            var cardsInRow = row.querySelectorAll('.card').length;
-            if (cardsInRow < cardPerBaris) {
-                // Jika masih ada slot kosong di dalam baris saat ini, gunakan baris tersebut
-                currentRow = row;
-            }
-        });
-
-        // Jika tidak ada baris dengan slot kosong, buat baris baru
-        if (!currentRow) {
-            currentRow = document.createElement('div');
-            currentRow.classList.add('row');
-            // Tambahkan baris baru ke dalam dokumen
-            var tambahProdukButton = document.getElementById('tambahProdukButton');
-            tambahProdukButton.insertAdjacentElement('afterend', currentRow);
+        for (var i = 0; i < ukuranProduk.length; i++) {
+            var variation = `
+                <p class="card-text">Warna: ${variasiProduk[0].value}</p>
+                <p class="card-text">Ukuran: ${ukuranProduk[i].value}</p>
+                <p class="card-text">Harga: ${hargaProduk[i].value}</p>
+                <p class="card-text">Stock: ${stockProduk[0].value}</p>
+                <input type="text" value="${variasiProduk[0].value}" class="form-control invisible" placeholder="Warna" id="warna_produk[]" name="warna_produk[]">
+                <input type="text" value="${ukuranProduk[i].value}" class="form-control invisible" placeholder="Ukuran" id="ukuran[]" name="ukuran[]">
+                <input type="number" value="${hargaProduk[i].value}" class="form-control invisible" placeholder="Harga" id="harga[]" name="harga[]">
+                <input type="number" value="${stockProduk[0].value}" class="form-control invisible" placeholder="Stock" id="stock[]" name="stock[]">
+            `;
+            cardBody.innerHTML += variation;
         }
 
-        // Buat kolom untuk card
-        var col = document.createElement('div');
-        col.classList.add('col-6'); // Atur lebar col menjadi 50% dari lebar baris
-        col.appendChild(card);
+        cardContainer.appendChild(cardBody);
 
-        // Tambahkan kolom ke dalam baris
-        currentRow.appendChild(col);
+        var cardDiv = document.getElementById('cardContainer');
+        cardDiv.appendChild(cardContainer);
+
+        var fotoProdukCard = cardBody.querySelector('#foto_produk_card');
+        if (fotoProduk) {
+            fotoProdukCard.src = URL.createObjectURL(fotoProdukInput.files[0]);
+        } else {
+            fotoProdukCard.style.display = 'none';
         }
+    }
 
-        function hapusCard(card) {
-            card.parentNode.removeChild(card);
-        }
-    </script>
+    document.getElementById('foto_produk_modal').addEventListener('change', function(event) {
+        var fotoProduk = document.getElementById('preview_foto_produk');
+        fotoProduk.src = URL.createObjectURL(event.target.files[0]);
+        fotoProduk.style.display = 'block';
+    });
+    function clearFormInputs() {
+        document.getElementById('nama_produk').value = '';
+        document.getElementById('deskripsi').value = '';
+        document.getElementById('kategori_id').value = '';
+        document.getElementById('foto_produk').value = '';
+        document.getElementById('jenis').value = '';
+        var variasiProduk = document.querySelectorAll('#variasi_produk input[name="warna_produk[]"]');
+        variasiProduk.forEach(input => input.value = '');
+        var ukuranProduk = document.querySelectorAll('#variasi_produk input[name="ukuran[]"]');
+        ukuranProduk.forEach(input => input.value = '');
+        var hargaProduk = document.querySelectorAll('#variasi_produk input[name="harga[]"]');
+        hargaProduk.forEach(input => input.value = '');
+        var stockProduk = document.querySelectorAll('#variasi_produk input[name="stock[]"]');
+        stockProduk.forEach(input => input.value = '');
+    }
 
+    function simpanData() {
+        displayDataInCard();
+    }
+</script>
 @endsection

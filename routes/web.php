@@ -33,7 +33,12 @@ Route::get('/konveksi/kategoriKonveksi', [kategoriKonveksiController::class, 'ka
 Route::post('/konveksi/storeeKategori', [kategoriKonveksiController::class, 'storee'])->name('storeeKategori');
 Route::delete('/konveksi/deleteeKategori/{id}', [kategoriKonveksiController::class, 'deletee'])->name('deleteeKategori');
 // kategori Konveksi end 
+
+// Tambah produk konveksi
 Route::get('/konveksi/produkKonveksi', [produkKonveksiController::class, 'produkKonveksi'])->name('produkKonveksi');
+Route::post('/konveksi/simpanProdukKonveksi', [produkKonveksiController::class, 'simpanDataKonveksi'])->name('simpanProdukKonveksi');
+// Tambah produk konveksi end
+
 Route::get('/konveksi/detailProdukKonveksi', [Controller::class, 'detailProdukKonveksi'])->name('detailProdukKonveksi');
 
 Route::get('/tokobaju', [Controller::class, 'tokobaju'])->name('tokobaju');
@@ -41,8 +46,13 @@ Route::get('/tokobaju', [Controller::class, 'tokobaju'])->name('tokobaju');
 Route::get('/tokobaju/kategoriTokobaju', [kategoriTokobajuController::class, 'kategoriTokobaju'])->name('kategoriTokobaju');
 Route::post('/tokobaju/storeKategori', [kategoriTokobajuController::class, 'store'])->name('storeKategori');
 Route::delete('/tokobaju/deleteKategori/{id}', [kategoriTokobajuController::class, 'delete'])->name('deleteKategori');
-// kategori toko baju end 
+// kategori toko baju end
+
+// Tambah produk toko baju 
 Route::get('/tokobaju/produkTokobaju', [produkTokobajuController::class, 'produkTokobaju'])->name('produkTokobaju');
+Route::post('/tokobaju/simpanProduk', [produkTokobajuController::class, 'simpanData'])->name('simpanProduk');
+//Tambah produk toko baju end
+
 Route::get('/tokobaju/detailProdukTokobaju', [Controller::class, 'detailProdukTokobaju'])->name('detailProdukTokobaju');
 
 Route::get('/transaksi', [Controller::class, 'transaksi'])->name('transaksi');
