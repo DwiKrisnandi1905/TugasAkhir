@@ -29,6 +29,10 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label for="tanggal_masuk" class="form-label">Tanggal Masuk:</label>
+                <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk" value="{{ old('tanggal_masuk') }}">
+            </div>
+            <div class="mb-3">
                 <label for="jenis" class="form-label">Jenis Bahan:</label>
                 <input type="text" class="form-control" id="jenis" name="jenis">
             </div>

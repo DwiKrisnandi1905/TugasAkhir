@@ -8,7 +8,7 @@ class Konveksi extends Model
 {
     protected $table = 'konveksi';
 
-    protected $fillable = ['nama_produk', 'deskripsi', 'kategori_id', 'jenis', 'foto_produk'];
+    protected $fillable = ['nama_produk', 'deskripsi', 'kategori_id', 'jenis', 'foto_produk', 'tanggal_masuk'];
 
     public function variasi()
     {

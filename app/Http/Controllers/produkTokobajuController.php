@@ -48,6 +48,7 @@ class produkTokobajuController extends Controller
         $produk->kategori_id = $request->kategori_id;
         $produk->foto_produk = $imageName;
         $produk->deskripsi_produk = $request->deskripsi_produk;
+        $produk->tanggal_masuk = now();
         $produk->save();
 
         for ($i = 0; $i < count($request->warna_produk); $i++) {

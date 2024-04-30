@@ -6,6 +6,8 @@ use App\Http\Controllers\kategoriTokobajuController;
 use App\Http\Controllers\kategoriKonveksiController;
 use App\Http\Controllers\produkTokobajuController;
 use App\Http\Controllers\produkKonveksiController;
+use App\Http\Controllers\tokobajuController;
+use App\Http\Controllers\konveksiController;
 
 
 /*
@@ -27,7 +29,7 @@ use App\Http\Controllers\produkKonveksiController;
 Route::get('/', [Controller::class, 'dashboard'])->name('dashboard');
 Route::get('/pelanggan', [Controller::class, 'pelanggan'])->name('pelanggan');
 
-Route::get('/konveksi', [Controller::class, 'konveksi'])->name('konveksi');
+Route::get('/konveksi', [konveksiController::class, 'konveksi'])->name('konveksi');
 // kategori Konveksi
 Route::get('/konveksi/kategoriKonveksi', [kategoriKonveksiController::class, 'kategoriKonveksi'])->name('kategoriKonveksi');
 Route::post('/konveksi/storeeKategori', [kategoriKonveksiController::class, 'storee'])->name('storeeKategori');
@@ -41,7 +43,7 @@ Route::post('/konveksi/simpanProdukKonveksi', [produkKonveksiController::class, 
 
 Route::get('/konveksi/detailProdukKonveksi', [Controller::class, 'detailProdukKonveksi'])->name('detailProdukKonveksi');
 
-Route::get('/tokobaju', [Controller::class, 'tokobaju'])->name('tokobaju');
+Route::get('/tokobaju', [tokobajuController::class, 'tokobaju'])->name('tokobaju');
 // kategori tokobaju 
 Route::get('/tokobaju/kategoriTokobaju', [kategoriTokobajuController::class, 'kategoriTokobaju'])->name('kategoriTokobaju');
 Route::post('/tokobaju/storeKategori', [kategoriTokobajuController::class, 'store'])->name('storeKategori');

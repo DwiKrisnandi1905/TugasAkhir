@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('jenis');
             $table->foreign('kategori_id')->references('id')->on('kategori_konveksis')->onDelete('cascade');
             $table->string('foto_produk');
+            $table->date('tanggal_masuk')->nullable();
             $table->timestamps();
         });
     }

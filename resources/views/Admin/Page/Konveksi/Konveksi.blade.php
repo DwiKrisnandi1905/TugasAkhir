@@ -46,141 +46,27 @@
       <thead>
         <tr>
           <th scope="col">Id</th>
-          <th scope="col" class="col-2">Tanggal Masuk</th>
-          <th scope="col" class="col-2">Nama Layanan</th>
-          <th scope="col" class="col-3">Kategori</th>
-          <th scope="col" class="col-2">Harga</th>
-          <th scope="col" class="col-2">Stock bahan</th>
+          <th scope="col" class="col-4">Tanggal Masuk</th>
+          <th scope="col" class="col-4">Nama Layanan</th>
+          <th scope="col" class="col-4">Kategori</th>
           <th scope="col" class="col-2">Aksi</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>23/03/2024</td>
-          <td>Jersey Futsal</td>
-          <td>Pakaian olahraga pria</td>
-          <td>Rp 80.000,00</td>
-          <td>30</td>
-          <td>
-            <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukKonveksi') }}';"></i>
-                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
-              </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>23/03/2024</td>
-          <td>Jersey Futsal</td>
-          <td>Pakaian olahraga pria</td>
-          <td>Rp 80.000,00</td>
-          <td>30</td>
-          <td>
-            <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukKonveksi') }}';"></i>
-                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
-              </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>23/03/2024</td>
-          <td>Jersey Futsal</td>
-          <td>Pakaian olahraga pria</td>
-          <td>Rp 80.000,00</td>
-          <td>30</td>
-          <td>
-            <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukKonveksi') }}';"></i>
-                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
-              </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>23/03/2024</td>
-          <td>Jersey Futsal</td>
-          <td>Pakaian olahraga pria</td>
-          <td>Rp 80.000,00</td>
-          <td>30</td>
-          <td>
-            <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukKonveksi') }}';"></i>
-                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
-              </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>23/03/2024</td>
-          <td>Jersey Futsal</td>
-          <td>Pakaian olahraga pria</td>
-          <td>Rp 80.000,00</td>
-          <td>30</td>
-          <td>
-            <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukKonveksi') }}';"></i>
-                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
-              </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>23/03/2024</td>
-          <td>Jersey Futsal</td>
-          <td>Pakaian olahraga pria</td>
-          <td>Rp 80.000,00</td>
-          <td>30</td>
-          <td>
-            <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukKonveksi') }}';"></i>
-                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
-              </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>23/03/2024</td>
-          <td>Jersey Futsal</td>
-          <td>Pakaian olahraga pria</td>
-          <td>Rp 80.000,00</td>
-          <td>30</td>
-          <td>
-            <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukKonveksi') }}';"></i>
-                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
-              </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>23/03/2024</td>
-          <td>Jersey Futsal</td>
-          <td>Pakaian olahraga pria</td>
-          <td>Rp 80.000,00</td>
-          <td>30</td>
-          <td>
-            <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukKonveksi') }}';"></i>
-                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
-              </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>23/03/2024</td>
-          <td>Jersey Futsal</td>
-          <td>Pakaian olahraga pria</td>
-          <td>Rp 80.000,00</td>
-          <td>30</td>
-          <td>
-            <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukKonveksi') }}';"></i>
-                <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
-              </div>
-          </td>
-        </tr>
+        @foreach($konveksis as $konveksi)
+          <tr>
+              <th scope="row">{{ $konveksi->id }}</th>
+              <td>{{ $konveksi->tanggal_masuk }}</td>
+              <td>{{ $konveksi->nama_produk }}</td>
+              <td>{{ $konveksi->kategori->name }}</td>          
+            <td>
+              <div class="d-flex justify-content-center align-items-center gap-1">
+                  <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukKonveksi') }}';"></i>
+                  <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
+                </div>
+            </td>
+          </tr>
+        @endforeach
       </tbody>
     </table>
     <div class="d-flex justify-content-between mb-3">

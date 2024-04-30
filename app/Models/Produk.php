@@ -8,7 +8,7 @@ class Produk extends Model
 {
     protected $table = 'produk';
 
-    protected $fillable = ['nama_produk', 'deskripsi_produk', 'kategori_id', 'foto_produk'];
+    protected $fillable = ['nama_produk', 'deskripsi_produk', 'kategori_id', 'foto_produk', 'tanggal_masuk'];
 
     public function variasi()
     {

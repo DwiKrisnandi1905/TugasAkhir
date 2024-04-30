@@ -29,6 +29,10 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label for="tanggal_masuk" class="form-label">Tanggal Masuk:</label>
+                <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk" value="{{ old('tanggal_masuk') }}">
+            </div>
+            <div class="mb-3">
                 <label for="foto_produk" class="form-label">Upload Foto Produk Untuk Tampilan Utama:</label>
                 <input type="file" class="form-control" id="foto_produk" name="foto_produk" accept="image/*">
             </div>

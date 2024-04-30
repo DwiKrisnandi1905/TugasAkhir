@@ -48,6 +48,7 @@ class produkKonveksiController extends Controller
         $konveksi->jenis = $request->jenis;
         $konveksi->foto_produk = $imageName;
         $konveksi->deskripsi = $request->deskripsi;
+        $konveksi->tanggal_masuk = now();
         $konveksi->save();
 
         for ($i = 0; $i < count($request->warna_produk); $i++) {
