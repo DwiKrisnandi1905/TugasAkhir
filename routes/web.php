@@ -41,7 +41,7 @@ Route::get('/konveksi/produkKonveksi', [produkKonveksiController::class, 'produk
 Route::post('/konveksi/simpanProdukKonveksi', [produkKonveksiController::class, 'simpanDataKonveksi'])->name('simpanProdukKonveksi');
 // Tambah produk konveksi end
 
-Route::get('/konveksi/detailProdukKonveksi', [Controller::class, 'detailProdukKonveksi'])->name('detailProdukKonveksi');
+Route::get('/konveksi/detailProdukKonveksi/{id}', [konveksiController::class, 'detailProdukKonveksi'])->name('detailProdukKonveksi');
 
 Route::get('/tokobaju', [tokobajuController::class, 'tokobaju'])->name('tokobaju');
 // kategori tokobaju 
@@ -55,7 +55,7 @@ Route::get('/tokobaju/produkTokobaju', [produkTokobajuController::class, 'produk
 Route::post('/tokobaju/simpanProduk', [produkTokobajuController::class, 'simpanData'])->name('simpanProduk');
 //Tambah produk toko baju end
 
-Route::get('/tokobaju/detailProdukTokobaju', [Controller::class, 'detailProdukTokobaju'])->name('detailProdukTokobaju');
+Route::get('/tokobaju/detailProdukTokobaju/{id}', [tokobajuController::class, 'detailProdukTokobaju'])->name('detailProdukTokobaju');
 
 Route::get('/transaksi', [Controller::class, 'transaksi'])->name('transaksi');
 Route::get('/transaksi/metodeTransaksi', [Controller::class, 'metodeTransaksi'])->name('metodeTransaksi');

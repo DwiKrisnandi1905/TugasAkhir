@@ -12,32 +12,36 @@
         <tbody>
           <tr>
             <th scope="row" class="col-4">Id Produk</th>
-            <td id="idProduk">123</td>
+            <td id="idProduk">{{ $konveksis->id }}</td>
+          </tr>
+          <tr>
+            <th scope="row" class="col-4">Tanggal Masuk</th>
+            <td id="kategori">{{ $konveksis->tanggal_masuk }}</td>
           </tr>
           <tr>
             <th scope="row" class="col-4">Nama Produk</th>
-            <td id="namaProduk">Jersey Futsal</td>
+            <td id="namaProduk">{{ $konveksis->nama_produk }}</td>
           </tr>
           <tr>
             <th scope="row" class="col-4">Kategori</th>
-            <td id="kategori">Pakaian Olahraga Pria</td>
+            <td id="kategori">{{ $konveksis->kategori->name }}</td>
           </tr>
           <tr>
             <th scope="row" class="col-4">Jenis Bahan</th>
-            <td id="jenisBahan">Katun</td>
+            <td id="jenisBahan">{{ $konveksis->jenis }}</td>
           </tr>
-          <tr>
+          {{-- <tr>
             <th scope="row" class="col-4">Ukuran Tersedia</th>
             <td>XXXL, XXL, XL, L, M</td>
-          </tr>
-          <tr>
+          </tr> --}}
+          {{-- <tr>
             <th scope="row" class="col-4">Harga Persatuan</th>
             <td id="harga">Rp 80.000,00</td>
           </tr>
           <tr>
             <th scope="row" class="col-4">Harga Persatuan(Khusus XXXL dan XXL)</th>
             <td id="hargaKhusus">Rp 90.000,00</td>
-          </tr>
+          </tr> --}}
           <tr>
             <th scope="row" class="col-4">Upload Foto Contoh Produk Jadi</th>
             <td>Pakaian_Olahraga_Pria.jpg</td>
@@ -60,7 +64,7 @@
           </tr>
           <tr>
             <th scope="row" class="col-4">Deskripsi</th>
-            <td id="deskripsi">produk ini memiliki bahan yang berkualitas</td>
+            <td id="deskripsi">{{ $konveksis->deskripsi }}</td>
           </tr>
         </tbody>
       </table>

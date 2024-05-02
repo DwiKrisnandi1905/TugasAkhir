@@ -61,7 +61,7 @@
               <td>{{ $konveksi->kategori->name }}</td>          
             <td>
               <div class="d-flex justify-content-center align-items-center gap-1">
-                  <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukKonveksi') }}';"></i>
+                  <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailProdukKonveksi', ['id' => $konveksi->id]) }}';"></i>
                   <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
                 </div>
             </td>

@@ -19,4 +19,14 @@ class tokobajuController extends Controller
             'title' => 'Toko Baju',
         ]);
     }
+
+    public function detailProdukTokobaju (string $id)
+    {
+        $produks = Produk::findOrFail($id);
+        return view('admin.page.TokoBaju.DetailProduk',[
+            'produks' => $produks,
+            'name' => 'Detail Produk Toko Baju',
+            'title' => 'Detail Produk Toko Baju',
+        ]);
+    }
 }
