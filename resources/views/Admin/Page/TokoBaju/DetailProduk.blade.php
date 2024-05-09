@@ -53,61 +53,30 @@
         </tbody>
       </table>
       <h4>Detail warna dan ukuran produk</h4>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th colspan="5" class="text-center">Merah</th>
-                </tr>
-            </thead>            
+        <table class="table table-bordered">         
             <thead>
             <tr>
+                <th scope="col">Warna</th>
                 <th scope="col">Ukuran</th>
                 <th scope="col">Harga</th>
                 <th scope="col">Stock</th>
+                <th scope="col">Gambar</th>
                 <th scope="col">Terjual</th>
                 <th scope="col">Aksi</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">XXXL</th>
-                <td class="harga">Rp 80.000,00</td>
-                <td class="stock">30</td>
-                <td>15</td>
-                <td><button class="btn btn-delete btn-danger btn-sm" style="display: none;" onclick="deleteRow(this)">Hapus</button></td>
-            </tr>
-            <tr>
-                <th scope="row">XXL</th>
-                <td class="harga">Rp 80.000,00</td>
-                <td class="stock">30</td>
-                <td>15</td>
-                <td><button class="btn btn-delete btn-danger btn-sm" style="display: none;" onclick="deleteRow(this)">Hapus</button></td>
-            </tr>
-            <tr>
-                <th scope="row">XL</th>
-                <td class="harga">Rp 80.000,00</td>
-                <td class="stock">30</td>
-                <td>15</td>
-                <td><button class="btn btn-delete btn-danger btn-sm" style="display: none;" onclick="deleteRow(this)">Hapus</button></td>
-            </tr>
-            <tr>
-                <th scope="row">L</th>
-                <td class="harga">Rp 80.000,00</td>
-                <td class="stock">30</td>
-                <td>15</td>
-                <td><button class="btn btn-delete btn-danger btn-sm" style="display: none;" onclick="deleteRow(this)">Hapus</button></td>
-            </tr>
-            <tr>
-                <th scope="row">M</th>
-                <td class="harga">Rp 80.000,00</td>
-                <td class="stock">30</td>
-                <td>15</td>
-                <td><button class="btn btn-delete btn-danger btn-sm" style="display: none;" onclick="deleteRow(this)">Hapus</button></td>
-            </tr>
-            <tr>
-                <th scope="row">Gambar</th>
-                <td colspan="4">Merah.jpg</td>
-            </tr>
+            @foreach($variasiProduk as $variasiProduk)
+              <tr>
+                  <th scope="row">{{ $variasiProduk->warna_produk }}</th>
+                  <th class="ukuran">{{ $variasiProduk->ukuran }}</th>
+                  <td class="harga">{{ $variasiProduk->harga }}</td>
+                  <td class="stock">{{ $variasiProduk->stock }}</td>
+                  <td class="gambar">jersey.jpg</td>
+                  <td>15</td>
+                  <td><button class="btn btn-delete btn-danger btn-sm" style="display: none;" onclick="deleteRow(this)">Hapus</button></td>
+              </tr>
+            @endforeach
             </tbody>
         </table>
         <div class="mb-3 justify-content-center d-flex gap-4">
