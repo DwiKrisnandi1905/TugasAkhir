@@ -6,6 +6,11 @@
         <div class="mb-3 text-primary" onclick="window.location='{{ route('konveksi') }}';">
             <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
         </div>
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <form action="{{ route('storeeKategori') }}" method="POST">
           @csrf
           <div class="mb-3">
@@ -32,6 +37,9 @@
                   <td>{{ $kategori->name }}</td>
                   <td>
                     <div class="d-flex justify-content-center align-items-center">
+                      <a href="{{ route('editKategoriKonveksi', $kategori->id) }}" class="text-warning me-2">
+                        <i class="bi bi-pencil-square" style="font-size: 20px; cursor: pointer;"></i>
+                      </a>
                       <form action="{{ route('deleteeKategori', $kategori->id) }}" method="POST" id="deleteForm{{ $kategori->id }}">
                         @csrf
                         @method('DELETE')

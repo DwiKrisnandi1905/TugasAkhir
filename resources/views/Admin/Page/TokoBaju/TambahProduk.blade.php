@@ -14,6 +14,11 @@
         <div class="mb-3 text-primary" onclick="window.location='{{ route('tokobaju') }}';">
             <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
         </div>
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <form action="{{ route('simpanProduk') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">

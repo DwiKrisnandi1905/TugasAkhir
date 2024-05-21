@@ -61,7 +61,7 @@ class produkKonveksiController extends Controller
             ]);
         }
 
-        return redirect()->route('produkKonveksi')->with('success', 'Produk berhasil ditambahkan!');
+        return redirect()->route('konveksi')->with('success', 'Produk berhasil ditambahkan!');
     }
 
 }

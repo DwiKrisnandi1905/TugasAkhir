@@ -37,4 +37,27 @@ class kategoriTokobajuController extends Controller
         return redirect()->route('kategoriTokobaju')->with('success', 'Kategori berhasil dihapus!');
     }
 
+    public function edit($id)
+    {
+        $kategori = kategoriTokobaju::findOrFail($id);
+        return view('admin.page.TokoBaju.EditKategori', [
+            'kategori' => $kategori,
+            'name' => 'Edit Kategori',
+            'title' => 'Edit Kategori'
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'kategoriTokobaju' => 'required|string|max:255',
+        ]);
+
+        $kategori = kategoriTokobaju::findOrFail($id);
+        $kategori->update([
+            'name' => $request->kategoriTokobaju,
+        ]);
+
+        return redirect()->route('kategoriTokobaju')->with('success', 'Kategori berhasil diperbarui!');
+    }
 }

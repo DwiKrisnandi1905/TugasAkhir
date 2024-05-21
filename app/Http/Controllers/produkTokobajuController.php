@@ -61,7 +61,7 @@ class produkTokobajuController extends Controller
             ]);
         }
 
-        return redirect()->route('produkTokobaju')->with('success', 'Produk berhasil ditambahkan!');
+        return redirect()->route('tokobaju')->with('success', 'Produk berhasil ditambahkan!');
     }
 
 }

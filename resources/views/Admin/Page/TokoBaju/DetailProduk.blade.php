@@ -8,6 +8,11 @@
                 <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
             </div>
         </div>
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
       <table class="table table-bordered">
         <tbody>
           <tr>
@@ -80,8 +85,8 @@
             </tbody>
         </table>
         <div class="mb-3 justify-content-center d-flex gap-4">
-            <button type="button" class="btn btn-success w-75 fw-bold" id="editButton" onclick="editData()">Edit</button>
-        </div>
+          <a href="{{ route('editProduk', ['id' => $produks->id]) }}" class="btn btn-success w-75 fw-bold">Edit</a>
+      </div>      
     </div>    
 </div>
 @endsection

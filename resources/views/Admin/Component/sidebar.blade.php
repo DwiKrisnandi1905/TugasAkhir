@@ -9,14 +9,14 @@
     </div>
     <ul class="sidebar-nav">
         <li class="sidebar-item {{ Request::path() == '/' ? 'active' : '' }}">
-            <a href="/" class="sidebar-link collapsed has-dropdown" 
+            <a href="/dashboard" class="sidebar-link collapsed has-dropdown" 
                 data-bs-target="#dashboard" aria-expanded="false" aria-controls="dashboard">
                 <i class="lni lni-grid-alt"></i>
                 <span>Dashboard</span>
             </a>
             <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                 <li class="sidebar-item">
-                    <a href="/" class="sidebar-link">Dashboard</a>
+                    <a href="/dashboard" class="sidebar-link">Dashboard</a>
                 </li>
             </ul>
         </li>
@@ -32,18 +32,6 @@
                 </li>
             </ul>
         </li>
-        {{-- <li class="sidebar-item {{ Request::path() == '/' ? 'active' : '' }}">
-            <a href="/" class="sidebar-link">
-                <i class="lni lni-grid-alt"></i>
-                <span>Dashboard</span>
-            </a>
-        </li> --}}
-        {{-- <li class="sidebar-item {{ Request::path() == 'pelanggan' ? 'active' : '' }}">
-            <a href="pelanggan" class="sidebar-link">
-                <i class="lni lni-users"></i>
-                <span>Pelanggan</span>
-            </a>
-        </li> --}}
         <li class="sidebar-item">
             <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                 data-bs-target="#produk" aria-expanded="false" aria-controls="produk">
@@ -107,35 +95,32 @@
                 </li>
             </ul>
         </li>
-        {{-- <li class="sidebar-item {{ Request::path() == 'transaksi' ? 'active' : '' }}">
-            <a href="transaksi" class="sidebar-link">
-                <i class="fas fa-credit-card"></i>
-                <span>Transaksi</span>
-            </a>
-        </li> --}}
-        {{-- <li class="sidebar-item {{ Request::path() == 'history' ? 'active' : '' }}">
-            <a href="history" class="sidebar-link">
-                <i class="fas fa-history"></i>
-                <span>Histori</span>
-            </a>
-        </li> --}}
-        {{-- <li class="sidebar-item {{ Request::path() == 'notifikasi' ? 'active' : '' }}">
-            <a href="notifikasi" class="sidebar-link">
-                <i class="lni lni-popup"></i>
-                <span>Notification</span>
-            </a>
-        </li> --}}
-        {{-- <li class="sidebar-item {{ Request::path() == 'setting' ? 'active' : '' }}">
-            <a href="setting" class="sidebar-link">
-                <i class="lni lni-cog"></i>
-                <span>Setting</span>
-            </a>
-        </li> --}}
     </ul>
     <div class="sidebar-footer">
-        <a href="#" class="sidebar-link">
-            <i class="lni lni-exit"></i>
-            <span>Logout</span>
-        </a>
+        <form action="{{ route('logout') }}" method="POST" id="logout-form">
+            @csrf
+            <a href="#" class="sidebar-link" onclick="event.preventDefault(); showLogoutAlert();">
+                <i class="lni lni-exit"></i>
+                <span>Logout</span>
+            </a>
+        </form>
     </div>
 </aside>
+<script>
+    function showLogoutAlert() {
+        Swal.fire({
+            title: 'Konfirmasi Logout',
+            text: "Apakah Anda yakin ingin logout?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, logout!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('logout-form').submit();
+            }
+        })
+    }
+</script>

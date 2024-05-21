@@ -11,6 +11,14 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public function landingPage ()
+    {
+        return view('landingPage.landingPage',[
+            'name' => 'Landing Page',
+            'title' => 'Landing Page',
+        ]);
+    }
+
     public function dashboard ()
     {
         return view('admin.page.Dashboard',[
@@ -81,27 +89,27 @@ class Controller extends BaseController
     //         'title' => 'Detail Produk Toko Baju',
     //     ]);
     // }
-    public function transaksi ()
-    {
-        return view('admin.page.Transaksi.Transaksi',[
-            'name' => 'Transaksi',
-            'title' => 'Transaksi',
-        ]);
-    }
-    public function metodeTransaksi ()
-    {
-        return view('admin.page.Transaksi.metodeTransaksi',[
-            'name' => 'Metode Transaksi',
-            'title' => 'Metode Transaksi',
-        ]);
-    }
-    public function detailTransaksi ()
-    {
-        return view('admin.page.Transaksi.detailTransaksi',[
-            'name' => 'Detail Transaksi',
-            'title' => 'Detail Transaksi',
-        ]);
-    }
+    // public function transaksi ()
+    // {
+    //     return view('admin.page.Transaksi.Transaksi',[
+    //         'name' => 'Transaksi',
+    //         'title' => 'Transaksi',
+    //     ]);
+    // }
+    // public function metodeTransaksi ()
+    // {
+    //     return view('admin.page.Transaksi.metodeTransaksi',[
+    //         'name' => 'Metode Transaksi',
+    //         'title' => 'Metode Transaksi',
+    //     ]);
+    // }
+    // public function detailTransaksi ()
+    // {
+    //     return view('admin.page.Transaksi.detailTransaksi',[
+    //         'name' => 'Detail Transaksi',
+    //         'title' => 'Detail Transaksi',
+    //     ]);
+    // }
     public function history ()
     {
         return view('admin.page.History',[
