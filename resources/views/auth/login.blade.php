@@ -134,7 +134,7 @@
                             </div>
                             
                             <div class="forgot-password">
-                                <a href="#">Lupa sandi</a>
+                                <a href="{{ route('password.request') }}">Lupa sandi</a>
                             </div>
                         </form>
                     </div>

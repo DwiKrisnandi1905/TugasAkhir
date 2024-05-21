@@ -9,6 +9,7 @@ use App\Http\Controllers\produkKonveksiController;
 use App\Http\Controllers\tokobajuController;
 use App\Http\Controllers\konveksiController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\transaksiController;
 
@@ -35,6 +36,11 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/forgot-password', [PasswordResetController::class, 'showRequestForm'])->name('password.request');
+Route::post('/forgot-password', [PasswordResetController::class, 'handleRequest'])->name('password.email');
+Route::get('/reset-password/{email}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])->name('password.update');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // admin
