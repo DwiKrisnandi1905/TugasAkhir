@@ -156,7 +156,7 @@ a.sidebar-link:hover {
 }
 
 /* dashboard */
-.card {
+#card-dashboard {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -165,10 +165,26 @@ a.sidebar-link:hover {
   background-color: #FAA845;
   border: solid rgba(0, 0, 0, 0.125);
   border-radius: 0.75rem;
+  min-height: 30vh;
 }
 
 /* pelanggan */
     #Pelanggan {
+        background-color: #FFF;
+        min-height: 100vh;
+        border-radius: 6px;
+    }
+    .table-bordered th,
+    .table-bordered td {
+        border: 2px solid #b6b6b6;
+        background-color: #f0efef;
+    }
+/* Toko Baju */
+    #Filter-TokoBaju {
+        background-color: #FFF;
+        border-radius: 6px;
+    }
+    #Table-TokoBaju {
         background-color: #FFF;
         min-height: 100vh;
         border-radius: 6px;

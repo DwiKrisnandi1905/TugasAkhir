@@ -13,6 +13,7 @@
             <li><a class="dropdown-item" href="#">A - Z</a></li>
           </ul>
         </div>
+        <button class="btn btn-danger fw-bold text-white">Export</button>
       </div>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -25,8 +26,8 @@
           <th scope="col">Id</th>
           <th scope="col" class="col-4">Nama</th>
           <th scope="col" class="col-4">Alamat</th>
-          <th scope="col" class="col-4">Telepon</th>
-          <th scope="col" class="col-1">Aksi</th>
+          <th scope="col" class="col-3">Telepon</th>
+          <th scope="col" class="col-2">Aksi</th>
         </tr>
       </thead>
       <tbody>
@@ -36,7 +37,9 @@
           <td>123 Main St, City</td>
           <td>123-456-7890</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+              <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+            </div>
           </td>
         </tr>
         <tr>
@@ -45,7 +48,9 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+              <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+            </div>
           </td>
         </tr>
         <tr>
@@ -54,7 +59,9 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+              <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+            </div>
           </td>
         </tr>
         <tr>
@@ -63,7 +70,9 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+              <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+            </div>
           </td>
         </tr>
         <tr>
@@ -72,7 +81,9 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+              <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+            </div>
           </td>
         </tr>
         <tr>
@@ -81,7 +92,9 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+              <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+            </div>
           </td>
         </tr>
         <tr>
@@ -90,7 +103,9 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+              <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+            </div>
           </td>
         </tr>
         <tr>
@@ -99,7 +114,9 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+              <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+            </div>
           </td>
         </tr>
         <tr>
@@ -108,7 +125,9 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+              <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+            </div>
           </td>
         </tr>
         <tr>
@@ -117,7 +136,9 @@
           <td>456 Elm St, Town</td>
           <td>987-654-3210</td>
           <td>
-            <button class="btn btn-primary">Detail</button>
+            <div class="d-flex justify-content-center align-items-center gap-1">
+              <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+            </div>
           </td>
         </tr>
       </tbody>
