@@ -29,11 +29,10 @@ class AuthController extends Controller
         } elseif ($role == 'user') {
             return redirect()->intended('/home');
         }
+        return back()->withErrors([
+            'email' => 'Email atau password yang anda masukkan salah',
+        ]);
     }
-
-    return back()->withErrors([
-        'email' => 'Masukkan email dan password dengan benar',
-    ]);
 }
 
 
