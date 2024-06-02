@@ -8,7 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #f0f2f5;
             font-family: 'Segoe UI', sans-serif;
         }
         .container {
@@ -17,9 +17,9 @@
         .card {
             border: none;
             border-radius: 15px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            background: linear-gradient(to right, #FFA500, #FF6347);
+            background: linear-gradient(to right, #ff8c00, #ff4500);
             color: #fff;
         }
         .card-header {
@@ -29,26 +29,34 @@
             padding: 20px;
             border-radius: 15px 15px 0 0;
         }
+        .card-body {
+            background-color: #ff8c00 ;
+            color: #fff; 
+        }
         .form-control {
-            border-radius: 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+            border: none;
             box-shadow: none;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #fff;
+            background-color: #f3f3f3;
+            color: #000;
         }
         .form-control:focus {
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 0 0.15rem rgba(255, 255, 255, 0.25);
+            border-color: rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 0 0.15rem rgba(0, 0, 0, 0.25);
+        }
+        .form-label {
+            color: rgba(255, 255, 255, 0.8);
         }
         .btn-primary {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.2);
             border: none;
             border-radius: 4px;
             width: 100%;
             color: #fff;
+            transition: background-color 0.3s;
         }
         .btn-primary:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.4);
         }
         .form-check-input {
             margin-top: 5px;
@@ -64,6 +72,7 @@
         .forgot-password a {
             color: #fff;
             text-decoration: none;
+            transition: text-decoration 0.3s;
         }
         .forgot-password a:hover {
             text-decoration: underline;
@@ -77,12 +86,10 @@
         .card-footer a {
             color: #fff;
             text-decoration: none;
+            transition: text-decoration 0.3s;
         }
         .card-footer a:hover {
             text-decoration: underline;
-        }
-        .input-group {
-            position: relative;
         }
         .input-group .btn {
             position: absolute;
@@ -117,20 +124,22 @@
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="mb-3">
-                                <input type="email" class="form-control" name="email" placeholder="Email" required>
+                                <label for="email" class="form-label fw-bolder">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                             </div>
                             <div class="mb-3">
+                                <label for="password" class="form-label fw-bolder">Password</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                                     <button class="btn" type="button" id="togglePassword"><i class="far fa-eye-slash"></i></button>
                                 </div>
                             </div>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="remember_me">
-                                <label class="form-check-label" for="remember_me">Ingatkan saya</label>
+                                <label class="form-check-label fw-bolder" for="remember_me">Ingatkan saya</label>
                             </div>
                             <div class="mb-3">
-                                <button type="submit" class="btn btn-primary">Login</button>
+                                <button type="submit" class="btn btn-primary fw-bolder">Login</button>
                             </div>
                             
                             <div class="forgot-password">
@@ -139,7 +148,7 @@
                         </form>
                     </div>
                     <div class="card-footer">
-                        <p>Tudak punya akun? <a href="{{ route('register') }}" class="text-decoration-none">Register</a></p>
+                        <p>Tidak punya akun? <a href="{{ route('register') }}" class="text-decoration-none">Register</a></p>
                     </div>
                 </div>
             </div>
@@ -161,35 +170,35 @@
                     } else {
                         localStorage.removeItem('rememberEmail');
                         localStorage.removeItem('rememberPassword');
-                    }
-                });
+                    });
 
-                var rememberedEmail = localStorage.getItem('rememberEmail');
-                var rememberedPassword = localStorage.getItem('rememberPassword');
-                if (rememberedEmail && rememberedPassword) {
-                    emailInput.value = rememberedEmail;
-                    passwordInput.value = rememberedPassword;
-                }
-            }
-        });
+var rememberedEmail = localStorage.getItem('rememberEmail');
+var rememberedPassword = localStorage.getItem('rememberPassword');
+if (rememberedEmail && rememberedPassword) {
+    emailInput.value = rememberedEmail;
+    passwordInput.value = rememberedPassword;
+}
+}
+});
 
-        document.addEventListener("DOMContentLoaded", function() {
-            var passwordInput = document.querySelector('input[name="password"]');
-            var togglePasswordButton = document.getElementById('togglePassword');
-            
-            if (passwordInput && togglePasswordButton) {
-                togglePasswordButton.addEventListener('click', function() {
-                    var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                    passwordInput.setAttribute('type', type);
-                    
-                    if (type === 'password') {
-                        this.innerHTML = '<i class="far fa-eye-slash"></i>';
-                    } else {
-                        this.innerHTML = '<i class="far fa-eye"></i>';
-                    }
-                });
-            }
-        });
-    </script>    
+document.addEventListener("DOMContentLoaded", function() {
+var passwordInput = document.querySelector('input[name="password"]');
+var togglePasswordButton = document.getElementById('togglePassword');
+
+if (passwordInput && togglePasswordButton) {
+togglePasswordButton.addEventListener('click', function() {
+    var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    
+    if (type === 'password') {
+        this.innerHTML = '<i class="far fa-eye-slash"></i>';
+    } else {
+        this.innerHTML = '<i class="far fa-eye"></i>';
+    }
+});
+}
+});
+</script>    
 </body>
 </html>
+
