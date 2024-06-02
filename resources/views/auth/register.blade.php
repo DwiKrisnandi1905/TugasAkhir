@@ -6,6 +6,7 @@
     <title>Register</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
         /* Custom styles */
@@ -65,6 +66,19 @@
         .card-footer a:hover {
             text-decoration: underline;
         }
+        .input-group {
+            position: relative;
+        }
+        .input-group .btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            border: none;
+            background: transparent;
+            z-index: 10;
+            color: #000;
+        }
     </style>
 </head>
 <body>
@@ -76,6 +90,23 @@
                         <h3>Register</h3>
                     </div>
                     <div class="card-body">
+                        <!-- Alert messages -->
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="mb-3">
@@ -85,10 +116,16 @@
                                 <input type="email" class="form-control" name="email" placeholder="Email" required>
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                    <button class="btn toggle-password" type="button" data-input="password"><i class="far fa-eye-slash"></i></button>
+                                </div>
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control" name="password_confirmation" placeholder="Konfirmasi Password" required>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" name="password_confirmation" placeholder="Konfirmasi Password" required>
+                                    <button class="btn toggle-password" type="button" data-input="password_confirmation"><i class="far fa-eye-slash"></i></button>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary">Register</button>
@@ -105,5 +142,25 @@
 
     <!-- Bootstrap JS (optional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var toggleButtons = document.querySelectorAll('.toggle-password');
+            
+            toggleButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var input = document.querySelector('input[name="' + this.dataset.input + '"]');
+                    var type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+                    
+                    if (type === 'password') {
+                        this.innerHTML = '<i class="far fa-eye-slash"></i>';
+                    } else {
+                        this.innerHTML = '<i class="far fa-eye"></i>';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

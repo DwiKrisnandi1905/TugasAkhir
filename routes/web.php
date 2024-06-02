@@ -10,7 +10,9 @@ use App\Http\Controllers\tokobajuController;
 use App\Http\Controllers\konveksiController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasswordResetController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Pelanggan\UserController;
+use App\Http\Controllers\Pelanggan\TokobajuPelangganController;
+use App\Http\Controllers\Pelanggan\KonveksiPelangganController;
 use App\Http\Controllers\transaksiController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
@@ -31,21 +33,22 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 //     return view('welcome');
 // });
 
-Route::get('/', [Controller::class, 'landingPage'])->name('landingPage');
-Route::get('/landingPage', [Controller::class, 'landingPage'])->name('landingPage');
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::get('/', [Controller::class, 'landingPage'])->name('landingPage')->middleware(['guestt','guest']);
+Route::get('/landingPage', [Controller::class, 'landingPage'])->name('landingPage')->middleware(['guestt','guest']);
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware(['guestt','guest']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register')->middleware(['guestt','guest']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request')->middleware(['guestt','guest']);
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset')->middleware(['guestt','guest']);
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // admin
+    Route::get('/', [Controller::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
     Route::get('/pelanggan', [Controller::class, 'pelanggan'])->name('pelanggan');
 
@@ -120,5 +123,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/index', [UserController::class, 'index'])->name('index');
+    // Route::get('/', [UserController::class, 'home'])->name('home');
+    Route::get('/home', [UserController::class, 'home'])->name('home');
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::get('/cart', [UserController::class, 'cart'])->name('cart');
+    Route::get('/konveksii', [KonveksiPelangganController::class, 'konveksii'])->name('konveksii');
+    Route::get('/konveksii/detailKonveksi/{id}', [KonveksiPelangganController::class, 'detailKonveksi'])->name('detailKonveksi');
+    Route::get('/tokobajuu', [TokobajuPelangganController::class, 'tokobajuu'])->name('tokobajuu');
+    Route::get('/tokobajuu/detailTokobaju/{id}', [TokobajuPelangganController::class, 'detailTokobaju'])->name('detailTokobaju');
 });

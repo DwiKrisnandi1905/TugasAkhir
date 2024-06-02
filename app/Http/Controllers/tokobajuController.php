@@ -119,10 +119,10 @@ class tokobajuController extends Controller
         $rows = (int) $request->input('rows', 10);
         
         $produks = Produk::where('nama_produk', 'like', '%' . $query . '%')
-                        ->orWhereHas('kategori', function ($q) use ($query) {
-                            $q->where('name', 'like', '%' . $query . '%');
-                        })
-                        ->paginate($rows);
+        ->orWhereHas('kategori', function ($q) use ($query) {
+            $q->where('name', 'like', '%' . $query . '%');
+        })
+        ->paginate($rows);
 
         return view('admin.page.TokoBaju.Tokobaju', [
             'produks' => $produks,

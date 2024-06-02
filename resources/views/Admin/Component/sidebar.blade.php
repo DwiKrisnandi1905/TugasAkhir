@@ -8,7 +8,7 @@
         </div>
     </div>
     <ul class="sidebar-nav">
-        <li class="sidebar-item {{ Request::path() == '/' ? 'active' : '' }}">
+        <li class="sidebar-item {{ Request::path() == 'dashboard' ? 'active' : '' }}">
             <a href="/dashboard" class="sidebar-link collapsed has-dropdown" 
                 data-bs-target="#dashboard" aria-expanded="false" aria-controls="dashboard">
                 <i class="lni lni-grid-alt"></i>

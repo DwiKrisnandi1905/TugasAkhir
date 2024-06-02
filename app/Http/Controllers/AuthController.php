@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -15,22 +16,26 @@ class AuthController extends Controller
     }
 
     public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+{
+    $credentials = $request->only('email', 'password');
+    $remember = $request->has('remember');
 
-            if (Auth::user()->role == 'admin') {
-                return redirect()->intended('/dashboard');
-            } elseif (Auth::user()->role == 'user') {
-                return redirect()->intended('/index');
-            }
+    if (Auth::attempt($credentials, $remember)) {
+        $request->session()->regenerate();
+        $role = Auth::user()->role;
+        
+        if ($role == 'admin') {
+            return redirect()->intended('/');
+        } elseif ($role == 'user') {
+            return redirect()->intended('/home');
         }
-
-        return back()->withErrors([
-            'email' => 'Masukkan email dan password dengan benar',
-        ]);
     }
+
+    return back()->withErrors([
+        'email' => 'Masukkan email dan password dengan benar',
+    ]);
+}
+
 
     public function showRegisterForm()
     {
@@ -49,10 +54,10 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'user', 
+            'role' => 'user',
         ]);
 
-        return redirect('/login')->with('success', 'Registration successful, please login.');
+        return redirect()->route('register')->with('status', 'Registrasi berhasil, silahkan kembali ke halaman login');
     }
 
     public function logout(Request $request)
