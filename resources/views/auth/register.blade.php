@@ -15,7 +15,7 @@
             font-family: 'Segoe UI', sans-serif;
         }
         .container {
-            margin-top: 80px;
+            margin-top: 6%;
         }
         .card {
             border: none;
@@ -109,7 +109,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="card-body">
-                                <div class="card-header mb-3">
+                                <div class="card-header mb-3 border-rounded">
                                     <h3>Register</h3>
                                 </div>
                                 <!-- Alert messages -->

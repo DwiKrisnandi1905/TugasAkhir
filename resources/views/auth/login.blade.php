@@ -12,7 +12,7 @@
             font-family: 'Segoe UI', sans-serif;
         }
         .container {
-            margin-top: 80px;
+            margin-top: 6%;
         }
         .card {
             border: none;
@@ -25,7 +25,7 @@
             color: #fff;
             text-align: center;
             padding: 10px;
-            border-radius: 15px 15px 0 0;
+            border-radius: 15px 15px 15px 15px;
         }
         .card-body {
             background-color: #fff;
@@ -126,7 +126,7 @@
                     <div class="row g-0">
                         <div class="col-md-6">
                             <div class="card-body">
-                                <div class="card-header mb-3">
+                                <div class="card-header mb-3 border-rounded">
                                     <h3>Form Login</h3>
                                 </div>
                                 @if ($errors->any())

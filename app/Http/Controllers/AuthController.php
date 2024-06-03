@@ -16,24 +16,31 @@ class AuthController extends Controller
     }
 
     public function login(Request $request)
-{
-    $credentials = $request->only('email', 'password');
-    $remember = $request->has('remember');
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
 
-    if (Auth::attempt($credentials, $remember)) {
-        $request->session()->regenerate();
-        $role = Auth::user()->role;
-        
-        if ($role == 'admin') {
-            return redirect()->intended('/');
-        } elseif ($role == 'user') {
-            return redirect()->intended('/home');
+        $credentials = $request->only('email', 'password');
+        $remember = $request->has('remember');
+
+        if (Auth::attempt($credentials, $remember)) {
+            $request->session()->regenerate();
+            $role = Auth::user()->role;
+
+            if ($role == 'admin') {
+                return redirect()->intended('/');
+            } elseif ($role == 'user') {
+                return redirect()->intended('/home');
+            }
         }
+
         return back()->withErrors([
             'email' => 'Email atau password yang anda masukkan salah',
-        ]);
+        ])->withInput($request->only('email'));
     }
-}
+
 
 
     public function showRegisterForm()

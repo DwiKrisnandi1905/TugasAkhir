@@ -18,32 +18,82 @@
         }
 
         .navbar {
+            background: linear-gradient(to right, #FFA500, #FF6347);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+
         .navbar-nav .nav-link.active {
-            color: #0d6efd;
+            color: #fff;
             font-weight: bold;
         }
 
         .btn {
             color: #fff;
-            background-color: #0d6efd;
+            background-color: #FF6347;
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             border: 2px solid #fff; 
         }
 
         .btn:hover {
-            color: #0d6efd;
+            color: #FF6347;
             background-color: #fff;
+        }
+
+        .bg-primary-custom {
+            background: linear-gradient(to right, #FFA500, #FF6347);
+            color: #fff;
+        }
+
+        .bg-light-custom {
+            background-color: #f8f9fa;
+        }
+
+        .footer-custom {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        .team-member {
+            margin-bottom: 30px;
+        }
+
+        .team-member img {
+            border-radius: 50%;
+        }
+
+        .team-member h5 {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .team-member p {
+            color: #666;
+        }
+
+        #home {
+            background-image: url('/bg2.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            color: #fff;
+        }
+
+        #home .container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 50px;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand text-white" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>   
@@ -72,7 +122,7 @@
     </nav>
 
     <!-- Home Section -->
-    <section id="home" class="py-5 text-center bg-primary text-white min-vh-100 d-flex-center">
+    <section id="home" class="py-5 text-center min-vh-100 d-flex-center">
         <div class="container">
             <h1 class="display-4">Selamat Datang di Website Kami</h1>
             <p class="lead">Ini adalah halaman home dari website kami.</p>
@@ -81,15 +131,55 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-5 min-vh-100 d-flex-center">
-        <div class="container text-center">
-            <h2>Tentang Kami</h2>
-            <p>Kami adalah perusahaan yang bergerak di bidang ...</p>
+    <section id="about" class="py-5 min-vh-100 d-flex-center bg-light-custom">
+        <div class="container">
+            <h2 class="text-center mb-5">Tentang Kami</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Visi Kami</h3>
+                    <p>Menjadi pemimpin dalam industri kami dengan inovasi dan kualitas terbaik.</p>
+                    <h3>Misi Kami</h3>
+                    <ul>
+                        <li>Menyediakan produk dan layanan berkualitas tinggi kepada pelanggan.</li>
+                        <li>Membangun hubungan yang kuat dengan komunitas dan lingkungan.</li>
+                        <li>Mendorong inovasi dan kreativitas di setiap aspek bisnis kami.</li>
+                    </ul>
+                    <h3>Nilai-Nilai Kami</h3>
+                    <ul>
+                        <li>Integritas</li>
+                        <li>Komitmen</li>
+                        <li>Inovasi</li>
+                        <li>Kerjasama</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h3>Sejarah Kami</h3>
+                    <p>Kami didirikan pada tahun 2000 dengan tujuan untuk memberikan solusi terbaik bagi pelanggan kami. Sejak saat itu, kami telah berkembang menjadi salah satu perusahaan terkemuka di industri kami, dengan tim yang terdiri dari para profesional yang berdedikasi.</p>
+                    <h3>Tim Kami</h3>
+                    <div class="row">
+                        <div class="col-sm-4 team-member">
+                            <img src="https://via.placeholder.com/150" class="img-fluid" alt="Team Member 1">
+                            <h5>John Doe</h5>
+                            <p>CEO</p>
+                        </div>
+                        <div class="col-sm-4 team-member">
+                            <img src="https://via.placeholder.com/150" class="img-fluid" alt="Team Member 2">
+                            <h5>Jane Smith</h5>
+                            <p>CTO</p>
+                        </div>
+                        <div class="col-sm-4 team-member">
+                            <img src="https://via.placeholder.com/150" class="img-fluid" alt="Team Member 3">
+                            <h5>Mike Johnson</h5>
+                            <p>CFO</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Products Section -->
-    <section id="products" class="py-5 bg-light min-vh-100">
+    <section id="products" class="py-5 bg-light-custom min-vh-100">
         <div class="container text-center">
             <h2>Produk Kami</h2>
             <div class="row">
@@ -125,7 +215,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-5 min-vh-100 d-flex-center">
+    <section id="contact" class="py-5 min-vh-100 d-flex-center bg-light-custom">
         <div class="container">
             <h2 class="text-center">Hubungi Kami</h2>
             <form>
@@ -147,7 +237,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-4 bg-dark text-white text-center">
+    <footer class="py-4 footer-custom text-center">
         <div class="container">
             <p>&copy; 2023 Perusahaan Anda. Semua hak dilindungi.</p>
         </div>
