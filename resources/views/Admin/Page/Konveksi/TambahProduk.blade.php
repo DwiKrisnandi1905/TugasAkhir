@@ -8,12 +8,20 @@
         width: auto;
         height: auto;
     }
+    .modal-xl-custom {
+        max-width: 85%; 
+    }
 </style>
 <div class="card mb-3">
     <div class="card-body">
         <div class="mb-3 text-primary" onclick="window.location='{{ route('konveksi') }}';">
             <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
         </div>
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <form action="{{ route('simpanProdukKonveksi') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
@@ -37,11 +45,11 @@
                 <input type="text" class="form-control" id="jenis" name="jenis">
             </div>
             <div class="mb-3">
-                <label for="foto_produk" class="form-label">Upload Foto Contoh Produk Jadi:</label>
+                <label for="foto_produk" class="form-label">Upload Foto Produk Untuk Tampilan Utama:</label>
                 <input type="file" class="form-control" id="foto_produk" name="foto_produk" accept="image/*">
             </div>
             <div class="mb-3">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalWarnaBahan">Tambahkan Variasi</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalWarnaProduk">Tambahkan Produk</button>
             </div>
             <div id="cardContainer" class="mb-3"></div>
             <div class="mb-3">
@@ -51,8 +59,8 @@
             <div class="d-flex justify-content-center mb-3">
                 <button type="submit" class="btn btn-success">Simpan</button>
             </div>
-            <div class="modal fade" id="modalWarnaBahan" tabindex="-1" aria-labelledby="modalWarnaProdukLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
+            <div class="modal fade" id="modalWarnaProduk" tabindex="-1" aria-labelledby="modalWarnaProdukLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl-custom">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="modalWarnaProdukLabel">Tambahkan Produk</h5>
@@ -60,22 +68,14 @@
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="foto_produk_modal" class="form-label">Upload Foto Bahan:</label>
-                                <input type="file" class="form-control mb-3" id="foto_produk_modal" name="foto_produk_modal" accept="image/*">
-                                <img id="preview_foto_produk" src="#" alt="Preview Foto Produk" class="gambar-produk" style="display: none;">
-                                <div id="warnaBaju">
-                                    <input type="text" class="form-control mb-3" placeholder="Warna" id="warna_produks[]" name="warna_produks[]">
-                                </div>
-                                <div id="stockBaju">
-                                    <input type="number" class="form-control" placeholder="Stock Bahan" id="stocks[]" name="stocks[]">
-                                </div>
-                            </div>
-                            <div class="mb-3">
                                 <label for="variasi_produk" class="form-label">Variasi Produk</label>
                                 <div id="variasi_produk">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Ukuran" id="ukurans[]" name="ukurans[]">
-                                        <input type="number" class="form-control" placeholder="Harga" id="hargas[]" name="hargas[]">
+                                        <input type="text" class="form-control" placeholder="Warna" name="warna_produks[]">
+                                        <input type="text" class="form-control" placeholder="Ukuran" name="ukurans[]">
+                                        <input type="number" class="form-control" placeholder="Harga" name="hargas[]">
+                                        <input type="number" class="form-control" placeholder="Stock" name="stocks[]">
+                                        <input type="file" class="form-control" name="foto_produk_modals[]" accept="image/*">
                                         <button class="btn btn-outline-secondary" type="button" id="tambah_variasi">Tambah Variasi</button>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            <button type="button" class="btn btn-primary" onclick="simpanData()" data-bs-dismiss="modal">Simpan</button>
+                            <button type="button" class="btn btn-primary" onclick="displayDataInCard()" data-bs-dismiss="modal">Simpan</button>
                         </div>
                     </div>
                 </div>
@@ -91,14 +91,18 @@
         </form>
     </div>
 </div>
-<script> 
+
+<script>
     document.getElementById('tambah_variasi').addEventListener('click', function() {
         var variasi_produk = document.getElementById('variasi_produk');
         var new_variasi = document.createElement('div');
         new_variasi.classList.add('input-group', 'mb-3');
         new_variasi.innerHTML = `
+            <input type="text" class="form-control" placeholder="Warna" name="warna_produks[]">
             <input type="text" class="form-control" placeholder="Ukuran" name="ukurans[]">
             <input type="number" class="form-control" placeholder="Harga" name="hargas[]">
+            <input type="number" class="form-control" placeholder="Stock" name="stocks[]">
+            <input type="file" class="form-control" name="foto_produk_modals[]" accept="image/*">
             <button class="btn btn-outline-secondary" type="button" onclick="hapus_variasi(this)">Hapus</button>
         `;
         variasi_produk.appendChild(new_variasi);
@@ -109,84 +113,35 @@
     }
 
     function displayDataInCard() {
-        var namaProduk = document.getElementById('nama_produk').value;
-        var deskripsiProduk = document.getElementById('deskripsi').value;
-        var kategoriId = document.getElementById('kategori_id').value;
-        var jenisId = document.getElementById('jenis').value;
-        
-        var fotoProdukInput = document.getElementById('foto_produk_modal');
-        var fotoProduk = '';
-        if(fotoProdukInput.files.length > 0) {
-            fotoProduk = fotoProdukInput.files[0].name;
-        }
+        var cardContainer = document.getElementById('cardContainer');
 
-        var variasiProduk = document.querySelectorAll('#warnaBaju input[name="warna_produks[]"]');
-        var ukuranProduk = document.querySelectorAll('#variasi_produk input[name="ukurans[]"]');
-        var hargaProduk = document.querySelectorAll('#variasi_produk input[name="hargas[]"]');
-        var stockProduk = document.querySelectorAll('#stockBaju input[name="stocks[]"]');
+        var variasi_produk = document.getElementById('variasi_produk');
+        var variasi_groups = variasi_produk.querySelectorAll('.input-group');
 
-        var cardContainer = document.createElement('div');
-        cardContainer.classList.add('card', 'mb-3');
-        var cardBody = document.createElement('div');
-        cardBody.classList.add('card-body');
+        variasi_groups.forEach((group, index) => {
+            var warna = group.querySelector('input[name="warna_produks[]"]').value;
+            var ukuran = group.querySelector('input[name="ukurans[]"]').value;
+            var harga = group.querySelector('input[name="hargas[]"]').value;
+            var stock = group.querySelector('input[name="stocks[]"]').value;
+            var foto_input = group.querySelector('input[name="foto_produk_modals[]"]');
 
-        cardBody.innerHTML = `
-            
-            <p class="card-text">Foto Produk: ${fotoProduk}</p>
-            <img src="" alt="Foto Produk" id="foto_produk_card" class="gambar-produk">
-            <h6 class="card-subtitle mb-2 text-muted">Variasi Produk:</h6>
-        `;
+            var foto_produk = foto_input.files.length > 0 ? foto_input.files[0] : null;
+            var foto_url = foto_produk ? URL.createObjectURL(foto_produk) : '';
 
-        for (var i = 0; i < ukuranProduk.length; i++) {
-            var variation = `
-                <p class="card-text">Warna: ${variasiProduk[0].value}</p>
-                <p class="card-text">Ukuran: ${ukuranProduk[i].value}</p>
-                <p class="card-text">Harga: ${hargaProduk[i].value}</p>
-                <p class="card-text">Stock: ${stockProduk[0].value}</p>
-                <input type="text" value="${variasiProduk[0].value}" class="form-control invisible" placeholder="Warna" id="warna_produk[]" name="warna_produk[]">
-                <input type="text" value="${ukuranProduk[i].value}" class="form-control invisible" placeholder="Ukuran" id="ukuran[]" name="ukuran[]">
-                <input type="number" value="${hargaProduk[i].value}" class="form-control invisible" placeholder="Harga" id="harga[]" name="harga[]">
-                <input type="number" value="${stockProduk[0].value}" class="form-control invisible" placeholder="Stock" id="stock[]" name="stock[]">
+            var card = document.createElement('div');
+            card.classList.add('card', 'mb-3');
+            card.innerHTML = `
+                <div class="card-body">
+                    <h5 class="card-title">Variasi Produk ${index + 1}</h5>
+                    <p class="card-text">Warna: ${warna}</p>
+                    <p class="card-text">Ukuran: ${ukuran}</p>
+                    <p class="card-text">Harga: ${harga}</p>
+                    <p class="card-text">Stock: ${stock}</p>
+                    ${foto_url ? `<img src="${foto_url}" class="gambar-produk" alt="Foto Produk">` : ''}
+                </div>
             `;
-            cardBody.innerHTML += variation;
-        }
-
-        cardContainer.appendChild(cardBody);
-
-        var cardDiv = document.getElementById('cardContainer');
-        cardDiv.appendChild(cardContainer);
-
-        var fotoProdukCard = cardBody.querySelector('#foto_produk_card');
-        if (fotoProduk) {
-            fotoProdukCard.src = URL.createObjectURL(fotoProdukInput.files[0]);
-        } else {
-            fotoProdukCard.style.display = 'none';
-        }
-    }
-
-    document.getElementById('foto_produk_modal').addEventListener('change', function(event) {
-        var fotoProduk = document.getElementById('preview_foto_produk');
-        fotoProduk.src = URL.createObjectURL(event.target.files[0]);
-        fotoProduk.style.display = 'block';
-    });
-    function clearFormInputs() {
-        document.getElementById('nama_produk').value = '';
-        document.getElementById('deskripsi').value = '';
-        document.getElementById('kategori_id').value = '';
-        document.getElementById('foto_produk').value = '';
-        document.getElementById('jenis').value = '';
-        var variasiProduk = document.querySelectorAll('#variasi_produk input[name="warna_produk[]"]');
-        variasiProduk.forEach(input => input.value = '');
-        var ukuranProduk = document.querySelectorAll('#variasi_produk input[name="ukuran[]"]');
-        ukuranProduk.forEach(input => input.value = '');
-        var hargaProduk = document.querySelectorAll('#variasi_produk input[name="harga[]"]');
-        hargaProduk.forEach(input => input.value = '');
-        var stockProduk = document.querySelectorAll('#variasi_produk input[name="stock[]"]');
-        stockProduk.forEach(input => input.value = '');
-    }
-
-    function simpanData() {
-        displayDataInCard();
+            cardContainer.appendChild(card);
+        });
     }
 </script>
 @endsection

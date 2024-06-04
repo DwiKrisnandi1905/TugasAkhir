@@ -36,7 +36,7 @@ class KonveksiPelangganController extends Controller
         $hargaTerendah = $konveksi->variasi->min('harga');
 
         return view('Pelanggan.Page.Konveksi.detailKonveksi', [
-            'konveksis' => $konveksi,
+            'konveksi' => $konveksi,
             'variasi' => $variasi,
             'hargaTertinggi' => $hargaTertinggi,
             'hargaTerendah' => $hargaTerendah,

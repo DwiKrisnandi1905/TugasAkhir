@@ -33,11 +33,11 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 //     return view('welcome');
 // });
 
-Route::get('/', [Controller::class, 'landingPage'])->name('landingPage')->middleware(['guestt','guest']);
-Route::get('/landingPage', [Controller::class, 'landingPage'])->name('landingPage')->middleware(['guestt','guest']);
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware(['guestt','guest']);
+Route::get('/', [Controller::class, 'landingPage'])->name('landingPage')->middleware('guestt');
+Route::get('/landingPage', [Controller::class, 'landingPage'])->name('landingPage')->middleware('guestt');
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guestt');
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register')->middleware(['guestt','guest']);
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register')->middleware('guestt');
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -48,7 +48,7 @@ Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name(
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // admin
-    Route::get('/', [Controller::class, 'dashboard'])->name('dashboard');
+    // Route::get('/', [Controller::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
     Route::get('/pelanggan', [Controller::class, 'pelanggan'])->name('pelanggan');
 
