@@ -58,7 +58,7 @@
             background-color: rgba(255, 99, 71, 1);
         }
         .card-footer {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: #f8f9fa;
             border-radius: 0 0 15px 15px;
             padding: 10px 20px;
             text-align: center;
@@ -96,16 +96,31 @@
             height: auto;
             border-radius: 15px;
         }
+        .back-arrow {
+            display: flex;
+            align-items: center;
+            color: #ff6347;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .back-arrow:hover {
+            text-decoration: underline;
+        }
+        .back-arrow i {
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <a href="/" class="back-arrow"><i class="fas fa-arrow-left"></i> Landing Page</a>
                 <div class="card">
                     <div class="row g-0">
                         <div class="col-md-6 image-container">
-                            <img src="your-image-url.jpg" alt="Register Image">
+                            <img src="images/bg3.jpg" alt="Register Image">
                         </div>
                         <div class="col-md-6">
                             <div class="card-body">
@@ -155,7 +170,7 @@
                                 </form>
                             </div>
                             <div class="card-footer">
-                                <p>Sudah punya akun? <a href="{{ route('login') }}" class="text-decoration-none fw-bold">Login disini</a></p>
+                                <p>Sudah punya akun? <a href="{{ route('login') }}" class="fw-bold">Login disini</a></p>
                             </div>
                         </div>
                     </div>

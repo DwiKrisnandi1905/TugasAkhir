@@ -25,19 +25,19 @@
             color: #fff;
             text-align: center;
             padding: 10px;
-            border-radius: 15px 15px 15px 15px;
+            border-radius: 15px 15px 0 0;
         }
         .card-body {
             background-color: #fff;
             color: #000; 
             padding: 40px 30px;
         }
-
         .card-footer {
-            color: #000
-            background: #fff;     
+            background-color: #f8f9fa;
+            border-radius: 0 0 15px 15px;
+            padding: 10px 20px;
+            text-align: center;
         }
-        
         .form-control {
             border-radius: 5px;
             border: none;
@@ -82,13 +82,8 @@
         .forgot-password a:hover {
             text-decoration: underline;
         }
-        .card-footer {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            text-align: center;
-        }
         .card-footer a {
-            color: #ff6347;
+            color: #FF6347;
             text-decoration: none;
         }
         .card-footer a:hover {
@@ -116,12 +111,28 @@
             height: auto;
             border-radius: 15px;
         }
+        .back-arrow {
+            display: flex;
+            align-items: center;
+            color: #ff6347;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 3%;
+            margin-right: 8%; 
+        }
+        .back-arrow:hover {
+            text-decoration: underline;
+        }
+        .back-arrow i {
+            margin-right: 50px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <a href="/" class="back-arrow me-1"><i class="fas fa-arrow-left"></i> Landing Page</a>
                 <div class="card">
                     <div class="row g-0">
                         <div class="col-md-6">
@@ -164,14 +175,13 @@
                                 </form>
                             </div>
                             <div class="card-footer">
-                                <p>Tidak punya akun? <a href="{{ route('register') }}" class="text-decoration-none fw-bold">Register</a></p>
+                                <p>Tidak punya akun? <a href="{{ route('register') }}" class="fw-bold">Register</a></p>
                             </div>
                         </div>
                         <div class="col-md-6 image-container">
                             <img src="images/bg3.jpg" alt="Login Image">
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>

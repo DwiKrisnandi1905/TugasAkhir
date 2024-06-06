@@ -10,15 +10,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class=" mx-2 nav-link {{ Request::is('home') ? 'active' : '' }}" href="/">Home</a>
+             <li class="nav-item">
+                    <a class="mx-2 nav-link {{ Request::is('profile') ? 'active' : '' }}" href="/profile"><i class="fas fa-user"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class=" mx-2 nav-link {{ Request::is('profile') ? 'active' : '' }}" href="/profile">Profile</a>
+                    <a class="mx-2 nav-link {{ Request::is('home') ? 'active' : '' }}" href="/"><i class="fas fa-home"></i></a>
                 </li>
                 <li class="nav-item">
                     <a href="/cart" class="mx-2 nav-link {{ Request::is('cart') ? 'active' : '' }}"><i class="fas fa-shopping-cart"></i></a>
                 </li>
+                
             </ul>
         </div>
     </div>
