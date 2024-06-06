@@ -126,8 +126,8 @@
                     </div>
 
                     <div class="mb-4">
-                        <button class="btn btn-primary me-2" id="checkoutButton" data-bs-toggle="modal" data-bs-target="#checkoutModal">Checkout</button>
-                        <button class="btn btn-success">Keranjang</button>
+                        <button class="btn btn-primary me-2" id="checkoutButton" data-bs-toggle="modal" data-bs-target="#checkoutModal">Keranjang</button>
+                        {{-- <button class="btn btn-success">Keranjang</button> --}}
                     </div>
                 </div>
             </div>
@@ -147,7 +147,7 @@
     <div class="modal-dialog d-flex align-items-center justify-content-center">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="checkoutModalLabel">Checkout</h5>
+                <h5 class="modal-title" id="checkoutModalLabel">Keranjang</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-start">
@@ -158,7 +158,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-primary">Checkout</button>
+                <button type="button" class="btn btn-primary">Keranjang</button>
             </div>
         </div>
     </div>
@@ -166,6 +166,7 @@
 
 <script>
     let hargaSatuan = {{ $hargaTertinggi }};
+    let selectedImage = '';
 
     // Function to reduce quantity
     document.getElementById('btnMinus').addEventListener('click', function() {
@@ -213,6 +214,12 @@
         
         // If variations match the selected color
         if (selectedVariasi[color]) {
+            var selectedVarian = selectedVariasi[color][0]; // Ambil variasi pertama sebagai contoh
+            selectedImage = selectedVarian.foto_produk_modal;
+            
+            // Update gambar utama produk
+            document.querySelector('.container-detail img.img-fluid').src = '{{ asset('images') }}/' + selectedImage;
+
             sizeStockContainer.innerHTML = `
                 <label class="form-label">Pilih Ukuran:</label>
                 <div class="btn-group" role="group" aria-label="Size options">
@@ -257,6 +264,36 @@
         document.getElementById('modalUkuran').textContent = selectedSize.labels[0].textContent;
         document.getElementById('modalKuantitas').textContent = quantity;
         document.getElementById('modalTotalHarga').textContent = totalHarga;
+    });
+
+     // Handle form submission when the modal "Keranjang" button is clicked
+    document.querySelector('#checkoutModal .btn-primary').addEventListener('click', function() {
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '{{ route("cart.store") }}';
+
+        var inputs = [
+            { name: 'nama_produk', value: '{{ $produk->nama_produk }}' },
+            { name: 'warna', value: document.getElementById('modalWarna').textContent },
+            { name: 'ukuran', value: document.getElementById('modalUkuran').textContent },
+            { name: 'kuantitas', value: document.getElementById('modalKuantitas').textContent },
+            { name: 'harga_satuan', value: hargaSatuan },
+            { name: 'total_harga', value: parseFloat(document.getElementById('modalTotalHarga').textContent.replace('Rp ', '').replace(/\./g, '').replace(',', '.')) },
+            { name: 'image', value: selectedImage },
+            { name: 'kategori', value: '{{ $produk->kategori->name }}' },
+            { name: '_token', value: '{{ csrf_token() }}' }
+        ];
+
+        inputs.forEach(function(input) {
+            var hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = input.name;
+            hiddenInput.value = input.value;
+            form.appendChild(hiddenInput);
+        });
+
+        document.body.appendChild(form);
+        form.submit();
     });
 </script>
 @endsection

@@ -13,6 +13,7 @@ use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\Pelanggan\UserController;
 use App\Http\Controllers\Pelanggan\TokobajuPelangganController;
 use App\Http\Controllers\Pelanggan\KonveksiPelangganController;
+use App\Http\Controllers\Pelanggan\CartController;
 use App\Http\Controllers\transaksiController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
@@ -126,7 +127,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     // Route::get('/', [UserController::class, 'home'])->name('home');
     Route::get('/home', [UserController::class, 'home'])->name('home');
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
-    Route::get('/cart', [UserController::class, 'cart'])->name('cart');
+    Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+    Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
     Route::get('/konveksii', [KonveksiPelangganController::class, 'konveksii'])->name('konveksii');
     Route::get('/konveksii/detailKonveksi/{id}', [KonveksiPelangganController::class, 'detailKonveksi'])->name('detailKonveksi');
     Route::get('/tokobajuu', [TokobajuPelangganController::class, 'tokobajuu'])->name('tokobajuu');

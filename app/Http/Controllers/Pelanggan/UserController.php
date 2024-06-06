@@ -21,13 +21,13 @@ class UserController extends Controller
             'title' => 'Profile',
         ]);
     }
-    public function cart()
-    {
-        return view('Pelanggan.Page.cart' ,[
-            'name' => 'Cart',
-            'title' => 'Cart',
-        ]);
-    }
+    // public function cart()
+    // {
+    //     return view('Pelanggan.Page.cart' ,[
+    //         'name' => 'Cart',
+    //         'title' => 'Cart',
+    //     ]);
+    // }
     public function konveksii()
     {
         return view('Pelanggan.Page.Konveksi.Konveksi' ,[
