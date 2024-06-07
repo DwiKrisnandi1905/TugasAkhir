@@ -126,8 +126,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <button class="btn btn-primary me-2" id="checkoutButton" data-bs-toggle="modal" data-bs-target="#checkoutModal">Checkout</button>
-                        <button class="btn btn-success">Keranjang</button>
+                        <button class="btn btn-primary me-2" id="checkoutButton" data-bs-toggle="modal" data-bs-target="#checkoutModal">Keranjang</button>
                     </div>
                 </div>
             </div>

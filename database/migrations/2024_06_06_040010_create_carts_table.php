@@ -22,7 +22,6 @@ return new class extends Migration
             $table->decimal('harga_satuan', 15, 2);
             $table->decimal('total_harga', 15, 2);
             $table->string('image');
-            $table->string('kategori');
             $table->timestamps();
         });
     }
