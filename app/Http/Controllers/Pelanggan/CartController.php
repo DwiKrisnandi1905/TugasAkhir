@@ -43,4 +43,12 @@ class CartController extends Controller
 
         return redirect()->route('cart');
     }
+
+    public function delete($id)
+    {
+        $cartItem = Cart::findOrFail($id);
+        $cartItem->delete();
+
+        return redirect()->route('cart')->with('success', 'Produk berhasil dihapus dari keranjang!');
+    }
 }

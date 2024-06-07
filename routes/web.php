@@ -129,6 +129,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::get('/cart', [CartController::class, 'cart'])->name('cart');
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+    Route::delete('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
     Route::get('/konveksii', [KonveksiPelangganController::class, 'konveksii'])->name('konveksii');
     Route::get('/konveksii/detailKonveksi/{id}', [KonveksiPelangganController::class, 'detailKonveksi'])->name('detailKonveksi');
     Route::get('/tokobajuu', [TokobajuPelangganController::class, 'tokobajuu'])->name('tokobajuu');
