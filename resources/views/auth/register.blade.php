@@ -120,12 +120,12 @@
                 <div class="card">
                     <div class="row g-0">
                         <div class="col-md-6 image-container">
-                            <img src="images/bg3.jpg" alt="Register Image">
+                            <img src="images/register.svg" alt="Register Image">
                         </div>
                         <div class="col-md-6">
                             <div class="card-body">
                                 <div class="card-header mb-3 border-rounded">
-                                    <h3>Register</h3>
+                                    <h3>Form Register</h3>
                                 </div>
                                 <!-- Alert messages -->
                                 @if ($errors->any())

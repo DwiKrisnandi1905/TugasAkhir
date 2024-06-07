@@ -12,7 +12,7 @@
                             <div class="card h-100">
                                 <img src="{{ asset('images/' . $item->image) }}" class="card-img-top" alt="{{ $item->nama_produk }}">
                                 <div class="card-body text-start">
-                                    <h5 class="card-title mb-3 text-primary">{{ $item->nama_produk }}</h5>
+                                    <h5 class="card-title mb-3 text-primary black">{{ $item->nama_produk }}</h5>
                                     <p class="card-text"><strong>Warna:</strong> {{ $item->warna }}</p>
                                     <p class="card-text"><strong>Ukuran:</strong> {{ $item->ukuran }}</p>
                                     <p class="card-text"><strong>Kuantitas:</strong> {{ $item->kuantitas }}</p>
@@ -57,7 +57,7 @@
         background: #fff;
         border-radius: 10px;
     }
-    h5 {
+    .black{
         font-weight: bold;
         color: #333;
     }

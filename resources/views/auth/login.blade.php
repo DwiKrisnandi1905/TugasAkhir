@@ -179,7 +179,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 image-container">
-                            <img src="images/bg3.jpg" alt="Login Image">
+                            <img src="images/login.svg" alt="Login Image">
                         </div>
                     </div>
             </div>

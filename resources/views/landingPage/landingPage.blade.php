@@ -31,6 +31,10 @@
             font-weight: bold;
         }
 
+        .orange {
+            color: #FF6347;
+        }
+
         .btn {
             color: #fff;
             background-color: #FF6347;
@@ -41,6 +45,7 @@
         .btn:hover {
             color: #FF6347;
             background-color: #fff;
+            border: 2px solid #FF6347;
         }
 
         .bg-primary-custom {
@@ -50,6 +55,11 @@
 
         .bg-light-custom {
             background-color: #f8f9fa;
+        }
+
+        .bg-dark-custom {
+            background-color: #343a40;
+            color: #fff;
         }
 
         .footer-custom {
@@ -70,22 +80,83 @@
             font-weight: bold;
         }
 
+        .form-label, .black {
+            color: #000;
+        }
+
+        .form-control {
+            background-color: #c2bfbf;
+        }
+
         .team-member p {
             color: #666;
         }
 
+        .accordion-header button {
+            font-weight: bold;
+            color: black;
+        }
+
+        .accordion-header button:not(.collapsed) {
+            background-color: #ff9a27;
+        }
+
+
         #home {
-            background-image: url('/bg2.jpg');
+            background-image: url('images/bg3.jpg'); 
             background-repeat: no-repeat;
             background-position: center center;
             background-size: cover;
             color: #fff;
+            position: relative;
+        }
+
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
         }
 
         #home .container {
+            position: relative;
+            z-index: 2;
             background: rgba(0, 0, 0, 0.5);
             padding: 50px;
             border-radius: 10px;
+        }
+
+        #products {
+            background-color: #f0f0f0; /* Light gray background for Products section */
+        }
+
+        #about {
+            background-color: #fff; /* White background for About section */
+        }
+
+        #contact {
+            background: #e74900;
+        }
+
+        #contact .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            box-shadow: 0 6px 6px rgba(0, 0, 0, 1);
+        }
+
+        #qna {
+            background-color: #f0f0f0; /* Light gray background for Q&A section */
+        }
+
+        #qna .accordion-item {
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -106,10 +177,13 @@
                         <a class="nav-link" href="#about" onclick="setActive(this)">Tentang Kami</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#products" onclick="setActive(this)">Produk Kami</a>
+                        <a class="nav-link" href="#products" onclick="setActive(this)">Produk</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact" onclick="setActive(this)">Hubungi Kami</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#qna" onclick="setActive(this)">QnA</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">
@@ -124,9 +198,45 @@
     <!-- Home Section -->
     <section id="home" class="py-5 text-center min-vh-100 d-flex-center">
         <div class="container">
-            <h1 class="display-4">Selamat Datang di Website Kami</h1>
-            <p class="lead">Ini adalah halaman home dari website kami.</p>
+            <h1 class="display-4">Selamat Datang di <span class="orange fw-bold">Alveen Clothing</span></h1>
+            <p class="lead fst-italic">"Wear Your Confidence"</p>
             <a href="{{ route('login') }}" class="btn">Mulai Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-5 bg-light-custom min-vh-100">
+        <div class="container text-center">
+            <h2 class="mb-5 fw-bold">Produk Kami</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produk 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Produk 1</h5>
+                            <p class="card-text">Deskripsi singkat produk 1.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produk 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Produk 2</h5>
+                            <p class="card-text">Deskripsi singkat produk 2.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produk 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Produk 3</h5>
+                            <p class="card-text">Deskripsi singkat produk 3.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -178,46 +288,10 @@
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section id="products" class="py-5 bg-light-custom min-vh-100">
-        <div class="container text-center">
-            <h2>Produk Kami</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produk 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Produk 1</h5>
-                            <p class="card-text">Deskripsi singkat produk 1.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produk 2">
-                        <div class="card-body">
-                            <h5 class="card-title">Produk 2</h5>
-                            <p class="card-text">Deskripsi singkat produk 2.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produk 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Produk 3</h5>
-                            <p class="card-text">Deskripsi singkat produk 3.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact Section -->
-    <section id="contact" class="py-5 min-vh-100 d-flex-center bg-light-custom">
+    <section id="contact" class="py-5 min-vh-100 d-flex-center">
         <div class="container">
-            <h2 class="text-center">Hubungi Kami</h2>
+            <h2 class="text-center black">Hubungi Kami</h2>
             <form>
                 <div class="mb-3">
                     <label for="name" class="form-label">Nama</label>
@@ -231,15 +305,51 @@
                     <label for="message" class="form-label">Pesan</label>
                     <textarea class="form-control" id="message" rows="3" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Kirim</button>
+                <button type="submit" class="btn">Kirim</button>
             </form>
+        </div>
+    </section>
+
+    <!-- Q&A -->
+    <section id="qna" class="py-5 bg-light-custom">
+        <div class="accordion accordion-flush bg-light-custom mx-5" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Dimana letak Alveen Clothing ?
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Alveen Clothing terletak di Tembalang.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Mengapa harus Alveen Clothing ?
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Alveen Clothing menawarkan produk dengan kualitas tinggi yang terjamin. Bahan-bahan yang dipilih dengan cermat dan perhatian terhadap detail dalam desain membuat setiap produk menjadi nilai investasi yang baik bagi konsumen.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    No. Telepon yang bisa dihubungi ?
+                    </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Jangan segan menghubungi kami pada +62-888-888-888.</div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="py-4 footer-custom text-center">
         <div class="container">
-            <p>&copy; 2023 Perusahaan Anda. Semua hak dilindungi.</p>
+            <p>&copy; 2024 Alveen Clothing. Semua hak dilindungi.</p>
         </div>
     </footer>
 

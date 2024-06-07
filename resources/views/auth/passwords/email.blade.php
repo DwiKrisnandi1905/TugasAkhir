@@ -95,7 +95,7 @@
     <div class="card">
         <div class="row g-0">
             <div class="col-md-6 left-column">
-                <img src="images/fpw.jpg" alt="forget-password">
+                <img src="images/fpw.svg" alt="forget-password">
             </div>
             <div class="col-md-6 right-column">
                 <div class="card-header">
