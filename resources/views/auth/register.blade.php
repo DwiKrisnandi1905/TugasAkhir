@@ -15,7 +15,7 @@
             font-family: 'Segoe UI', sans-serif;
         }
         .container {
-            margin-top: 6%;
+            margin-top: 9vh;
         }
         .card {
             border: none;
@@ -24,7 +24,7 @@
             overflow: hidden;
         }
         .card-header {
-            background: linear-gradient(to right, #FFA500, #FF6347);
+            background: linear-gradient(to right, #ff8c00, #ff4500);
             color: #fff;
             text-align: center;
             padding: 20px;
