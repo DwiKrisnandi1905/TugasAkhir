@@ -75,6 +75,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body text-start">
+                    <h2 class="card-title">{{ $produk->id }}</h2>
                     <h2 class="card-title">{{ $produk->nama_produk }}</h2>
                     <p class="card-text text-muted">Kategori: {{ $produk->kategori->name }}</p>
                     <h4 class="text-primary">Rp {{ number_format($hargaTertinggi, 2, ',', '.') }} - Rp {{ number_format($hargaTerendah, 2, ',', '.') }}</h4>
@@ -151,6 +152,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-start">
+                <p><strong>id:</strong> <span id="modalWarna"></span></p>
                 <p><strong>Warna:</strong> <span id="modalWarna"></span></p>
                 <p><strong>Ukuran:</strong> <span id="modalUkuran"></span></p>
                 <p><strong>Kuantitas:</strong> <span id="modalKuantitas"></span></p>
@@ -273,6 +275,7 @@
         form.action = '{{ route("cart.store") }}';
 
         var inputs = [
+            { name: 'produk_id', value: '{{ $produk->id }}' },
             { name: 'nama_produk', value: '{{ $produk->nama_produk }}' },
             { name: 'warna', value: document.getElementById('modalWarna').textContent },
             { name: 'ukuran', value: document.getElementById('modalUkuran').textContent },
