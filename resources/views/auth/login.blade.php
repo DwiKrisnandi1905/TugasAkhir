@@ -11,9 +11,9 @@
             background-color: #f0f2f5;
             font-family: 'Segoe UI', sans-serif;
         }
-        /* .container {
-            margin-top: 6%;
-        } */
+        .container {
+            margin-top: 9vh;
+        }
         .card {
             border: none;
             border-radius: 15px;

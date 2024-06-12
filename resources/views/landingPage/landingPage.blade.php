@@ -6,6 +6,7 @@
     <title>Landing Page</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         body {
             padding-top: 56px;
@@ -101,7 +102,6 @@
             background-color: #ff9a27;
         }
 
-
         #home {
             background-image: url('images/bg3.jpg'); 
             background-repeat: no-repeat;
@@ -151,11 +151,11 @@
             box-shadow: 0 6px 6px rgba(0, 0, 0, 1);
         }
 
-        #qna {
+        #faq {
             background-color: #f0f0f0; /* Light gray background for Q&A section */
         }
 
-        #qna .accordion-item {
+        #faq .accordion-item {
             margin-bottom: 10px;
         }
     </style>
@@ -164,7 +164,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand text-white" href="#">Navbar</a>
+            <a class="navbar-brand" href="/"><i class="fas fa-tshirt"></i></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>   
@@ -183,7 +183,7 @@
                         <a class="nav-link" href="#contact" onclick="setActive(this)">Hubungi Kami</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#qna" onclick="setActive(this)">QnA</a>
+                        <a class="nav-link" href="#faq" onclick="setActive(this)">FAQ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">
@@ -311,7 +311,7 @@
     </section>
 
     <!-- Q&A -->
-    <section id="qna" class="py-5 bg-light-custom">
+    <section id="faq" class="py-5 bg-light-custom">
         <div class="accordion accordion-flush bg-light-custom mx-5" id="accordionFlushExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">

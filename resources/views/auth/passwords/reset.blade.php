@@ -1,89 +1,93 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Reset Kata Sandi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #f0f2f5;
             font-family: 'Segoe UI', sans-serif;
         }
         .container {
-            margin-top: 80px;
+            margin-top: 9vh;
         }
         .card {
             border: none;
             border-radius: 15px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            background: linear-gradient(to right, #FFA500, #FF6347);
-            color: #fff;
         }
         .card-header {
-            background-color: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(to right, #FFA500, #FF6347);
             color: #fff;
             text-align: center;
-            padding: 20px;
+            padding: 10px;
             border-radius: 15px 15px 0 0;
         }
+        .card-body {
+            background-color: #fff;
+            color: #000; 
+            padding: 40px 30px;
+        }
+        .card-footer {
+            background-color: #f8f9fa;
+            border-radius: 0 0 15px 15px;
+            padding: 10px 20px;
+            text-align: center;
+        }
         .form-control {
-            border-radius: 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+            border: none;
             box-shadow: none;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #fff;
+            background-color: #f3f3f3;
+            color: #000;
         }
         .form-control:focus {
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 0 0.15rem rgba(255, 255, 255, 0.25);
+            border-color: rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 0 0.15rem rgba(0, 0, 0, 0.25);
+        }
+        .form-label {
+            color: rgba(0, 0, 0, 0.8);
         }
         .btn-primary {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 69, 0, 0.8);
             border: none;
             border-radius: 4px;
             width: 100%;
             color: #fff;
+            transition: background-color 0.3s;
         }
         .btn-primary:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 69, 0, 1);
         }
         .form-check-input {
             margin-top: 5px;
         }
         .form-check-label {
             margin-left: 5px;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(0, 0, 0, 0.7);
         }
         .forgot-password {
             text-align: right;
             margin-top: 10px;
         }
         .forgot-password a {
-            color: #fff;
+            color: #ff4500;
             text-decoration: none;
+            transition: text-decoration 0.3s;
         }
         .forgot-password a:hover {
             text-decoration: underline;
         }
-        .card-footer {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 0 0 15px 15px;
-            padding: 10px 20px;
-            text-align: center;
-        }
         .card-footer a {
-            color: #fff;
+            color: #FF6347;
             text-decoration: none;
         }
         .card-footer a:hover {
             text-decoration: underline;
-        }
-        .input-group {
-            position: relative;
         }
         .input-group .btn {
             position: absolute;
@@ -95,6 +99,18 @@
             z-index: 10;
             color: #000;
         }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
     </style>
 </head>
 <body>
@@ -102,63 +118,54 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Reset Kata Sandi') }}</div>
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                        <form method="POST" action="{{ route('password.update') }}">
-                            @csrf
-
-                            <input type="hidden" name="token" value="{{ $token }}">
-
-                            <div class="mb-3 row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Alamat E-Mail') }}</label>
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <div class="card-header mb-3 border-rounded">
+                                    <h3>Reset Kata Sandi</h3>
                                 </div>
-                            </div>
-
-                            <div class="mb-3 row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Kata Sandi') }}</label>
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                                        <button class="btn toggle-password" type="button" data-input="password"><i class="far fa-eye-slash"></i></button>
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                @if ($errors->any())
+                                    <div class="alert alert-danger" role="alert">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="mb-3 row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Konfirmasi Kata Sandi') }}</label>
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                        <button class="btn toggle-password" type="button" data-input="password_confirmation"><i class="far fa-eye-slash"></i></button>
+                                @endif
+                                <form method="POST" action="{{ route('password.update') }}">
+                                    @csrf
+                                    <input type="hidden" name="token" value="{{ $token }}">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label fw-bolder">Alamat E-Mail</label>
+                                        <input type="email" class="form-control" id="email" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
                                     </div>
-                                </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label fw-bolder">Kata Sandi Baru</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Kata Sandi" required>
+                                            <button class="btn" type="button" id="togglePassword"><i class="far fa-eye-slash"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password-confirm" class="form-label fw-bolder">Konfirmasi Kata Sandi Baru</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="password-confirm" name="password_confirmation" placeholder="Konfirmasi Kata Sandi" required>
+                                            <button class="btn" type="button" id="toggleConfirmPassword"><i class="far fa-eye-slash"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <button type="submit" class="btn btn-primary fw-bolder">Reset Kata Sandi</button>
+                                    </div>
+                                </form>
                             </div>
-
-                            <div class="mb-3 row">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Reset Kata Sandi') }}
-                                    </button>
-                                </div>
+                            <div class="card-footer">
+                                <p>Ingat kata sandi Anda? <a href="{{ route('login') }}" class="fw-bold">Login</a></p>
                             </div>
-                        </form>
+                        </div>
+                        <div class="col-md-6 image-container">
+                            <img src="/images/reset.svg" alt="reset">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -168,13 +175,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            var toggleButtons = document.querySelectorAll('.toggle-password');
-            
-            toggleButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var input = document.querySelector('input[name="' + this.dataset.input + '"]');
-                    var type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-                    input.setAttribute('type', type);
+            var passwordInput = document.querySelector('input[name="password"]');
+            var confirmPasswordInput = document.querySelector('input[name="password_confirmation"]');
+            var togglePasswordButton = document.getElementById('togglePassword');
+            var toggleConfirmPasswordButton = document.getElementById('toggleConfirmPassword');
+
+            if (passwordInput && togglePasswordButton && confirmPasswordInput && toggleConfirmPasswordButton) {
+                togglePasswordButton.addEventListener('click', function() {
+                    var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
                     
                     if (type === 'password') {
                         this.innerHTML = '<i class="far fa-eye-slash"></i>';
@@ -182,7 +191,18 @@
                         this.innerHTML = '<i class="far fa-eye"></i>';
                     }
                 });
-            });
+
+                toggleConfirmPasswordButton.addEventListener('click', function() {
+                    var type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    confirmPasswordInput.setAttribute('type', type);
+                    
+                    if (type === 'password') {
+                        this.innerHTML = '<i class="far fa-eye-slash"></i>';
+                    } else {
+                        this.innerHTML = '<i class="far fa-eye"></i>';
+                    }
+                });
+            }
         });
     </script>
 </body>
