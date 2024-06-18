@@ -4,27 +4,27 @@ namespace App\Http\Controllers\Pelanggan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Cart;
+use App\Models\CartKonveksi;
 use Illuminate\Support\Facades\Auth;
 
-class CartController extends Controller
+class CartKonveksiController extends Controller
 {
-    public function cart()
+    public function cartKonveksi()
     {
-        $cart = Cart::where('user_id', Auth::id())->get();
+        $cart = CartKonveksi::where('user_id', Auth::id())->get();
 
-        return view('Pelanggan.Page.cart', [
+        return view('Pelanggan.Page.CartKonveksi', [
             'name' => 'Cart',
             'title' => 'Cart',
             'cart' => $cart,
         ]);
     }
 
-    public function store(Request $request)
+    public function storeKonveksi(Request $request)
     {
         // dd($request);
         $request->validate([
-            'produk_id' => 'required|integer|min:1',
+            'konveksi_id' => 'required|integer|min:1',
             'variasi_id' => 'required|integer|min:1',
             'nama_produk' => 'required|string|max:255',
             'warna' => 'required|string|max:255',
@@ -35,8 +35,8 @@ class CartController extends Controller
             'image' => 'required|string|max:255',
         ]);
         
-        Cart::create(array_merge($request->only([
-            'produk_id',
+        CartKonveksi::create(array_merge($request->only([
+            'konveksi_id',
             'variasi_id',
             'nama_produk',
             'warna', 
@@ -47,14 +47,14 @@ class CartController extends Controller
             'image',
         ]), ['user_id' => Auth::id()]));
 
-        return redirect()->route('cart');
+        return redirect()->route('cartKonveksi');
     }
 
-    public function delete($id)
+    public function deleteKonveksi($id)
     {
-        $cartItem = Cart::where('user_id', Auth::id())->findOrFail($id);
+        $cartItem = CartKonveksi::where('user_id', Auth::id())->findOrFail($id);
         $cartItem->delete();
 
-        return redirect()->route('cart')->with('success', 'Produk berhasil dihapus dari keranjang!');
+        return redirect()->route('cartKonveksi')->with('success', 'Produk berhasil dihapus dari keranjang!');
     }
 }

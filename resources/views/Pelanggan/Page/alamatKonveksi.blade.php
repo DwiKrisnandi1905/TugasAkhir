@@ -4,7 +4,7 @@
 
 <div class="container mt-4">
     <h2 class="mb-4 text-center">Masukkan Alamat Pengiriman</h2>
-    <form action="{{ route('alamat.store') }}" method="POST">
+    <form action="{{ route('alamatKonveksi.store') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="nama_pemilik_rumah">Nama Pemilik Rumah</label>

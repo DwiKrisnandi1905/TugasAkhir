@@ -26,7 +26,7 @@
 
     <h4 class="mb-4 text-center">Total Biaya: Rp {{ number_format($total_biaya, 2, ',', '.') }}</h4>
 
-    <form action="{{ route('pesanan.storePayment') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('pesananKonveksi.storePayment') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="metode_pembayaran">Metode Pembayaran</label>

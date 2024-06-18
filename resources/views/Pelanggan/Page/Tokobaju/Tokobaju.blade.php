@@ -55,7 +55,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $produk->nama_produk }}</h5>
                     <p class="card-text">Rp {{ number_format($produk->variasi->first()->highest_price, 2) }}</p>
-                    <a href="{{ route('detailTokobaju', $produk->id) }}" class="btn btn-primary">Detail Produk</a>
+                    <a href="{{ route('detailTokobaju', $produk->id) }}" class="btn btn-primary">Detail</a>
                 </div>
             </div>
         </div>

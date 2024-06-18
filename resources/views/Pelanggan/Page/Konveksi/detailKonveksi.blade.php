@@ -166,6 +166,8 @@
 <script>
     let hargaSatuan = {{ $hargaTertinggi }};
     let selectedImage = '';
+    let selectedS = '';
+    let selectedC = '';
 
     // Function to reduce quantity
     document.getElementById('btnMinus').addEventListener('click', function() {
@@ -229,7 +231,7 @@
             selectedVariasi[color].forEach(function(variasi) {
                 sizeStockContainer.innerHTML += `
                     <input type="radio" class="btn-check" name="size" id="size${variasi.ukuran}" data-harga="${variasi.harga}" data-stock="${variasi.stock}" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="size${variasi.ukuran}">${variasi.ukuran} (Stok: ${variasi.stock})</label>
+                    <label class="btn btn-outline-primary" for="size${variasi.ukuran}" data-size="${variasi.ukuran}">${variasi.ukuran} (Stok: ${variasi.stock})</label>
                 `;
             });
 
@@ -261,18 +263,28 @@
         }
 
         document.getElementById('modalWarna').textContent = selectedColor;
-        document.getElementById('modalUkuran').textContent = selectedSize.labels[0].textContent;
+        document.getElementById('modalUkuran').textContent = selectedSize.labels[0].dataset.size;
+        selectedS = selectedSize.labels[0].dataset.size;
+        selectedC = selectedColor;
         document.getElementById('modalKuantitas').textContent = quantity;
         document.getElementById('modalTotalHarga').textContent = totalHarga;
     });
 
      // Handle form submission when the modal "Keranjang" button is clicked
      document.querySelector('#checkoutModal .btn-primary').addEventListener('click', function() {
+        // Get variations based on selected color
+        var selectedVariasi = @json($konveksi->variasi);
+        var selectedVarian = selectedVariasi.find(function(variasi) {
+            return variasi.warna_produk === selectedC && variasi.ukuran === selectedS;
+        });
+
         var form = document.createElement('form');
         form.method = 'POST';
-        form.action = '{{ route("cart.store") }}';
+        form.action = '{{ route("cartKonveksi.store") }}';
 
         var inputs = [
+            { name: 'konveksi_id', value: '{{ $konveksi->id }}' },
+            { name: 'variasi_id', value: selectedVarian.id },
             { name: 'nama_produk', value: '{{ $konveksi->nama_produk }}' },
             { name: 'warna', value: document.getElementById('modalWarna').textContent },
             { name: 'ukuran', value: document.getElementById('modalUkuran').textContent },
@@ -280,6 +292,7 @@
             { name: 'harga_satuan', value: hargaSatuan },
             { name: 'total_harga', value: parseFloat(document.getElementById('modalTotalHarga').textContent.replace('Rp ', '').replace(/\./g, '').replace(',', '.')) },
             { name: 'image', value: selectedImage },
+            { name: 'kategori', value: '{{ $konveksi->kategori->name }}' },
             { name: '_token', value: '{{ csrf_token() }}' }
         ];
 

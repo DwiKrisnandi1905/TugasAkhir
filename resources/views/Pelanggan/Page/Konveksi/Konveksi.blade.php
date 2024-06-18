@@ -55,7 +55,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $konveksi->nama_produk }}</h5>
                     <p class="card-text">Rp {{ number_format($konveksi->variasi->first()->highest_price, 2) }}</p>
-                    <a href="{{ route('detailKonveksi', $konveksi->id) }}" class="btn btn-primary">Detail Produk</a>
+                    <a href="{{ route('detailKonveksi', $konveksi->id) }}" class="btn btn-primary">Detail</a>
                 </div>
             </div>
         </div>

@@ -7,13 +7,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function home()
-    {
-        return view('Pelanggan.Page.home' ,[
-            'name' => 'Home',
-            'title' => 'Home',
-        ]);
-    }
     public function profile()
     {
         return view('Pelanggan.Page.profile' ,[

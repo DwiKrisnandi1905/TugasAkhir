@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Model
+class CartKonveksi extends Model
 {
     use HasFactory;
+
+    protected $table = 'cart_konveksi';
+    
     protected $fillable = [
-        'produk_id',
+        'konveksi_id',
         'variasi_id',
         'user_id',
         'nama_produk',

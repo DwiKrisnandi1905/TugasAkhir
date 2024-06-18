@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('carts', function (Blueprint $table) {
+        Schema::create('pesanan_konveksi', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('produk_id')->constrained('produk')->onDelete('cascade');
-            $table->integer('variasi_id');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('konveksi_id')->constrained('variations_produk_konveksi')->onDelete('cascade');
             $table->string('nama_produk');
             $table->string('warna');
             $table->string('ukuran');
@@ -25,6 +23,14 @@ return new class extends Migration
             $table->decimal('harga_satuan', 15, 2);
             $table->decimal('total_harga', 15, 2);
             $table->string('image');
+            $table->string('nama_pemilik_rumah')->nullable();
+            $table->string('alamat_lengkap')->nullable();
+            $table->string('kode_pos')->nullable();
+            $table->string('link_lokasi')->nullable();
+            $table->string('metode_pembayaran')->nullable();
+            $table->string('no_rekening')->nullable();
+            $table->string('bukti_pembayaran')->nullable();
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }
@@ -36,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('pesanan_konveksi');
     }
 };

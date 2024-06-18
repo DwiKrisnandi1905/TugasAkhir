@@ -26,13 +26,13 @@ class Controller extends BaseController
             'title' => 'Dashboard',
         ]);
     }
-    public function pelanggan ()
-    {
-        return view('admin.page.Pelanggan',[
-            'name' => 'Pelanggan',
-            'title' => 'Pelanggan',
-        ]);
-    }
+    // public function pelanggan ()
+    // {
+    //     return view('admin.page.Pelanggan',[
+    //         'name' => 'Pelanggan',
+    //         'title' => 'Pelanggan',
+    //     ]);
+    // }
     // public function konveksi ()
     // {
     //     return view('admin.page.Konveksi.Konveksi',[

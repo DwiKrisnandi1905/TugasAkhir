@@ -133,7 +133,7 @@
                         <div class="col-md-3 mb-4 d-flex align-items-stretch">
                             <div class="card h-100">
                                 <div class="select-item-container">
-                                    <input type="checkbox" class="select-item" id="select-{{ $item->id }}" data-id="{{ $item->id }}" data-nama="{{ $item->nama_produk }}" data-warna="{{ $item->warna }}" data-ukuran="{{ $item->ukuran }}" data-kuantitas="{{ $item->kuantitas }}" data-hargasatuan="{{ $item->harga_satuan }}" data-totalharga="{{ $item->total_harga }}" data-image="{{ $item->image }}" data-produk="{{ $item->variasi_id }}">
+                                    <input type="checkbox" class="select-item" id="select-{{ $item->id }}" data-id="{{ $item->id }}" data-nama="{{ $item->nama_produk }}" data-warna="{{ $item->warna }}" data-ukuran="{{ $item->ukuran }}" data-kuantitas="{{ $item->kuantitas }}" data-hargasatuan="{{ $item->harga_satuan }}" data-totalharga="{{ $item->total_harga }}" data-image="{{ $item->image }}" data-konveksi="{{ $item->variasi_id }}">
                                     <label for="select-{{ $item->id }}"></label>
                                 </div>
                                 <img src="{{ asset('images/' . $item->image) }}" class="card-img-top" alt="{{ $item->nama_produk }}">
@@ -147,7 +147,7 @@
                                     <p class="card-text"><strong>Total Harga:</strong> <span class="text-success">Rp {{ number_format($item->total_harga, 2, ',', '.') }}</span></p>
                                 </div>
                                 <div class="card-footer text-center">
-                                    <form action="{{ route('cart.delete', $item->id) }}" method="POST" class="delete-form">
+                                    <form action="{{ route('cartKonveksi.delete', $item->id) }}" method="POST" class="delete-form">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-danger btn-sm delete-btn">Hapus</button>
@@ -195,7 +195,7 @@
     let selectedItems = [];
     document.querySelectorAll('.select-item:checked').forEach(item => {
         selectedItems.push({
-            produk_id: item.dataset.produk,
+            konveksi_id: item.dataset.konveksi,
             id: item.dataset.id,
             nama: item.dataset.nama,
             warna: item.dataset.warna,
@@ -240,7 +240,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 console.log(selectedItems);
-                fetch("{{ route('pesanan.store') }}", {
+                fetch("{{ route('pesananKonveksi.store') }}", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -251,7 +251,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        window.location.href = "{{ route('alamat.form') }}";
+                        window.location.href = "{{ route('alamatKonveksi.form') }}";
                     } else {
                         Swal.fire('Error', 'Terjadi kesalahan saat menyimpan pesanan.', 'error');
                     }

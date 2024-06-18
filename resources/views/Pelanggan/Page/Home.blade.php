@@ -47,16 +47,27 @@
     <h3 class="text-start">Rekomendasi Produk</h3>
 </div>
 
+@php
+    $allProducts = array_merge($produks->all(), $konveksis->all());
+    shuffle($allProducts);
+@endphp
+
 <div class="row row-cols-lg-5 row-cols-md-4 row-cols-2 mt-4">
-    <div class="col mb-4">
-        <div class="card card-produk">
-            <img src="images/1714290395.jpg" class="card-img-top" alt="Product Image 1">
-            <div class="card-body">
-                <h5 class="card-title">Product Name 1</h5>
-                <p class="card-text">$XX.XX</p>
-                <a href="#" class="btn btn-primary">Detail Produk</a>
+    @foreach($allProducts as $product)
+        <div class="col mb-4">
+            <div class="card card-produk">
+                <img src="{{ asset('images/' . $product->foto_produk) }}" class="card-img-top" alt="Product Image {{ $loop->iteration }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $product->nama_produk }}</h5>
+                    <p class="card-text">Rp {{ number_format($product->variasi->first()->highest_price, 2) }}</p>
+                    @if ($product instanceof App\Models\Produk)
+                        <a href="{{ route('detailTokobaju', $product->id) }}" class="btn btn-primary">Detail</a>
+                    @elseif ($product instanceof App\Models\Konveksi)
+                        <a href="{{ route('detailKonveksi', $product->id) }}" class="btn btn-primary">Detail</a>
+                    @endif
+                </div>
             </div>
         </div>
-    </div>
+    @endforeach
 </div>
 @endsection

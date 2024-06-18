@@ -28,7 +28,7 @@
           </div>
           <div class="text-end pt-1">
             <p class="text-sm mb-0">Total Pengguna</p>
-            <h4 class="mb-0 mt-2">2,300</h4>
+            <h4 class="mb-0 mt-2">{{ $totalUsers }}</h4>
           </div>
         </div>
         <hr class="dark horizontal my-0">

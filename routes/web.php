@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\pelangganController;
 use App\Http\Controllers\kategoriTokobajuController;
 use App\Http\Controllers\kategoriKonveksiController;
 use App\Http\Controllers\produkTokobajuController;
@@ -11,10 +13,13 @@ use App\Http\Controllers\konveksiController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\Pelanggan\UserController;
+use App\Http\Controllers\Pelanggan\HomeController;
 use App\Http\Controllers\Pelanggan\TokobajuPelangganController;
 use App\Http\Controllers\Pelanggan\KonveksiPelangganController;
 use App\Http\Controllers\Pelanggan\CartController;
+use App\Http\Controllers\Pelanggan\CartKonveksiController;
 use App\Http\Controllers\Pelanggan\PesananController;
+use App\Http\Controllers\Pelanggan\PesananKonveksiController;
 use App\Http\Controllers\transaksiController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
@@ -51,8 +56,8 @@ Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name(
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // admin
     // Route::get('/', [Controller::class, 'dashboard'])->name('dashboard');
-    Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
-    Route::get('/pelanggan', [Controller::class, 'pelanggan'])->name('pelanggan');
+    Route::get('/dashboard', [dashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/pelanggan', [pelangganController::class, 'pelanggan'])->name('pelanggan');
 
     // ---------------------------------------------------KONVEKSI---------------------------------------------------------------
     Route::get('/konveksi', [konveksiController::class, 'konveksi'])->name('konveksi');
@@ -126,18 +131,24 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::middleware(['auth', 'role:user'])->group(function () {
     // Route::get('/', [UserController::class, 'home'])->name('home');
-    Route::get('/home', [UserController::class, 'home'])->name('home');
+    Route::get('/home', [HomeController::class, 'home'])->name('home');
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::get('/cart', [CartController::class, 'cart'])->name('cart');
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+    Route::get('/cartKonveksi', [CartKonveksiController::class, 'cartKonveksi'])->name('cartKonveksi');
+    Route::post('/cartKonveksi', [CartKonveksiController::class, 'storeKonveksi'])->name('cartKonveksi.store');
     Route::delete('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
+    Route::delete('/cartKonveksi/delete/{id}', [CartKonveksiController::class, 'deleteKonveksi'])->name('cartKonveksi.delete');
     Route::post('/pesanan', [PesananController::class, 'store'])->name('pesanan.store');
+    Route::post('/pesananKonveksi', [PesananKonveksiController::class, 'storeKonveksi'])->name('pesananKonveksi.store');
     Route::get('/address', [PesananController::class, 'alamatForm'])->name('alamat.form');
     Route::post('/address', [PesananController::class, 'storeAlamat'])->name('alamat.store');
+    Route::get('/addressKonveksi', [PesananKonveksiController::class, 'alamatFormKonveksi'])->name('alamatKonveksi.form');
+    Route::post('/addressKonveksi', [PesananKonveksiController::class, 'storeAlamatKonveksi'])->name('alamatKonveksi.store');
     Route::get('/payment', [PesananController::class, 'paymentForm'])->name('payment.form');
     Route::post('/payment', [PesananController::class, 'storePayment'])->name('pesanan.storePayment');
-    // Route::put('/payment', [PesananController::class, 'storePayment'])->name('pesanan.storePayment');
-    // Route::put('/update-stock', [PesananController::class, 'updateStock'])->name('updateStock'); 
+    Route::get('/paymentKonveksi', [PesananKonveksiController::class, 'paymentFormKonveksi'])->name('paymentKonveksi.form');
+    Route::post('/paymentKonveksi', [PesananKonveksiController::class, 'storePaymentKonveksi'])->name('pesananKonveksi.storePayment');
     Route::get('/konveksii', [KonveksiPelangganController::class, 'konveksii'])->name('konveksii');
     Route::get('/konveksii/detailKonveksi/{id}', [KonveksiPelangganController::class, 'detailKonveksi'])->name('detailKonveksi');
     Route::get('/tokobajuu', [TokobajuPelangganController::class, 'tokobajuu'])->name('tokobajuu');

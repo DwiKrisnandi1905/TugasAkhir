@@ -4,20 +4,20 @@ namespace App\Http\Controllers\Pelanggan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Pesanan;
-use App\Models\Produk;
-use App\Models\VariasiProduk;
+use App\Models\PesananKonveksi;
+use App\Models\Konveksi;
+use App\Models\VariasiProdukKonveksi;
 use App\Models\TambahMetode;
-use App\Models\Cart;
+use App\Models\CartKonveksi;
 use Illuminate\Support\Facades\Auth;
 
-class PesananController extends Controller
+class PesananKonveksiController extends Controller
 {
-    public function store(Request $request)
+    public function storeKonveksi(Request $request)
     {
         $request->validate([
             'items' => 'required|array',
-            'items.*.produk_id' => 'required|integer|min:1',
+            'items.*.konveksi_id' => 'required|integer|min:1',
             'items.*.id' => 'required|integer',
             'items.*.nama' => 'required|string|max:255',
             'items.*.warna' => 'required|string|max:255',
@@ -29,8 +29,8 @@ class PesananController extends Controller
         ]);
 
         foreach ($request->items as $item) {
-            Pesanan::create([
-                'produk_id' => $item['produk_id'],
+            PesananKonveksi::create([
+                'konveksi_id' => $item['konveksi_id'],
                 'nama_produk' => $item['nama'],
                 'warna' => $item['warna'],
                 'ukuran' => $item['ukuran'],
@@ -54,15 +54,15 @@ class PesananController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function alamatForm()
+    public function alamatFormKonveksi()
     {
-        return view('Pelanggan.Page.alamat', [
+        return view('Pelanggan.Page.alamatKonveksi', [
             'name' => 'Alamat',
             'title' => 'Alamat',
         ]);
     }
 
-    public function storeAlamat(Request $request)
+    public function storeAlamatKonveksi(Request $request)
     {
         $request->validate([
             'nama_pemilik_rumah' => 'required|string|max:255',
@@ -72,28 +72,28 @@ class PesananController extends Controller
         ]);
 
         // Update all orders with the address details
-        Pesanan::whereNull('nama_pemilik_rumah')->update([
+        PesananKonveksi::whereNull('nama_pemilik_rumah')->update([
             'nama_pemilik_rumah' => $request->nama_pemilik_rumah,
             'alamat_lengkap' => $request->alamat_lengkap,
             'kode_pos' => $request->kode_pos,
             'link_lokasi' => $request->link_lokasi,
         ]);
 
-        return redirect()->route('payment.form');
+        return redirect()->route('paymentKonveksi.form');
     }
 
-    public function paymentForm()
+    public function paymentFormKonveksi()
     {
-        $pesanan = Pesanan::whereNull('metode_pembayaran')->get();
+        $pesanan = PesananKonveksi::whereNull('metode_pembayaran')->get();
         $total_biaya = $pesanan->sum('total_harga');
         $metode_transaksi = TambahMetode::all();
-        return view('Pelanggan.Page.payment', compact('pesanan', 'total_biaya', 'metode_transaksi'), [
+        return view('Pelanggan.Page.paymentKonveksi', compact('pesanan', 'total_biaya', 'metode_transaksi'), [
             'name' => 'Pembayaran',
             'title' => 'Pembayaran',
         ]);
     }
 
-    public function storePayment(Request $request)
+    public function storePaymentKonveksi(Request $request)
     {
         $request->validate([
             'metode_pembayaran' => 'required|string|max:255',
@@ -123,7 +123,7 @@ class PesananController extends Controller
 
         // Update stok produk berdasarkan pesanan
         foreach ($pesanan as $item) {
-            $variasi = VariasiProduk::where('id', $item['produk_id'])->first();
+            $variasi = VariasiProdukKonveksi::where('id', $item['konveksi_id'])->first();
 
             if ($variasi) {
                 $variasi->stock -= $item['kuantitas'];
@@ -134,7 +134,7 @@ class PesananController extends Controller
         }
 
         // Update all orders with the payment details
-        Pesanan::whereNull('metode_pembayaran')->update([
+        PesananKonveksi::whereNull('metode_pembayaran')->update([
             'metode_pembayaran' => $nama_bank,
             'no_rekening' => $no_rekening,
             'bukti_pembayaran' => $buktiPembayaranPath,
@@ -143,7 +143,7 @@ class PesananController extends Controller
 
         // Cart::where('user_id', Auth::id())->delete();
         $selectedItemIds = array_column($pesanan, 'id');
-        Cart::where('user_id', Auth::id())->whereIn('id', $selectedItemIds)->delete();
+        CartKonveksi::where('user_id', Auth::id())->whereIn('id', $selectedItemIds)->delete();
 
         return redirect()->route('home')->with('success', 'Pembayaran berhasil disimpan!');
     }

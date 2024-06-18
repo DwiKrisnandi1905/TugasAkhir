@@ -2,85 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pelanggan;
-use App\Http\Requests\StorepelangganRequest;
-use App\Http\Requests\UpdatepelangganRequest;
+use Illuminate\Http\Request;
+use App\Models\User;
 
-class PelangganController extends Controller
+class pelangganController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function pelanggan(Request $request)
     {
-        //
-    }
+        $search = $request->input('search');
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        $rowsPerPage = $request->input('rowsPerPage', 10);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorepelangganRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StorepelangganRequest $request)
-    {
-        //
-    }
+        $query = User::where('role', 'user');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\pelanggan  $pelanggan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(pelanggan $pelanggan)
-    {
-        //
-    }
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('email', 'like', '%' . $search . '%');
+            });
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\pelanggan  $pelanggan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(pelanggan $pelanggan)
-    {
-        //
-    }
+        $users = $query->paginate($rowsPerPage);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatepelangganRequest  $request
-     * @param  \App\Models\pelanggan  $pelanggan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatepelangganRequest $request, pelanggan $pelanggan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\pelanggan  $pelanggan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(pelanggan $pelanggan)
-    {
-        //
+        return view('admin.page.Pelanggan', [
+            'name' => 'Pelanggan',
+            'title' => 'Pelanggan',
+            'users' => $users,
+            'search' => $search,
+            'rowsPerPage' => $rowsPerPage,
+        ]);
     }
 }

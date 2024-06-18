@@ -85,23 +85,21 @@
       </tbody>
     </table>
     <div class="d-flex justify-content-between mb-3">
-      <div class="d-flex align-items-center mb-5"> 
+      <form class="d-flex align-items-center" action="{{ route('konveksi') }}" method="GET"> 
         <span>Tampilkan</span>
         <div class="dropdown" style="padding: 0 8px;">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              {{ request()->input('rows', 10) }}
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="#" data-value="10">10</a></li>
-                <li><a class="dropdown-item" href="#" data-value="20">20</a></li>
-                <li><a class="dropdown-item" href="#" data-value="30">30</a></li>
-            </ul>
+          <select name="rows" class="form-select" onchange="this.form.submit()">
+            <option value="10" {{ request()->input('rows') == 10 ? 'selected' : '' }}>10</option>
+            <option value="20" {{ request()->input('rows') == 20 ? 'selected' : '' }}>20</option>
+            <option value="50" {{ request()->input('rows') == 50 ? 'selected' : '' }}>50</option>
+          </select>
         </div>
         <span class="mr-2">Baris</span>
-      </div>
+        <input type="hidden" name="search" value="{{ request()->input('search') }}">
+      </form>
       <nav aria-label="Page navigation example">
         <ul class="pagination">
-            <li class="page-item">
+            <li class="page-item {{ $konveksis->previousPageUrl() ? '' : 'disabled' }}">
                 <a class="page-link" href="{{ $konveksis->previousPageUrl() }}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
@@ -111,7 +109,7 @@
                     <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                 </li>
             @endforeach
-            <li class="page-item">
+            <li class="page-item {{ $konveksis->previousPageUrl() ? '' : 'disabled' }}">
                 <a class="page-link" href="{{ $konveksis->nextPageUrl() }}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
