@@ -116,10 +116,28 @@
         font-size: 1rem !important;
         padding: 10px 20px !important;
     }
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .btn-konveksi {
+        background-color: #ff6f00;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+    }
 </style>
 
 <div class="container mt-4">
-    <h2 class="mb-4 text-center">Keranjang Belanja</h2>
+    <div class="header-container">
+        <h2 class="mb-4 text-center">Keranjang Konveksi</h2>
+        <a href="{{ route('cart') }}" class="btn-konveksi">Cart</a>
+    </div>
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}

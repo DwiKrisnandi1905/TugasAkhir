@@ -116,10 +116,28 @@
         font-size: 1rem !important;
         padding: 10px 20px !important;
     }
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .btn-konveksi {
+        background-color: #ff6f00;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+    }
 </style>
 
 <div class="container mt-4">
-    <h2 class="mb-4 text-center">Keranjang Belanja</h2>
+    <div class="header-container">
+        <h2 class="mb-4 text-center">Keranjang Tokobaju</h2>
+        <a href="{{ route('cartKonveksi') }}" class="btn-konveksi">Cart Konveksi</a>
+    </div>
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -135,7 +153,7 @@
                                 <div class="select-item-container">
                                     <input type="checkbox" class="select-item" id="select-{{ $item->id }}" data-id="{{ $item->id }}" data-nama="{{ $item->nama_produk }}" data-warna="{{ $item->warna }}" data-ukuran="{{ $item->ukuran }}" data-kuantitas="{{ $item->kuantitas }}" data-hargasatuan="{{ $item->harga_satuan }}" data-totalharga="{{ $item->total_harga }}" data-image="{{ $item->image }}" data-produk="{{ $item->variasi_id }}">
                                     <label for="select-{{ $item->id }}"></label>
-                                </div>
+                                </div> 
                                 <img src="{{ asset('images/' . $item->image) }}" class="card-img-top" alt="{{ $item->nama_produk }}">
                                 <div class="card-body text-start">
                                     <p class="card-text"><strong>id:</strong> {{ $item->variasi_id }}</p>
