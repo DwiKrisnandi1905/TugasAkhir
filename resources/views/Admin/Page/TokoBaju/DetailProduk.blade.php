@@ -33,7 +33,9 @@
           </tr>
           <tr>
             <th scope="row" class="col-4">Foto Produk Untuk Tampilan Utama</th>
-            <td id="fotoProduk">Pakaian_Olahraga_Pria.jpg</td>
+            <td id="fotoProduk">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#mainImageModal" style="text-decoration: none; color: #FFF; background-color: #000; padding-left: 10px; padding-right: 10px; border-radius: 8px;">{{ $produks->foto_produk }}</a>
+            </td>
           </tr>
           <tr>
             <th scope="row" class="col-4">Total Terjual</th>
@@ -71,16 +73,33 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($variasiProduk as $variasiProduk)
+            @foreach($variasiProduk as $variasi)
               <tr>
-                  <th scope="row">{{ $variasiProduk->warna_produk }}</th>
-                  <th class="ukuran">{{ $variasiProduk->ukuran }}</th>
-                  <td class="harga">{{ $variasiProduk->harga }}</td>
-                  <td class="stock">{{ $variasiProduk->stock }}</td>
-                  <td class="gambar">jersey.jpg</td>
+                  <th scope="row">{{ $variasi->warna_produk }}</th>
+                  <th class="ukuran">{{ $variasi->ukuran }}</th>
+                  <td class="harga">{{ $variasi->harga }}</td>
+                  <td class="stock">{{ $variasi->stock }}</td>
+                  <td class="gambar">
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#modalImageModal_{{ $variasi->id }}" style="text-decoration: none; color: #FFF; background-color: #000; padding-left: 10px; padding-right: 10px; border-radius: 8px;">{{ $variasi->foto_produk_modal }}</a>
+                  </td>
                   <td>15</td>
                   <td><button class="btn btn-delete btn-danger btn-sm" style="display: none;" onclick="deleteRow(this)">Hapus</button></td>
               </tr>
+
+              <!-- Modal for Variasi Images -->
+              <div class="modal fade" id="modalImageModal_{{ $variasi->id }}" tabindex="-1" aria-labelledby="modalImageModalLabel_{{ $variasi->id }}" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="modalImageModalLabel_{{ $variasi->id }}">Foto Produk</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body text-center">
+                              <img src="{{ asset('images/' . $variasi->foto_produk_modal) }}" alt="Foto Produk Modal" class="img-fluid">
+                          </div>
+                      </div>
+                  </div>
+              </div>
             @endforeach
             </tbody>
         </table>
@@ -89,5 +108,20 @@
       </div>      
     </div>    
 </div>
-@endsection
 
+<!-- Modal for Main Image -->
+<div class="modal fade" id="mainImageModal" tabindex="-1" aria-labelledby="mainImageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mainImageModalLabel">Foto Produk Utama</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="{{ asset('images/' . $produks->foto_produk) }}" alt="Foto Produk" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection

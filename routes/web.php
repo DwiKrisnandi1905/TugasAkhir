@@ -20,6 +20,7 @@ use App\Http\Controllers\Pelanggan\CartController;
 use App\Http\Controllers\Pelanggan\CartKonveksiController;
 use App\Http\Controllers\Pelanggan\PesananController;
 use App\Http\Controllers\Pelanggan\PesananKonveksiController;
+use App\Http\Controllers\Pelanggan\StatusPesananController;
 use App\Http\Controllers\transaksiController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
@@ -153,4 +154,5 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/konveksii/detailKonveksi/{id}', [KonveksiPelangganController::class, 'detailKonveksi'])->name('detailKonveksi');
     Route::get('/tokobajuu', [TokobajuPelangganController::class, 'tokobajuu'])->name('tokobajuu');
     Route::get('/tokobajuu/detailTokobaju/{id}', [TokobajuPelangganController::class, 'detailTokobaju'])->name('detailTokobaju');
+    Route::get('/statusPesanan', [StatusPesananController::class, 'statusPesanan'])->name('statusPesanan');
 });

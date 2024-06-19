@@ -136,7 +136,7 @@
     <div class="card p-2">
         <div class="card-body text-start">
             <h5 class="card-title">Deskripsi Produk</h5>
-            <p class="card-text">{{ $konveksi->deskripsi_produk }}</p>
+            <p class="card-text">{{ $konveksi->deskripsi }}</p>
         </div>
     </div>
 </div>
