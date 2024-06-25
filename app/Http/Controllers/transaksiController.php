@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\tambahMetode;
+use App\Models\Pesanan;
+use App\Models\PesananKonveksi;
 
 class transaksiController extends Controller
 {
     public function transaksi ()
     {
+        $pesanan = Pesanan::all();
+        $pesananKonveksi = PesananKonveksi::all();
         return view('admin.page.Transaksi.Transaksi',[
             'name' => 'Transaksi',
             'title' => 'Transaksi',
+            'pesanan' => $pesanan,
+            'pesananKonveksi' => $pesananKonveksi,
         ]);
     }
     public function metodeTransaksi ()
@@ -23,12 +29,32 @@ class transaksiController extends Controller
             'title' => 'Metode Transaksi',
         ]);
     }
-    public function detailTransaksi ()
+    public function detailTransaksi($id)
     {
-        return view('admin.page.Transaksi.detailTransaksi',[
+        $order = Pesanan::find($id) ?? PesananKonveksi::findOrFail($id);
+        return view('admin.page.Transaksi.detailTransaksi', [
             'name' => 'Detail Transaksi',
             'title' => 'Detail Transaksi',
+            'order' => $order,
         ]);
+    }
+
+    public function updateStatus(Request $request, $id, $type)
+    {
+        $request->validate([
+            'status' => 'required|string|in:pending,diproses,dikirim,selesai,dibatalkan',
+        ]);
+
+        if ($type === 'pesanan') {
+            $order = Pesanan::findOrFail($id);
+        } else {
+            $order = PesananKonveksi::findOrFail($id);
+        }
+
+        $order->status = $request->status;
+        $order->save();
+
+        return redirect()->route('detailTransaksi', ['id' => $order->id])->with('success', 'Status berhasil diupdate');
     }
 
     public function tambahMetode(Request $request)

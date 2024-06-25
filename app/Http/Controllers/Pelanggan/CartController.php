@@ -36,6 +36,7 @@ class CartController extends Controller
         ]);
         
         Cart::create(array_merge($request->only([
+            'user_id',
             'produk_id',
             'variasi_id',
             'nama_produk',

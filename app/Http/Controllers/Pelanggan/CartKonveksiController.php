@@ -36,6 +36,7 @@ class CartKonveksiController extends Controller
         ]);
         
         CartKonveksi::create(array_merge($request->only([
+            'user_id',
             'konveksi_id',
             'variasi_id',
             'nama_produk',

@@ -122,7 +122,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/transaksi/updateMetode/{id}', [transaksiController::class, 'updateMetode'])->name('updateMetode');
     //tambah metode transaksi end
 
-    Route::get('/transaksi/detailTransaksi', [transaksiController::class, 'detailTransaksi'])->name('detailTransaksi');
+    Route::get('/transaksi/detailTransaksi/{id}', [transaksiController::class, 'detailTransaksi'])->name('detailTransaksi');
+    Route::post('/transaksi/updateStatus/{id}/{type}', [transaksiController::class, 'updateStatus'])->name('updateStatus');
 
     Route::get('/history', [Controller::class, 'history'])->name('history');
     Route::get('/notifikasi', [Controller::class, 'notifikasi'])->name('notifikasi');

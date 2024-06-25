@@ -1,130 +1,149 @@
 @extends('Admin.Layout.index')
 
 @section('content')
-<div class="card" id="detailTransaksi">
-    <div class="card-body">
-      <div class="mb-3 text-primary" onclick="window.location='{{ route('transaksi') }}';">
+<style>
+    .table-responsive {
+        overflow-x: auto;
+    }
+    .vertical-table th {
+        width: 30%; /* Sesuaikan lebar kolom label */
+    }
+</style>
+<div class="container">
+    <div class="mb-3 text-primary" onclick="window.location='{{ route('transaksi') }}';">
         <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
-      </div>
-      <table class="table table-bordered">
-        <tbody>
-          <tr>
-            <th scope="row" class="col-4">Id Transaksi</th>
-            <td>123</td>
-          </tr>
-          <tr>
-            <th scope="row" class="col-4">Nama Lengkap</th>
-            <td>Steve</td>
-          </tr>
-          <tr>
-            <th scope="row" class="col-4">Alamat Lengkap</th>
-            <td>Semarang</td>
-          </tr>
-          <tr>
-            <th scope="row" class="col-4">No Telepon</th>
-            <td>081234567890</td>
-          </tr>
-          <tr>
-            <th scope="row" class="col-4">Tanggal Transaksi</th>
-            <td>24/02/2024</td>
-          </tr> 
-          <tr>
-            <th scope="row" class="col-4">Metode Pembayaran</th>
-            <td>Transfer BNI</td>
-          </tr>
-          <tr>
-            <th scope="row" class="col-4">Status Pembayaran</th>
-            <td>Belum Lunas</td>
-          </tr>
-          <tr>
-            <th scope="row" class="col-4">Status Pengiriman</th>
-            <td>Pending</td>
-          </tr>
-          <tr>
-            <th scope="row" class="col-4">Estimasi Pengiriman</th>
-            <td>27/02/2024</td>
-          </tr> 
-          <tr>
-            <th scope="row" class="col-4">Estimasi Diterima</th>
-            <td>01/03/2024</td>
-          </tr> 
-        </tbody>
-      </table>
-      <div class="mb-3 justify-content-center d-flex">
-        <button type="button" class="btn btn-primary w-75 fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
-      </div>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col" class="col-3">Produk/Layanan</th>
-            <th scope="col" class="col-2">Status Pengiriman</th>
-            <th scope="col" class="col-2">Harga Satuan</th> 
-            <th scope="col" class="col-1">Jumlah</th> 
-            <th scope="col" class="col-2">Subtotal</th>  
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>konveksi jersey futsal</td>
-            <td>diproses</td>
-            <td>Rp 20.000</td>
-            <td>10</td>
-            <td>Rp 200.000</td>
-          </tr>
-          <tr>
-            <td>konveksi jersey futsal</td>
-            <td>diproses</td>
-            <td>Rp 20.000</td>
-            <td>10</td>
-            <td>Rp 200.000</td>
-          </tr>
-          <tr>
-            <td colspan="4" class="text-center bg-secondary text-white">Total Pesanan</td>
-            <td>Rp 400.000</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
-  </div>
-  {{-- popup edit --}}
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Keterangan Transaksi</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal fade" id="modalGambar" tabindex="-1" aria-labelledby="modalGambarLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalGambarLabel">Gambar Produk</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="gambarModal" src="" class="img-fluid" alt="Gambar Produk">
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="paymentStatus" class="form-label">Status Pembayaran</label>
-            <select class="form-select" id="paymentStatus">
-              <option value="lunas">Lunas</option>
-              <option value="belum_lunas" selected>Belum Lunas</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="shippingStatus" class="form-label">Status Pengiriman</label>
-            <select class="form-select" id="shippingStatus">
-              <option value="pending" selected>Pending</option>
-              <option value="diproses">Diproses</option>
-              <option value="selesai">Selesai</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="shippingEstimate" class="form-label">Estimasi Pengiriman</label>
-            <input type="date" class="form-control" id="shippingEstimate">
-          </div>
-          <div class="mb-3">
-            <label for="deliveryEstimate" class="form-label">Estimasi Diterima</label>
-            <input type="date" class="form-control" id="deliveryEstimate">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-          <button type="button" class="btn btn-primary">Simpan Perubahan</button>
-        </div>
-      </div>
     </div>
-  </div>
-  {{-- popup edit end --}}
+
+    <div class="table-responsive">
+        <h2>Detail Pesanan</h2>
+        <table class="table table-bordered vertical-table">
+            <tbody>
+                <tr>
+                    <th>ID</th>
+                    <td>{{ $order->id }}</td>
+                </tr>
+                <tr>
+                    <th>Nama Produk</th>
+                    <td>{{ $order->nama_produk }}</td>
+                </tr>
+                <tr>
+                    <th>Warna</th>
+                    <td>{{ $order->warna }}</td>
+                </tr>
+                <tr>
+                    <th>Ukuran</th>
+                    <td>{{ $order->ukuran }}</td>
+                </tr>
+                <tr>
+                    <th>Kuantitas</th>
+                    <td>{{ $order->kuantitas }}</td>
+                </tr>
+                <tr>
+                    <th>Harga Satuan</th>
+                    <td>{{ $order->harga_satuan }}</td>
+                </tr>
+                <tr>
+                    <th>Total Harga</th>
+                    <td>{{ $order->total_harga }}</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>{{ $order->status }}</td>
+                </tr>
+                <tr>
+                    <th>Konfirmasi Nama Pembeli</th>
+                    <td>{{ $order->nama_pemilik_rumah }}</td>
+                </tr>
+                <tr>
+                    <th>Alamat Lengkap</th>
+                    <td>{{ $order->alamat_lengkap }}</td>
+                </tr>
+                <tr>
+                    <th>Kode Pos</th>
+                    <td>{{ $order->kode_pos }}</td>
+                </tr>
+                <tr>
+                    <th>Lokasi</th>
+                    <td><a href="{{ $order->link_lokasi }}" target="_blank">Lihat Lokasi</a></td>
+                </tr>
+                <tr>
+                    <th>Metode Pembayaran</th>
+                    <td>{{ $order->metode_pembayaran }}</td>
+                </tr>
+                <tr>
+                    <th>No Rekening</th>
+                    <td> 
+                        @if($order->no_rekening)
+                        {{ $order->no_rekening }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                </tr>
+                <tr>
+                    <th>Bukti Pembayaran</th>
+                    <td>
+                        @if($order->bukti_pembayaran)
+                        <a href="#" class="lihat-gambar" data-bs-toggle="modal" data-bs-target="#modalGambar" data-image="{{ asset('storage/' . $order->bukti_pembayaran) }}">Lihat Bukti Pembayaran</a>
+                        @else
+                        -
+                        @endif
+                    </td>
+                </tr>
+                <tr>
+                    <th>Aksi</th>
+                    <td>
+                        <form action="{{ route('updateStatus', ['id' => $order->id, 'type' => $order->getTable() == 'pesanan' ? 'pesanan' : 'pesananKonveksi']) }}" method="POST">
+                            @csrf
+                            <select name="status" class="form-control">
+                                <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                <option value="diproses" {{ $order->status == 'diproses' ? 'selected' : '' }}>Diproses</option>
+                                <option value="dikirim" {{ $order->status == 'dikirim' ? 'selected' : '' }}>Dikirim</option>
+                                <option value="selesai" {{ $order->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
+                                <option value="dibatalkan" {{ $order->status == 'dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary mt-2">Update</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Image</th>
+                    <td>
+                        @if($order->image)
+                        <a href="#" class="lihat-gambar" data-bs-toggle="modal" data-bs-target="#modalGambar" data-image="{{ asset('images/' . $order->image) }}">Lihat Gambar</a>
+                        @else
+                        Tidak Ada Gambar
+                        @endif
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var lihatGambarLinks = document.querySelectorAll('.lihat-gambar');
+        lihatGambarLinks.forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                var imageSource = link.getAttribute('data-image');
+                var modalImage = document.getElementById('gambarModal');
+                modalImage.src = imageSource;
+            });
+        });
+    });
+</script>
 @endsection

@@ -11,6 +11,7 @@ class PesananKonveksi extends Model
 
     protected $table = 'pesanan_konveksi';
     protected $fillable = [
+        'user_id',
         'konveksi_id',
         'nama_produk',
         'warna',
@@ -28,4 +29,9 @@ class PesananKonveksi extends Model
         'no_rekening',
         'bukti_pembayaran',
     ];
+
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
 }

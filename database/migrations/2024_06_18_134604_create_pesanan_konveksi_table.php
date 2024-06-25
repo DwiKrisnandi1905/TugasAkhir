@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('pesanan_konveksi', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('konveksi_id')->constrained('variations_produk_konveksi')->onDelete('cascade');
             $table->string('nama_produk');
             $table->string('warna');

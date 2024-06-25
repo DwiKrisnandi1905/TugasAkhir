@@ -7,7 +7,7 @@
     <form action="{{ route('alamatKonveksi.store') }}" method="POST">
         @csrf
         <div class="form-group">
-            <label for="nama_pemilik_rumah">Nama Pemilik Rumah</label>
+            <label for="nama_pemilik_rumah">Konfirmasi Nama Pembeli</label>
             <input type="text" class="form-control" id="nama_pemilik_rumah" name="nama_pemilik_rumah" required>
         </div>
         <div class="form-group">

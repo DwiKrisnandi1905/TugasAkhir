@@ -10,6 +10,7 @@ class Pesanan extends Model
     use HasFactory;
     protected $table = 'pesanan';
     protected $fillable = [
+        'user_id',
         'produk_id',
         'nama_produk',
         'warna',
@@ -27,4 +28,9 @@ class Pesanan extends Model
         'no_rekening',
         'bukti_pembayaran',
     ];
+
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
 }

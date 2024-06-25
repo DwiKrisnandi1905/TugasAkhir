@@ -28,8 +28,11 @@ class PesananKonveksiController extends Controller
             'items.*.image' => 'required|string|max:255',
         ]);
 
+        $userId = Auth::id();
+
         foreach ($request->items as $item) {
             PesananKonveksi::create([
+                'user_id' => $userId,
                 'konveksi_id' => $item['konveksi_id'],
                 'nama_produk' => $item['nama'],
                 'warna' => $item['warna'],
@@ -71,8 +74,10 @@ class PesananKonveksiController extends Controller
             'link_lokasi' => 'required|url',
         ]);
 
+        $userId = Auth::id();
+
         // Update all orders with the address details
-        PesananKonveksi::whereNull('nama_pemilik_rumah')->update([
+        PesananKonveksi::where('user_id', $userId)->whereNull('nama_pemilik_rumah')->update([
             'nama_pemilik_rumah' => $request->nama_pemilik_rumah,
             'alamat_lengkap' => $request->alamat_lengkap,
             'kode_pos' => $request->kode_pos,
@@ -84,9 +89,11 @@ class PesananKonveksiController extends Controller
 
     public function paymentFormKonveksi()
     {
-        $pesanan = PesananKonveksi::whereNull('metode_pembayaran')->get();
+         $userId = Auth::id();
+        $pesanan = PesananKonveksi::where('user_id', $userId)->whereNull('metode_pembayaran')->get();
         $total_biaya = $pesanan->sum('total_harga');
         $metode_transaksi = TambahMetode::all();
+
         return view('Pelanggan.Page.paymentKonveksi', compact('pesanan', 'total_biaya', 'metode_transaksi'), [
             'name' => 'Pembayaran',
             'title' => 'Pembayaran',
@@ -120,6 +127,8 @@ class PesananKonveksiController extends Controller
 
         // Decode the pesanan JSON
         $pesanan = json_decode($request->input('pesanan'), true);
+
+        $userId = Auth::id();
 
         // Update stok produk berdasarkan pesanan
         foreach ($pesanan as $item) {

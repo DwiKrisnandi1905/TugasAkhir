@@ -28,8 +28,11 @@ class PesananController extends Controller
             'items.*.image' => 'required|string|max:255',
         ]);
 
+        $userId = Auth::id();
+
         foreach ($request->items as $item) {
             Pesanan::create([
+                'user_id' => $userId,
                 'produk_id' => $item['produk_id'],
                 'nama_produk' => $item['nama'],
                 'warna' => $item['warna'],
@@ -48,7 +51,6 @@ class PesananController extends Controller
             // } else {
             //     return response()->json(['success' => false, 'message' => 'Variation not found'], 404);
             // }
-
         }
 
         return response()->json(['success' => true]);
@@ -71,8 +73,10 @@ class PesananController extends Controller
             'link_lokasi' => 'required|url',
         ]);
 
-        // Update all orders with the address details
-        Pesanan::whereNull('nama_pemilik_rumah')->update([
+        $userId = Auth::id();
+
+        // Update all orders with the address details for the authenticated user
+        Pesanan::where('user_id', $userId)->whereNull('nama_pemilik_rumah')->update([
             'nama_pemilik_rumah' => $request->nama_pemilik_rumah,
             'alamat_lengkap' => $request->alamat_lengkap,
             'kode_pos' => $request->kode_pos,
@@ -84,9 +88,11 @@ class PesananController extends Controller
 
     public function paymentForm()
     {
-        $pesanan = Pesanan::whereNull('metode_pembayaran')->get();
+        $userId = Auth::id();
+        $pesanan = Pesanan::where('user_id', $userId)->whereNull('metode_pembayaran')->get();
         $total_biaya = $pesanan->sum('total_harga');
         $metode_transaksi = TambahMetode::all();
+
         return view('Pelanggan.Page.payment', compact('pesanan', 'total_biaya', 'metode_transaksi'), [
             'name' => 'Pembayaran',
             'title' => 'Pembayaran',
@@ -121,6 +127,8 @@ class PesananController extends Controller
         // Decode the pesanan JSON
         $pesanan = json_decode($request->input('pesanan'), true);
 
+        $userId = Auth::id();
+
         // Update stok produk berdasarkan pesanan
         foreach ($pesanan as $item) {
             $variasi = VariasiProduk::where('id', $item['produk_id'])->first();
@@ -133,7 +141,13 @@ class PesananController extends Controller
             }
         }
 
-        // Update all orders with the payment details
+        // Update all orders with the payment details for the authenticated user
+        // Pesanan::where('user_id', $userId)->whereNull('metode_pembayaran')->update([
+        //     'metode_pembayaran' => $nama_bank,
+        //     'no_rekening' => $no_rekening,
+        //     'bukti_pembayaran' => $buktiPembayaranPath,
+        //     'status' => 'pending',
+        // ]);
         Pesanan::whereNull('metode_pembayaran')->update([
             'metode_pembayaran' => $nama_bank,
             'no_rekening' => $no_rekening,
@@ -141,7 +155,6 @@ class PesananController extends Controller
             'status' => 'pending',
         ]);
 
-        // Cart::where('user_id', Auth::id())->delete();
         $selectedItemIds = array_column($pesanan, 'id');
         Cart::where('user_id', Auth::id())->whereIn('id', $selectedItemIds)->delete();
 
