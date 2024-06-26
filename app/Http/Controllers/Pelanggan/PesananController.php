@@ -158,6 +158,6 @@ class PesananController extends Controller
         $selectedItemIds = array_column($pesanan, 'id');
         Cart::where('user_id', Auth::id())->whereIn('id', $selectedItemIds)->delete();
 
-        return redirect()->route('home')->with('success', 'Pembayaran berhasil disimpan!');
+        return redirect()->route('statusPesanan')->with('success', 'Pembayaran berhasil disimpan!');
     }
 }

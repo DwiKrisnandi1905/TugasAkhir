@@ -32,7 +32,6 @@
               <i class="fa fa-plus"></i>
               Metode Transaksi
             </button>
-            <p>mengatur detail transaksi per id pesanan</p>
           </div>
         </div>
         <button class="btn btn-danger fw-bold text-white ms-auto">Export</button>
@@ -56,14 +55,14 @@
           <tr>
             <th scope="row">{{ $order->id }}</th>
             <td>{{ $order->created_at->format('d/m/Y') }}</td>
-            <td>{{ $order->nama_pemilik_rumah }}</td>
+            <td>{{ $order->user->name }}</td>
             <td>{{ $order->nama_produk }}</td>
             <td>{{ $order->status }}</td>
             <td>Rp {{ number_format($order->total_harga, 0, ',', '.') }}</td>
             <td>{{ $order->kuantitas }}</td>
             <td>
               <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailTransaksi', ['id' => $order->id]) }}';"></i>
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailTransaksi', ['type' => 'pesanan', 'id' => $order->id]) }}';"></i>
 
                 <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
               </div>            
@@ -76,14 +75,14 @@
           <tr>
             <th scope="row">{{ $order->id }}</th>
             <td>{{ $order->created_at->format('d/m/Y') }}</td>
-            <td>{{ $order->nama_pemilik_rumah }}</td>
+            <td>{{ $order->user->name }}</td>
             <td>{{ $order->nama_produk }}</td>
             <td>{{ $order->status }}</td>
             <td>Rp {{ number_format($order->total_harga, 0, ',', '.') }}</td>
             <td>{{ $order->kuantitas }}</td>
             <td>
               <div class="d-flex justify-content-center align-items-center gap-1">
-                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailTransaksi', ['id' => $order->id]) }}';"></i>
+                <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;" onclick="window.location.href = '{{ route('detailTransaksi', ['type' => 'pesananKonveksi', 'id' => $order->id]) }}';"></i>
                 <i class="bi bi-trash-fill text-danger" style="font-size: 20px; cursor: pointer;" onclick="confirmDelete()"></i>
               </div>            
             </td>

@@ -29,33 +29,44 @@ class transaksiController extends Controller
             'title' => 'Metode Transaksi',
         ]);
     }
-    public function detailTransaksi($id)
-    {
-        $order = Pesanan::find($id) ?? PesananKonveksi::findOrFail($id);
-        return view('admin.page.Transaksi.detailTransaksi', [
-            'name' => 'Detail Transaksi',
-            'title' => 'Detail Transaksi',
-            'order' => $order,
-        ]);
+    public function detailTransaksi($type, $id)
+{
+    if ($type === 'pesanan') {
+        $order = Pesanan::findOrFail($id);
+    } elseif ($type === 'pesananKonveksi') {
+        $order = PesananKonveksi::findOrFail($id);
+    } else {
+        abort(404);
     }
 
-    public function updateStatus(Request $request, $id, $type)
-    {
-        $request->validate([
-            'status' => 'required|string|in:pending,diproses,dikirim,selesai,dibatalkan',
-        ]);
+    return view('admin.page.Transaksi.detailTransaksi', [
+        'name' => 'Detail Transaksi',
+        'title' => 'Detail Transaksi',
+        'order' => $order,
+        'orderType' => $type,
+    ]);
+}
 
-        if ($type === 'pesanan') {
-            $order = Pesanan::findOrFail($id);
-        } else {
-            $order = PesananKonveksi::findOrFail($id);
-        }
+public function updateStatus(Request $request, $id, $type)
+{
+    $request->validate([
+        'status' => 'required|string|in:pending,diproses,dikirim,selesai,dibatalkan',
+    ]);
 
-        $order->status = $request->status;
-        $order->save();
-
-        return redirect()->route('detailTransaksi', ['id' => $order->id])->with('success', 'Status berhasil diupdate');
+    if ($type === 'pesanan') {
+        $order = Pesanan::findOrFail($id);
+    } elseif ($type === 'pesananKonveksi') {
+        $order = PesananKonveksi::findOrFail($id);
+    } else {
+        abort(404);
     }
+
+    $order->status = $request->status;
+    $order->save();
+
+    return redirect()->route('detailTransaksi', ['type' => $type, 'id' => $order->id])->with('success', 'Status berhasil diupdate');
+}
+
 
     public function tambahMetode(Request $request)
     {

@@ -35,6 +35,7 @@
                     <th>ID</th>
                     <td>{{ $order->id }}</td>
                 </tr>
+                @if($orderType === 'pesanan')
                 <tr>
                     <th>Nama Produk</th>
                     <td>{{ $order->nama_produk }}</td>
@@ -59,6 +60,32 @@
                     <th>Total Harga</th>
                     <td>{{ $order->total_harga }}</td>
                 </tr>
+                @else
+                <tr>
+                    <th>Nama Produk Konveksi</th>
+                    <td>{{ $order->nama_produk }}</td>
+                </tr>
+                <tr>
+                    <th>Warna Bahan</th>
+                    <td>{{ $order->warna }}</td>
+                </tr>
+                <tr>
+                    <th>Ukuran Bahan</th>
+                    <td>{{ $order->ukuran }}</td>
+                </tr>
+                <tr>
+                    <th>Kuantitas Bahan</th>
+                    <td>{{ $order->kuantitas }}</td>
+                </tr>
+                <tr>
+                    <th>Harga Bahan Satuan</th>
+                    <td>{{ $order->harga_satuan }}</td>
+                </tr>
+                <tr>
+                    <th>Total Harga Bahan</th>
+                    <td>{{ $order->total_harga }}</td>
+                </tr>
+                @endif
                 <tr>
                     <th>Status</th>
                     <td>{{ $order->status }}</td>
@@ -106,7 +133,7 @@
                 <tr>
                     <th>Aksi</th>
                     <td>
-                        <form action="{{ route('updateStatus', ['id' => $order->id, 'type' => $order->getTable() == 'pesanan' ? 'pesanan' : 'pesananKonveksi']) }}" method="POST">
+                        <form action="{{ route('updateStatus', ['id' => $order->id, 'type' => $orderType]) }}" method="POST">
                             @csrf
                             <select name="status" class="form-control">
                                 <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>

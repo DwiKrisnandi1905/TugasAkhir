@@ -189,24 +189,24 @@
                         </div>
                     </div>
                     @endforeach
-                    @foreach($pesananKonveksiPending as $pesanan)
+                    @foreach($pesananKonveksiPending as $pesanans)
                     <div class="card-content">
-                        <img src="{{ asset('images/' . $pesanan->image) }}" alt="Product Image" class="card-img mx-2">
+                        <img src="{{ asset('images/' . $pesanans->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
+                                <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
                                 <a href="#" class="card-detail-link">Detail</a>
                             </div>
                             <p class="card-text text-start text-start">
-                                <strong>Warna:</strong> {{ $pesanan->warna }}<br>
-                                <strong>Ukuran:</strong> {{ $pesanan->ukuran }}<br>
-                                <strong>Kuantitas:</strong> {{ $pesanan->kuantitas }}<br>
-                                <strong>Harga Satuan:</strong> {{ $pesanan->harga_satuan }}<br>
-                                <strong>Total Harga:</strong> {{ $pesanan->total_harga }}
+                                <strong>Warna:</strong> {{ $pesanans->warna }}<br>
+                                <strong>Ukuran:</strong> {{ $pesanans->ukuran }}<br>
+                                <strong>Kuantitas:</strong> {{ $pesanans->kuantitas }}<br>
+                                <strong>Harga Satuan:</strong> {{ $pesanans->harga_satuan }}<br>
+                                <strong>Total Harga:</strong> {{ $pesanans->total_harga }}
                             </p>
                             <div class="card-footer">
                                 <div></div>
-                                <div class="card-status">{{ $pesanan->status }}</div>
+                                <div class="card-status">{{ $pesanans->status }}</div>
                             </div>
                         </div>
                     </div>
@@ -240,24 +240,24 @@
                         </div>
                     </div>
                     @endforeach
-                    @foreach($pesananKonveksiDiproses as $pesanan)
+                    @foreach($pesananKonveksiDiproses as $pesanans)
                     <div class="card-content">
-                        <img src="{{ asset('images/' . $pesanan->image) }}" alt="Product Image" class="card-img mx-2">
+                        <img src="{{ asset('images/' . $pesanans->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
+                                <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
                                 <a href="#" class="card-detail-link">Detail</a>
                             </div>
                             <p class="card-text text-start">
-                                <strong>Warna:</strong> {{ $pesanan->warna }}<br>
-                                <strong>Ukuran:</strong> {{ $pesanan->ukuran }}<br>
-                                <strong>Kuantitas:</strong> {{ $pesanan->kuantitas }}<br>
-                                <strong>Harga Satuan:</strong> {{ $pesanan->harga_satuan }}<br>
-                                <strong>Total Harga:</strong> {{ $pesanan->total_harga }}
+                                <strong>Warna:</strong> {{ $pesanans->warna }}<br>
+                                <strong>Ukuran:</strong> {{ $pesanans->ukuran }}<br>
+                                <strong>Kuantitas:</strong> {{ $pesanans->kuantitas }}<br>
+                                <strong>Harga Satuan:</strong> {{ $pesanans->harga_satuan }}<br>
+                                <strong>Total Harga:</strong> {{ $pesanans->total_harga }}
                             </p>
                             <div class="card-footer">
                                 <div></div>
-                                <div class="card-status">{{ $pesanan->status }}</div>
+                                <div class="card-status">{{ $pesanans->status }}</div>
                             </div>
                         </div>
                     </div>
@@ -291,24 +291,24 @@
                         </div>
                     </div>
                     @endforeach
-                    @foreach($pesananKonveksiDikirim as $pesanan)
+                    @foreach($pesananKonveksiDikirim as $pesanans)
                     <div class="card-content">
-                        <img src="{{ asset('images/' . $pesanan->image) }}" alt="Product Image" class="card-img mx-2">
+                        <img src="{{ asset('images/' . $pesanans->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
+                                <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
                                 <a href="#" class="card-detail-link">Detail</a>
                             </div>
                             <p class="card-text text-start">
-                                <strong>Warna:</strong> {{ $pesanan->warna }}<br>
-                                <strong>Ukuran:</strong> {{ $pesanan->ukuran }}<br>
-                                <strong>Kuantitas:</strong> {{ $pesanan->kuantitas }}<br>
-                                <strong>Harga Satuan:</strong> {{ $pesanan->harga_satuan }}<br>
-                                <strong>Total Harga:</strong> {{ $pesanan->total_harga }}
+                                <strong>Warna:</strong> {{ $pesanans->warna }}<br>
+                                <strong>Ukuran:</strong> {{ $pesanans->ukuran }}<br>
+                                <strong>Kuantitas:</strong> {{ $pesanans->kuantitas }}<br>
+                                <strong>Harga Satuan:</strong> {{ $pesanans->harga_satuan }}<br>
+                                <strong>Total Harga:</strong> {{ $pesanans->total_harga }}
                             </p>
                             <div class="card-footer">
                                 <div></div>
-                                <div class="card-status">{{ $pesanan->status }}</div>
+                                <div class="card-status">{{ $pesanans->status }}</div>
                             </div>
                         </div>
                     </div>
@@ -342,24 +342,24 @@
                         </div>
                     </div>
                     @endforeach
-                    @foreach($pesananKonveksiSelesai as $pesanan)
+                    @foreach($pesananKonveksiSelesai as $pesanans)
                     <div class="card-content">
-                        <img src="{{ asset('images/' . $pesanan->image) }}" alt="Product Image" class="card-img mx-2">
+                        <img src="{{ asset('images/' . $pesanans->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
+                                <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
                                 <a href="#" class="card-detail-link">Detail</a>
                             </div>
                             <p class="card-text text-start">
-                                <strong>Warna:</strong> {{ $pesanan->warna }}<br>
-                                <strong>Ukuran:</strong> {{ $pesanan->ukuran }}<br>
-                                <strong>Kuantitas:</strong> {{ $pesanan->kuantitas }}<br>
-                                <strong>Harga Satuan:</strong> {{ $pesanan->harga_satuan }}<br>
-                                <strong>Total Harga:</strong> {{ $pesanan->total_harga }}
+                                <strong>Warna:</strong> {{ $pesanans->warna }}<br>
+                                <strong>Ukuran:</strong> {{ $pesanans->ukuran }}<br>
+                                <strong>Kuantitas:</strong> {{ $pesanans->kuantitas }}<br>
+                                <strong>Harga Satuan:</strong> {{ $pesanans->harga_satuan }}<br>
+                                <strong>Total Harga:</strong> {{ $pesanans->total_harga }}
                             </p>
                             <div class="card-footer">
                                 <div></div>
-                                <div class="card-status">{{ $pesanan->status }}</div>
+                                <div class="card-status">{{ $pesanans->status }}</div>
                             </div>
                         </div>
                     </div>
@@ -393,24 +393,24 @@
                         </div>
                     </div>
                     @endforeach
-                    @foreach($pesananKonveksiDibatalkan as $pesanan)
+                    @foreach($pesananKonveksiDibatalkan as $pesanans)
                     <div class="card-content">
-                        <img src="{{ asset('images/' . $pesanan->image) }}" alt="Product Image" class="card-img mx-2">
+                        <img src="{{ asset('images/' . $pesanans->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
+                                <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
                                 <a href="#" class="card-detail-link">Detail</a>
                             </div>
                             <p class="card-text text-start">
-                                <strong>Warna:</strong> {{ $pesanan->warna }}<br>
-                                <strong>Ukuran:</strong> {{ $pesanan->ukuran }}<br>
-                                <strong>Kuantitas:</strong> {{ $pesanan->kuantitas }}<br>
-                                <strong>Harga Satuan:</strong> {{ $pesanan->harga_satuan }}<br>
-                                <strong>Total Harga:</strong> {{ $pesanan->total_harga }}
+                                <strong>Warna:</strong> {{ $pesanans->warna }}<br>
+                                <strong>Ukuran:</strong> {{ $pesanans->ukuran }}<br>
+                                <strong>Kuantitas:</strong> {{ $pesanans->kuantitas }}<br>
+                                <strong>Harga Satuan:</strong> {{ $pesanans->harga_satuan }}<br>
+                                <strong>Total Harga:</strong> {{ $pesanans->total_harga }}
                             </p>
                             <div class="card-footer">
                                 <div></div>
-                                <div class="card-status">{{ $pesanan->status }}</div>
+                                <div class="card-status">{{ $pesanans->status }}</div>
                             </div>
                         </div>
                     </div>
