@@ -41,4 +41,22 @@ class StatusPesananController extends Controller
             'pesananKonveksiDibatalkan' => $pesananKonveksiDibatalkan,
         ]);
     }
+    public function detailStatusPesanan($type, $id)
+{
+    if ($type === 'pesanan') {
+        $pesanan = Pesanan::findOrFail($id);
+    } elseif ($type === 'pesananKonveksi') {
+        $pesanan = PesananKonveksi::findOrFail($id);
+    } else {
+        abort(404);
+    }
+
+    return view('Pelanggan.Page.DetailStatusPesanan', [
+        'pesanan' => $pesanan,
+        'type' => $type,
+        'name' => 'Detail Status Pesanan',
+        'title' => 'Detail Status Pesanan',
+    ]);
+}
+
 }

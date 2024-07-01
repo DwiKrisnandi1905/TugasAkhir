@@ -166,14 +166,18 @@
         <div class="tab-pane fade show active" id="pills-pending" role="tabpanel" aria-labelledby="pills-pending-tab">
             <div class="card shadow-sm border-0">
                 <div class="card-body">
-                    <h3 class="card-title text-center">Pending</h3>
+                    <div class="d-flex">
+                        <div class="mb-3 text-primary" onclick="window.location='{{ route('profile') }}';">
+                            <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
+                        </div>
+                    </div>
                     @foreach($pesananPending as $pesanan)
                     <div class="card-content">
                         <img src="{{ asset('images/' . $pesanan->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
-                                <a href="#" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['id' => $pesanan->id, 'type' => 'pesanan']) }}" class="card-detail-link">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanan->warna }}<br>
@@ -195,7 +199,7 @@
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
-                                <a href="#" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link">Detail</a>
                             </div>
                             <p class="card-text text-start text-start">
                                 <strong>Warna:</strong> {{ $pesanans->warna }}<br>
@@ -217,14 +221,18 @@
         <div class="tab-pane fade" id="pills-diproses" role="tabpanel" aria-labelledby="pills-diproses-tab">
             <div class="card shadow-sm border-0">
                 <div class="card-body">
-                    <h3 class="card-title text-center">Diproses</h3>
+                    <div class="d-flex">
+                        <div class="mb-3 text-primary" onclick="window.location='{{ route('profile') }}';">
+                            <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
+                        </div>
+                    </div>
                     @foreach($pesananDiproses as $pesanan)
                     <div class="card-content">
                         <img src="{{ asset('images/' . $pesanan->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
-                                <a href="#" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanan->warna }}<br>
@@ -246,7 +254,7 @@
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
-                                <a href="#" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanans->warna }}<br>
@@ -268,14 +276,18 @@
         <div class="tab-pane fade" id="pills-dikirim" role="tabpanel" aria-labelledby="pills-dikirim-tab">
             <div class="card shadow-sm border-0">
                 <div class="card-body">
-                    <h3 class="card-title text-center">Dikirim</h3>
+                    <div class="d-flex">
+                        <div class="mb-3 text-primary" onclick="window.location='{{ route('profile') }}';">
+                            <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
+                        </div>
+                    </div>
                     @foreach($pesananDikirim as $pesanan)
                     <div class="card-content">
                         <img src="{{ asset('images/' . $pesanan->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
-                                <a href="#" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanan->warna }}<br>
@@ -297,7 +309,7 @@
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
-                                <a href="#" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanans->warna }}<br>
@@ -319,14 +331,18 @@
         <div class="tab-pane fade" id="pills-selesai" role="tabpanel" aria-labelledby="pills-selesai-tab">
             <div class="card shadow-sm border-0">
                 <div class="card-body">
-                    <h3 class="card-title text-center">Selesai</h3>
+                    <div class="d-flex">
+                        <div class="mb-3 text-primary" onclick="window.location='{{ route('profile') }}';">
+                            <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
+                        </div>
+                    </div>
                     @foreach($pesananSelesai as $pesanan)
                     <div class="card-content">
                         <img src="{{ asset('images/' . $pesanan->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
-                                <a href="#" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanan->warna }}<br>
@@ -348,7 +364,7 @@
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
-                                <a href="#" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanans->warna }}<br>
@@ -370,14 +386,18 @@
         <div class="tab-pane fade" id="pills-dibatalkan" role="tabpanel" aria-labelledby="pills-dibatalkan-tab">
             <div class="card shadow-sm border-0">
                 <div class="card-body">
-                    <h3 class="card-title text-center">Dibatalkan</h3>
+                    <div class="d-flex">
+                        <div class="mb-3 text-primary" onclick="window.location='{{ route('profile') }}';">
+                            <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
+                        </div>
+                    </div>
                     @foreach($pesananDibatalkan as $pesanan)
                     <div class="card-content">
                         <img src="{{ asset('images/' . $pesanan->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
-                                <a href="#" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanan->warna }}<br>
@@ -399,7 +419,7 @@
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
-                                <a href="#" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanans->warna }}<br>

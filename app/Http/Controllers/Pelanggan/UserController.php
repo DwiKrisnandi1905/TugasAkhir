@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function profile()
-    {
-        return view('Pelanggan.Page.profile' ,[
-            'name' => 'Profile',
-            'title' => 'Profile',
-        ]);
-    }
+    // public function profile()
+    // {
+    //     return view('Pelanggan.Page.profile' ,[
+    //         'name' => 'Profile',
+    //         'title' => 'Profile',
+    //     ]);
+    // }
     // public function cart()
     // {
     //     return view('Pelanggan.Page.cart' ,[
@@ -21,13 +21,13 @@ class UserController extends Controller
     //         'title' => 'Cart',
     //     ]);
     // }
-    public function konveksii()
-    {
-        return view('Pelanggan.Page.Konveksi.Konveksi' ,[
-            'name' => 'Konveksi',
-            'title' => 'Konveksi',
-        ]);
-    }
+    // public function konveksii()
+    // {
+    //     return view('Pelanggan.Page.Konveksi.Konveksi' ,[
+    //         'name' => 'Konveksi',
+    //         'title' => 'Konveksi',
+    //     ]);
+    // }
     // public function tokobajuu()
     // {
     //     return view('Pelanggan.Page.Tokobaju.Tokobaju' ,[

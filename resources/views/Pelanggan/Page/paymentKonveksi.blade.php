@@ -43,7 +43,7 @@
             <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran">
         </div>
         <input type="hidden" name="pesanan" value="{{ json_encode($pesanan) }}"> <!-- hidden input to pass pesanan items -->
-        <button type="button" class="btn btn-danger mt-2">batal</button>
+        <button type="button" id="cancel-btn" class="btn btn-danger mt-2">batal</button>
         <button type="submit" class="btn btn-primary mt-2">Simpan Pembayaran</button>
     </form>
 </div>
@@ -55,6 +55,41 @@
         } else {
             document.getElementById('bukti_pembayaran_container').style.display = 'none';
         }
+    });
+
+    document.getElementById('cancel-btn').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Pesanan Anda akan dihapus!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ff6f00',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Hapus',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch("{{ route('paymentKonveksi.cancel') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = "{{ route('cartKonveksi') }}";
+                    } else {
+                        Swal.fire('Error', 'Terjadi kesalahan saat menghapus pesanan.', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire('Error', 'Terjadi kesalahan saat menghapus pesanan.', 'error');
+                });
+            }
+        });
     });
 </script>
 

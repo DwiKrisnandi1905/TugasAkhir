@@ -86,6 +86,16 @@ class PesananController extends Controller
         return redirect()->route('payment.form');
     }
 
+    public function cancel()
+    {
+        $userId = Auth::id();
+
+        // Delete the orders and cart items for the authenticated user
+        Pesanan::where('user_id', $userId)->whereNull('nama_pemilik_rumah')->delete();
+
+        return response()->json(['success' => true]);
+    }
+
     public function paymentForm()
     {
         $userId = Auth::id();
@@ -159,5 +169,15 @@ class PesananController extends Controller
         Cart::where('user_id', Auth::id())->whereIn('id', $selectedItemIds)->delete();
 
         return redirect()->route('statusPesanan')->with('success', 'Pembayaran berhasil disimpan!');
+    }
+
+    public function paymentCancel()
+    {
+        $userId = Auth::id();
+
+        // Delete the orders and cart items for the authenticated user
+        Pesanan::where('user_id', $userId)->whereNull('metode_pembayaran')->delete();
+
+        return response()->json(['success' => true]);
     }
 }

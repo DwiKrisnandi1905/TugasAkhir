@@ -25,7 +25,7 @@ class produkTokobajuController extends Controller
             'nama_produk' => 'required|string|max:255',
             'kategori_id' => 'required|exists:kategori_tokobajus,id',
             'foto_produk' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'deskripsi_produk' => 'nullable|string',
+            'deskripsi_produk' => 'required|string',
             'warna_produks' => 'required|array',
             'ukurans' => 'required|array',
             'hargas' => 'required|array',

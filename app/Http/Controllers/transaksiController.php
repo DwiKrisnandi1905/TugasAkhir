@@ -9,17 +9,88 @@ use App\Models\PesananKonveksi;
 
 class transaksiController extends Controller
 {
-    public function transaksi ()
+    public function transaksi(Request $request)
+{
+    $rowsPesanan = (int) $request->input('rows_pesanan', 10); 
+    $rowsPesananKonveksi = (int) $request->input('rows_pesanan_konveksi', 10); 
+    $query = $request->input('query');
+    $tgl = $request->input('tgl');
+
+    $pesananPage = $request->input('pesanan_page', 1);
+    $pesananKonveksiPage = $request->input('pesanan_konveksi_page', 1);
+
+    $pesanan = Pesanan::query();
+    if ($query) {
+        $pesanan->where('nama_produk', 'like', '%' . $query . '%')
+                ->orWhereHas('user', function ($q) use ($query) {
+                    $q->where('name', 'like', '%' . $query . '%');
+                });
+    }
+    if ($tgl) {
+        $pesanan->whereDate('created_at', $tgl);
+    }
+    $pesanan = $pesanan->paginate($rowsPesanan, ['*'], 'pesanan_page', $pesananPage);
+
+    $pesananKonveksi = PesananKonveksi::query();
+    if ($query) {
+        $pesananKonveksi->where('nama_produk', 'like', '%' . $query . '%')
+                        ->orWhereHas('user', function ($q) use ($query) {
+                            $q->where('name', 'like', '%' . $query . '%');
+                        });
+    }
+    if ($tgl) {
+        $pesananKonveksi->whereDate('created_at', $tgl);
+    }
+    $pesananKonveksi = $pesananKonveksi->paginate($rowsPesananKonveksi, ['*'], 'pesanan_konveksi_page', $pesananKonveksiPage);
+
+    return view('admin.page.Transaksi.Transaksi', [
+        'name' => 'Transaksi',
+        'title' => 'Transaksi',
+        'pesanan' => $pesanan,
+        'pesananKonveksi' => $pesananKonveksi,
+        'rows_pesanan' => $rowsPesanan,
+        'rows_pesanan_konveksi' => $rowsPesananKonveksi,
+    ]);
+}
+
+    public function detailTransaksi($type, $id)
     {
-        $pesanan = Pesanan::all();
-        $pesananKonveksi = PesananKonveksi::all();
-        return view('admin.page.Transaksi.Transaksi',[
-            'name' => 'Transaksi',
-            'title' => 'Transaksi',
-            'pesanan' => $pesanan,
-            'pesananKonveksi' => $pesananKonveksi,
+        if ($type === 'pesanan') {
+            $order = Pesanan::findOrFail($id);
+        } elseif ($type === 'pesananKonveksi') {
+            $order = PesananKonveksi::findOrFail($id);
+        } else {
+            abort(404);
+        }
+
+        return view('admin.page.Transaksi.detailTransaksi', [
+            'name' => 'Detail Transaksi',
+            'title' => 'Detail Transaksi',
+            'order' => $order,
+            'orderType' => $type,
         ]);
     }
+
+    public function updateStatus(Request $request, $id, $type)
+    {
+        $request->validate([
+            'status' => 'required|string|in:pending,diproses,dikirim,selesai,dibatalkan',
+        ]);
+
+        if ($type === 'pesanan') {
+            $order = Pesanan::findOrFail($id);
+        } elseif ($type === 'pesananKonveksi') {
+            $order = PesananKonveksi::findOrFail($id);
+        } else {
+            abort(404);
+        }
+
+        $order->status = $request->status;
+        $order->save();
+
+        return redirect()->route('detailTransaksi', ['type' => $type, 'id' => $order->id])->with('success', 'Status berhasil diupdate');
+    }
+
     public function metodeTransaksi ()
     {
         $metode_transaksi = TambahMetode::all();
@@ -29,44 +100,6 @@ class transaksiController extends Controller
             'title' => 'Metode Transaksi',
         ]);
     }
-    public function detailTransaksi($type, $id)
-{
-    if ($type === 'pesanan') {
-        $order = Pesanan::findOrFail($id);
-    } elseif ($type === 'pesananKonveksi') {
-        $order = PesananKonveksi::findOrFail($id);
-    } else {
-        abort(404);
-    }
-
-    return view('admin.page.Transaksi.detailTransaksi', [
-        'name' => 'Detail Transaksi',
-        'title' => 'Detail Transaksi',
-        'order' => $order,
-        'orderType' => $type,
-    ]);
-}
-
-public function updateStatus(Request $request, $id, $type)
-{
-    $request->validate([
-        'status' => 'required|string|in:pending,diproses,dikirim,selesai,dibatalkan',
-    ]);
-
-    if ($type === 'pesanan') {
-        $order = Pesanan::findOrFail($id);
-    } elseif ($type === 'pesananKonveksi') {
-        $order = PesananKonveksi::findOrFail($id);
-    } else {
-        abort(404);
-    }
-
-    $order->status = $request->status;
-    $order->save();
-
-    return redirect()->route('detailTransaksi', ['type' => $type, 'id' => $order->id])->with('success', 'Status berhasil diupdate');
-}
-
 
     public function tambahMetode(Request $request)
     {
@@ -115,5 +148,89 @@ public function updateStatus(Request $request, $id, $type)
         $metode->delete();
 
         return redirect()->route('metodeTransaksi')->with('success', 'Metode transaksi berhasil dihapus');
+    }
+
+    public function deletePesanan($id)
+    {
+        $pesanan = Pesanan::findOrFail($id);
+        $pesanan->delete();
+
+        return redirect()->route('transaksi')->with('success', 'Pesanan berhasil dihapus');
+    }
+
+    public function deletePesananKonveksi($id)
+    {
+        $pesananKonveksi = PesananKonveksi::findOrFail($id);
+        $pesananKonveksi->delete();
+
+        return redirect()->route('transaksi')->with('success', 'Pesanan Konveksi berhasil dihapus');
+    }
+
+    public function history(Request $request)
+{
+    $query = $request->input('query');
+    $tgl = $request->input('tgl');
+    $pesananRows = $request->input('pesanan_rows', 10);
+    $pesananKonveksiRows = $request->input('pesanan_konveksi_rows', 10);
+
+    // Query for Pesanan Selesai/Dibatalkan
+    $queryPesanan = Pesanan::with('user')
+        ->where(function ($q) use ($query) {
+            if ($query) {
+                $q->where('nama_produk', 'like', '%' . $query . '%');
+            }
+        })
+        ->where(function ($q) use ($tgl) {
+            if ($tgl) {
+                $q->whereDate('created_at', $tgl);
+            }
+        })
+        ->whereIn('status', ['selesai', 'dibatalkan'])
+        ->orderBy('created_at', 'desc')
+        ->paginate($pesananRows, ['*'], 'pesanan_page');
+
+    $queryPesananKonveksi = PesananKonveksi::with('user')
+        ->where(function ($q) use ($query) {
+            if ($query) {
+                $q->where('nama_produk', 'like', '%' . $query . '%');
+            }
+        })
+        ->where(function ($q) use ($tgl) {
+            if ($tgl) {
+                $q->whereDate('created_at', $tgl);
+            }
+        })
+        ->whereIn('status', ['selesai', 'dibatalkan'])
+        ->orderBy('created_at', 'desc')
+        ->paginate($pesananKonveksiRows, ['*'], 'pesanan_konveksi_page');
+
+    return view('admin.page.History', [
+        'name' => 'History',
+        'title' => 'History',
+        'pesananSelesaiDibatalkan' => $queryPesanan,
+        'pesananKonveksiSelesaiDibatalkan' => $queryPesananKonveksi,
+        'pesananRows' => $pesananRows,
+        'pesananKonveksiRows' => $pesananKonveksiRows,
+    ]);
+}
+
+
+
+    public function detailHistory($type, $id)
+    {
+        if ($type === 'pesanan') {
+            $order = Pesanan::findOrFail($id);
+        } elseif ($type === 'pesananKonveksi') {
+            $order = PesananKonveksi::findOrFail($id);
+        } else {
+            abort(404);
+        }
+
+        return view('admin.page.detailHistory', [
+            'name' => 'Detail History',
+            'title' => 'Detail History',
+            'order' => $order,
+            'type' => $type,
+        ]);
     }
 }

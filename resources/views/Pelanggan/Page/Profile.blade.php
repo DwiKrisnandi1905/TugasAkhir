@@ -6,9 +6,8 @@
         <div class="col-md-4 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img class="rounded-circle mt-5" src="images/profil.png" width="90">
-                <span class="font-weight-bold">John Doe</span>
-                <span class="text-black-50">john_doe12@bbb.com</span>
-                <span>United States</span>
+                <span class="font-weight-bold">{{ Auth::user()->name }}</span>
+                <span class="text-black-50">{{ Auth::user()->email }}</span>
             </div>
         </div>
         <div class="col-md-8">
@@ -17,7 +16,7 @@
                     <h3 class="fw-bold">Profile Anda</h3>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-6"><input class="form-control" placeholder="Nama Depan" value="John" readonly></div>
+                    <div class="col-md-6"><input class="form-control" placeholder="Nama Depan" value="{{ Auth::user()->name }}" readonly></div>
                     <div class="col-md-6"><input class="form-control" value="Doe" placeholder="Nama Belakang" readonly></div>
                 </div>
                 <div class="row mt-3">
@@ -33,6 +32,7 @@
                     <div class="col-md-6"><input class="form-control" value="" placeholder="No. Akun" readonly></div>
                 </div>
                 <div class="mt-5 text-right">
+                    <a href="{{ route('statusPesanan') }}" class="btn btn-danger">Status Pesanan</a>
                     <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#editProfileModal">Edit Profile</button>
                 </div>
                 <div class="mt-3 text-right">

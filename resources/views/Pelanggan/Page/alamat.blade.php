@@ -22,9 +22,46 @@
             <label for="link_lokasi">Link Lokasi (Google Map)</label>
             <input type="text" class="form-control" id="link_lokasi" name="link_lokasi" required>
         </div>
-        <button type="button" class="btn btn-danger mt-2">batal</button>
+        <button type="button" id="cancel-btn" class="btn btn-danger mt-2">Batal</button>
         <button type="submit" class="btn btn-primary mt-2">Simpan Alamat</button>
     </form>
 </div>
+
+<script>
+document.getElementById('cancel-btn').addEventListener('click', function() {
+    Swal.fire({
+        title: 'Apakah Anda yakin?',
+        text: "Pesanan Anda akan dihapus!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ff6f00',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Hapus',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch("{{ route('pesanan.cancel') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = "{{ route('cart') }}";
+                } else {
+                    Swal.fire('Error', 'Terjadi kesalahan saat menghapus pesanan.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire('Error', 'Terjadi kesalahan saat menghapus pesanan.', 'error');
+            });
+        }
+    });
+});
+</script>
 
 @endsection

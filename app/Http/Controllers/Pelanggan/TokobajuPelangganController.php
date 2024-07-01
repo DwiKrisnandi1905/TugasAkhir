@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pelanggan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Produk;
+use App\Models\Pesanan;
 use Illuminate\Support\Facades\DB;
 
 class TokobajuPelangganController extends Controller
@@ -34,12 +35,14 @@ class TokobajuPelangganController extends Controller
 
         $hargaTertinggi = $produk->variasi->max('harga');
         $hargaTerendah = $produk->variasi->min('harga');
+        $totalTerjual = Pesanan::where('nama_produk', $produk->nama_produk)->sum('kuantitas');
 
         return view('Pelanggan.Page.Tokobaju.detailTokobaju', [
             'produk' => $produk,
             'variasi' => $variasi,
             'hargaTertinggi' => $hargaTertinggi,
             'hargaTerendah' => $hargaTerendah,
+            'totalTerjual' => $totalTerjual,
             'name' => 'Detail Toko Baju',
             'title' => 'Detail Toko Baju',
         ]);

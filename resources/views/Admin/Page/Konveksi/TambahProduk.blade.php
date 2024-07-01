@@ -26,27 +26,52 @@
             @csrf
             <div class="mb-3">
                 <label for="nama_produk" class="form-label">Nama Produk:</label>
-                <input type="text" class="form-control" id="nama_produk" name="nama_produk">
+                <input type="text" class="form-control @error('nama_produk') is-invalid @enderror" id="nama_produk" name="nama_produk">
+                @error('nama_produk')
+                    <div class="invalid-feedback">
+                        Nama konveksi harus diisi
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="kategori_id" class="form-label">Kategori:</label>
-                <select class="form-select" id="kategori_id" name="kategori_id">
+                <select class="form-select @error('kategori_id') is-invalid @enderror" id="kategori_id" name="kategori_id">
                     @foreach($kategoriKonveksi as $kategori)
                         <option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
                     @endforeach
                 </select>
+                @error('kategori_id')
+                    <div class="invalid-feedback">
+                        Silahkan pilih kategori atau buat kategori dulu
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="tanggal_masuk" class="form-label">Tanggal Masuk:</label>
-                <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk" value="{{ old('tanggal_masuk') }}">
+                <input type="date" class="form-control @error('tanggal_masuk') is-invalid @enderror" id="tanggal_masuk" name="tanggal_masuk" value="{{ old('tanggal_masuk') }}">
+                @error('tanggal_masuk')
+                    <div class="invalid-feedback">
+                        pilih tanggal masuk
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="jenis" class="form-label">Jenis Bahan:</label>
-                <input type="text" class="form-control" id="jenis" name="jenis">
+                <input type="text" class="form-control @error('jenis') is-invalid @enderror" id="jenis" name="jenis">
+                @error('jenis')
+                    <div class="invalid-feedback">
+                        Jenis bahan harus diisi
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="foto_produk" class="form-label">Upload Foto Produk Untuk Tampilan Utama:</label>
-                <input type="file" class="form-control" id="foto_produk" name="foto_produk" accept="image/*">
+                <input type="file" class="form-control @error('foto_produk') is-invalid @enderror" id="foto_produk" name="foto_produk" accept="image/*">
+                @error('foto_produk')
+                    <div class="invalid-feedback">
+                        Foto produk konveksi harus diisi
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalWarnaProduk">Tambahkan Produk</button>
@@ -54,7 +79,12 @@
             <div id="cardContainer" class="mb-3"></div>
             <div class="mb-3">
                 <label for="deskripsi" class="form-label">Deskripsi Produk:</label>
-                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>
+                <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" rows="3"></textarea>
+                @error('deskripsi')
+                    <div class="invalid-feedback">
+                        Deskripsi produk harus diisi
+                    </div>
+                @enderror
             </div>
             <div class="d-flex justify-content-center mb-3">
                 <button type="submit" class="btn btn-success">Simpan</button>

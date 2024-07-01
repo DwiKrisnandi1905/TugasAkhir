@@ -110,13 +110,13 @@ class Controller extends BaseController
     //         'title' => 'Detail Transaksi',
     //     ]);
     // }
-    public function history ()
-    {
-        return view('admin.page.History',[
-            'name' => 'History',
-            'title' => 'History',
-        ]);
-    }
+    // public function history ()
+    // {
+    //     return view('admin.page.History',[
+    //         'name' => 'History',
+    //         'title' => 'History',
+    //     ]);
+    // }
     public function notifikasi ()
     {
         return view('admin.page.Notifikasi',[

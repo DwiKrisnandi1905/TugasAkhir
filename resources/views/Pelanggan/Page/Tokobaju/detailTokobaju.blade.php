@@ -69,7 +69,7 @@
                         </button>
                     </div>
                     <div>
-                        <p class="text-muted mb-0">Terjual: {{ $produk->variasi->sum('terjual') }}</p>
+                        <p class="text-muted mb-0">Terjual: {{ $totalTerjual }}</p>
                     </div>
                 </div>
             </div>

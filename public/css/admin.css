@@ -156,7 +156,7 @@ a.sidebar-link:hover {
 }
 
 /* dashboard */
-#card-dashboard {
+/* #card-dashboard {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -166,7 +166,7 @@ a.sidebar-link:hover {
   border: solid rgba(0, 0, 0, 0.125);
   border-radius: 0.75rem;
   min-height: 30vh;
-}
+} */
 
 /* pelanggan */
     #Pelanggan {

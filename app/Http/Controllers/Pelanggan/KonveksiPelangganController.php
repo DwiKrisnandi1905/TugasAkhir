@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pelanggan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Konveksi;
+use App\Models\PesananKonveksi;
 use Illuminate\Support\Facades\DB;
 
 class KonveksiPelangganController extends Controller
@@ -34,12 +35,14 @@ class KonveksiPelangganController extends Controller
 
         $hargaTertinggi = $konveksi->variasi->max('harga');
         $hargaTerendah = $konveksi->variasi->min('harga');
+        $totalTerjual = PesananKonveksi::where('nama_produk', $konveksi->nama_produk)->sum('kuantitas');
 
         return view('Pelanggan.Page.Konveksi.detailKonveksi', [
             'konveksi' => $konveksi,
             'variasi' => $variasi,
             'hargaTertinggi' => $hargaTertinggi,
             'hargaTerendah' => $hargaTerendah,
+            'totalTerjual' => $totalTerjual,
             'name' => 'Detail Konveksi',
             'title' => 'Detail Konveksi',
         ]);

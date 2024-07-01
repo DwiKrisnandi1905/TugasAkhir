@@ -24,9 +24,9 @@ class produkKonveksiController extends Controller
         $request->validate([
             'nama_produk' => 'required|string|max:255',
             'kategori_id' => 'required|exists:kategori_konveksis,id',
-            'jenis' => 'nullable|string',
+            'jenis' => 'required|string',
             'foto_produk' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'deskripsi' => 'nullable|string',
+            'deskripsi' => 'required|string',
             'warna_produks' => 'required|array',
             'ukurans' => 'required|array',
             'hargas' => 'required|array',

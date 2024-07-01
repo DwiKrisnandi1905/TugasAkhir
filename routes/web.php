@@ -13,6 +13,7 @@ use App\Http\Controllers\konveksiController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\Pelanggan\UserController;
+use App\Http\Controllers\Pelanggan\ProfileController;
 use App\Http\Controllers\Pelanggan\HomeController;
 use App\Http\Controllers\Pelanggan\TokobajuPelangganController;
 use App\Http\Controllers\Pelanggan\KonveksiPelangganController;
@@ -120,12 +121,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/transaksi/deleteMetode/{id}', [TransaksiController::class, 'deleteMetode'])->name('deleteMetode');
     Route::get('/transaksi/editMetode/{id}', [transaksiController::class, 'editMetode'])->name('editMetode');
     Route::put('/transaksi/updateMetode/{id}', [transaksiController::class, 'updateMetode'])->name('updateMetode');
+    Route::delete('/transaksi/pesanan/{id}', [transaksiController::class, 'deletePesanan'])->name('deletePesanan');
+    Route::delete('/transaksi/pesanan-konveksi/{id}', [transaksiController::class, 'deletePesananKonveksi'])->name('deletePesananKonveksi');
     //tambah metode transaksi end
 
     Route::get('/transaksi/detailTransaksi/{type}/{id}', [TransaksiController::class, 'detailTransaksi'])->name('detailTransaksi');
     Route::post('/transaksi/update-status/{id}/{type}', [TransaksiController::class, 'updateStatus'])->name('updateStatus');
 
-    Route::get('/history', [Controller::class, 'history'])->name('history');
+    Route::get('/history', [TransaksiController::class, 'history'])->name('history');
+    Route::get('/history/detailHistory/{type}/{id}', [TransaksiController::class, 'detailHistory'])->name('detailHistory');
     Route::get('/notifikasi', [Controller::class, 'notifikasi'])->name('notifikasi');
     Route::get('/setting', [Controller::class, 'setting'])->name('setting');
     //end admin
@@ -134,7 +138,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:user'])->group(function () {
     // Route::get('/', [UserController::class, 'home'])->name('home');
     Route::get('/home', [HomeController::class, 'home'])->name('home');
-    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
     Route::get('/cart', [CartController::class, 'cart'])->name('cart');
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
     Route::get('/cartKonveksi', [CartKonveksiController::class, 'cartKonveksi'])->name('cartKonveksi');
@@ -145,15 +149,20 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::post('/pesananKonveksi', [PesananKonveksiController::class, 'storeKonveksi'])->name('pesananKonveksi.store');
     Route::get('/address', [PesananController::class, 'alamatForm'])->name('alamat.form');
     Route::post('/address', [PesananController::class, 'storeAlamat'])->name('alamat.store');
+    Route::post('/pesanan/cancel', [PesananController::class, 'cancel'])->name('pesanan.cancel');
     Route::get('/addressKonveksi', [PesananKonveksiController::class, 'alamatFormKonveksi'])->name('alamatKonveksi.form');
     Route::post('/addressKonveksi', [PesananKonveksiController::class, 'storeAlamatKonveksi'])->name('alamatKonveksi.store');
+    Route::post('/pesananKonveksi/cancel', [PesananKonveksiController::class, 'cancel'])->name('pesananKonveksi.cancel');
     Route::get('/payment', [PesananController::class, 'paymentForm'])->name('payment.form');
     Route::post('/payment', [PesananController::class, 'storePayment'])->name('pesanan.storePayment');
+    Route::post('/payment/cancel', [PesananController::class, 'paymentCancel'])->name('payment.cancel');
     Route::get('/paymentKonveksi', [PesananKonveksiController::class, 'paymentFormKonveksi'])->name('paymentKonveksi.form');
     Route::post('/paymentKonveksi', [PesananKonveksiController::class, 'storePaymentKonveksi'])->name('pesananKonveksi.storePayment');
+    Route::post('/paymentKonveksi/cancel', [PesananKonveksiController::class, 'paymentKonveksiCancel'])->name('paymentKonveksi.cancel');
     Route::get('/konveksii', [KonveksiPelangganController::class, 'konveksii'])->name('konveksii');
     Route::get('/konveksii/detailKonveksi/{id}', [KonveksiPelangganController::class, 'detailKonveksi'])->name('detailKonveksi');
     Route::get('/tokobajuu', [TokobajuPelangganController::class, 'tokobajuu'])->name('tokobajuu');
     Route::get('/tokobajuu/detailTokobaju/{id}', [TokobajuPelangganController::class, 'detailTokobaju'])->name('detailTokobaju');
     Route::get('/statusPesanan', [StatusPesananController::class, 'statusPesanan'])->name('statusPesanan');
+    Route::get('/detailStatusPesanan/{type}/{id}', [StatusPesananController::class, 'detailStatusPesanan'])->name('detailStatusPesanan');
 });
