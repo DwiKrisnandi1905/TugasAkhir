@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\tambahMetode;
 use App\Models\Pesanan;
 use App\Models\PesananKonveksi;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class transaksiController extends Controller
 {
@@ -232,5 +233,40 @@ class transaksiController extends Controller
             'order' => $order,
             'type' => $type,
         ]);
+    }
+
+    public function exportPdf(Request $request)
+    {
+        $pesanan = Pesanan::query();
+        $pesananKonveksi = PesananKonveksi::query();
+
+        // Apply filters (if any)
+        $query = $request->input('query');
+        $tgl = $request->input('tgl');
+
+        if ($query) {
+            $pesanan->where('nama_produk', 'like', '%' . $query . '%')
+                    ->orWhereHas('user', function ($q) use ($query) {
+                        $q->where('name', 'like', '%' . $query . '%');
+                    });
+            $pesananKonveksi->where('nama_produk', 'like', '%' . $query . '%')
+                            ->orWhereHas('user', function ($q) use ($query) {
+                                $q->where('name', 'like', '%' . $query . '%');
+                            });
+        }
+        if ($tgl) {
+            $pesanan->whereDate('created_at', $tgl);
+            $pesananKonveksi->whereDate('created_at', $tgl);
+        }
+
+        // Get all data without pagination
+        $pesanan = $pesanan->get();
+        $pesananKonveksi = $pesananKonveksi->get();
+
+        // Load the view and pass the data
+        $pdf = Pdf::loadView('admin.page.Transaksi.exportPdf', compact('pesanan', 'pesananKonveksi'));
+
+        // Download the PDF
+        return $pdf->download('transaksi.pdf');
     }
 }

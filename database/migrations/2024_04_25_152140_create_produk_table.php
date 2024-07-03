@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('kategori_id')->references('id')->on('kategori_tokobajus')->onDelete('cascade');
             $table->string('foto_produk');
             $table->date('tanggal_masuk')->nullable();
+            $table->string('nft_token_id')->nullable();
             $table->timestamps();
         });
     }

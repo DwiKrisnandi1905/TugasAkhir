@@ -49,7 +49,7 @@
           </div>
           <div>
             <p class="text-muted text-muted-custom mb-1">Total Transaksi</p>
-            <h4 class="font-weight-bold font-weight-bold-custom">Rp 100.000</h4>
+            <h4 class="font-weight-bold font-weight-bold-custom">Rp {{ number_format($totalTransaksi) }} </h4>
           </div>
         </div>
       </div>
@@ -81,14 +81,14 @@
       </div>
     </div>
     <div class="col-xl-3 col-sm-6">
-      <div class="card card-custom shadow-sm">
+      <div class="card card-custom shadow-sm" data-bs-toggle="modal" data-bs-target="#totalProdukTerjual" style="cursor: pointer;">
         <div class="card-body d-flex-custom">
           <div class="icon icon-lg icon-custom shadow">
             <i class="bi bi-cart-fill"></i>
           </div>
           <div>
             <p class="text-muted text-muted-custom mb-1">Produk Terjual</p>
-            <h4 class="font-weight-bold font-weight-bold-custom">10</h4>
+            <h4 class="font-weight-bold font-weight-bold-custom">{{ $totalTerjual }}</h4>
           </div>
         </div>
       </div>
@@ -107,6 +107,23 @@
       <div class="modal-body">
         <p><strong>Total Produk:</strong> {{ $totalProduk }}</p>
         <p><strong>Total Konveksi:</strong> {{ $totalKonveksi }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="totalProdukTerjual" tabindex="-1" aria-labelledby="totalProdukTerjualLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="totalProdukTerjualLabel">Detail Total Produk & Konveksi</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Total Produk Terjual:</strong> {{ $TotalPesananTerjual }}</p>
+        <p><strong>Total Konveksi Terjual:</strong> {{ $TotalPesananKonveksiTerjual }}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

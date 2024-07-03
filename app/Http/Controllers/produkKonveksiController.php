@@ -2,14 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\NFTService;
 use Illuminate\Http\Request;
 use App\Models\Konveksi;
 use App\Models\kategoriKonveksi;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
 
 class produkKonveksiController extends Controller
 {
+    protected $nftService;
+
+    public function __construct(NFTService $nftService)
+    {
+        $this->nftService = $nftService;
+    }
+
     public function produkKonveksi()
     {
         $kategoriKonveksi = kategoriKonveksi::all();
@@ -40,7 +49,10 @@ class produkKonveksiController extends Controller
         ]);
 
         $imageName = time() . '_foto_produk.' . $request->foto_produk->extension();  
-        $request->foto_produk->move(public_path('images'), $imageName);
+        $imagePath = public_path('images/' . $imageName);
+        $img = Image::make($request->foto_produk);
+        $img->insert(public_path('watermark.png'), 'bottom-right', 10, 10); // tambahkan watermark
+        $img->save($imagePath);
 
         $konveksi = new Konveksi();
         $konveksi->nama_produk = $request->nama_produk;
@@ -54,7 +66,10 @@ class produkKonveksiController extends Controller
         for ($i = 0; $i < count($request->warna_produks); $i++) {
             $foto_produk_modal = $request->file('foto_produk_modals')[$i];
             $imageNameModal = time() . '_foto_produk_modals_' . $i . '.' . $foto_produk_modal->extension();  
-            $foto_produk_modal->move(public_path('images'), $imageNameModal);
+            $imagePathModal = public_path('images/' . $imageNameModal);
+            $imgModal = Image::make($foto_produk_modal);
+            $imgModal->insert(public_path('watermark.png'), 'bottom-right', 10, 10); 
+            $imgModal->save($imagePathModal);
             
             $konveksi->variasi()->create([
                 'warna_produk' => $request->warna_produks[$i],
@@ -65,7 +80,41 @@ class produkKonveksiController extends Controller
             ]);
         }
 
+        // Buat NFT untuk foto produk utama
+        $tokenURI = url('images/' . $imageName); // Gunakan URL publik gambar sebagai tokenURI
+        $fromAddress = '0x0542C59c8Cf3A24B029F07447096C69e5987d462'; // Ganti dengan address Ethereum Anda
+        $transactionHash = $this->nftService->createToken($tokenURI, $fromAddress);
+
+        // Simpan ID token dan hash transaksi
+        $konveksi->nft_token_id = $transactionHash; // Simpan hash transaksi atau ID token jika tersedia
+        $konveksi->save();
+
         return redirect()->route('konveksi')->with('success', 'Produk berhasil ditambahkan!');
+    }
+
+    public function verifyNFT($transactionHash)
+    {
+        try {
+            $transactionReceipt = $this->nftService->verifyNFT($transactionHash);
+
+            if ($transactionReceipt) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'NFT verification successful',
+                    'data' => $transactionReceipt,
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Transaction not found',
+                ]);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 
 }
