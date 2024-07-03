@@ -43,7 +43,7 @@
           </button>
         </div>
       </div>
-      <button class="btn btn-danger fw-bold text-white ms-auto">Export</button>
+      <button class="btn btn-danger fw-bold text-white ms-auto" onclick="window.location='{{ route('exportPdf') }}';">Export PDF</button>
     </div>
     <table class="table table-bordered">
       <thead>

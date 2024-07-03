@@ -102,6 +102,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Tambah produk toko baju 
     Route::get('/tokobaju/produkTokobaju', [produkTokobajuController::class, 'produkTokobaju'])->name('produkTokobaju');
     Route::post('/tokobaju/simpanProduk', [produkTokobajuController::class, 'simpanData'])->name('simpanProduk');
+    Route::get('/verify-nft/{transactionHash}', [produkTokobajuController::class, 'verifyNFT'])->name('verify-nft');
     //Tambah produk toko baju end
 
     //Detail Tokobaju
@@ -127,6 +128,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/transaksi/detailTransaksi/{type}/{id}', [TransaksiController::class, 'detailTransaksi'])->name('detailTransaksi');
     Route::post('/transaksi/update-status/{id}/{type}', [TransaksiController::class, 'updateStatus'])->name('updateStatus');
+    Route::get('/transaksi/export-pdf', [transaksiController::class, 'exportPdf'])->name('exportPdf');
 
     Route::get('/history', [TransaksiController::class, 'history'])->name('history');
     Route::get('/history/detailHistory/{type}/{id}', [TransaksiController::class, 'detailHistory'])->name('detailHistory');
