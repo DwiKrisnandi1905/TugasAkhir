@@ -109,6 +109,18 @@
             margin: 5%;
         }
 
+        .card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s;
+        }
+
+        .card img {
+            transition: transform 0.3s;
+        }
+
+        .card:hover img {
+            transform: scale(1.1);
+        }
 
         #home {
             position: relative;
@@ -177,10 +189,17 @@
             margin-bottom: 10px;
         }
 
-        .card-img-top {
-            height: 200px; 
-            object-fit: cover;
-            padding: 2%;
+        .card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s;
+        }
+
+        .card img {
+            transition: transform 0.3s;
+        }
+
+        .card:hover img {
+            transform: scale(1.0);
         }
     </style>
 </head>
@@ -188,7 +207,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><i class="fas fa-tshirt"></i></a>
+            <a class="navbar-brand" href="/"><i class="fa fa-tshirt"></i></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>   
@@ -242,7 +261,7 @@
                 <!-- Product 1 -->
                 <div class="col-md-4 mb-4 mx-auto">
                     <div class="card">
-                        <img src="images/1718171245_foto_produk_modal_0.jpg" class="card-img-top" alt="Product 1">
+                        <img src="images/1719150681_foto_produk.jpg" class="card-img-top" alt="Product 1">
                         <div class="card-body">
                             <h5 class="card-title text-center">Toko Baju</h5>
                             <a href="{{ route('login') }}" class="btn">Lihat Sekarang</a>
@@ -252,7 +271,7 @@
                 <!-- Product 2 -->
                 <div class="col-md-4 mb-4 mx-auto">
                     <div class="card">
-                        <img src="images/1718171245_foto_produk_modal_0.jpg" class="card-img-top" alt="Product 2">
+                        <img src="images/1719150681_foto_produk.jpg" class="card-img-top" alt="Product 2">
                         <div class="card-body">
                             <h5 class="card-title text-center">Konveksi Baju</h5>
                             <a href="{{ route('login') }}" class="btn">Lihat Sekarang</a>
@@ -270,7 +289,7 @@
             <h2 class="text-center mb-5 fw-bold">Tentang Kami</h2>
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <img src="images/about.jpg" class="img-fluid rounded" alt="Tentang Kami">
+                    <img src="images/bg2.jpg" class="img-fluid rounded" alt="Tentang Kami">
                 </div>
                 <div class="col-md-6">
                     <p class="text-justify">Alveen Clothing adalah sebuah toko pakaian dan penyedia jasa konveksi baju yang terletak di daerah Tembalang, sebuah kawasan yang dinamis di Kota Semarang. Kami tidak hanya menyediakan berbagai pilihan pakaian berkualitas tinggi, tetapi juga menawarkan layanan konveksi yang handal dan profesional. Lokasi kami yang strategis memudahkan pelanggan untuk mengakses toko kami, baik dari pusat kota maupun dari daerah sekitarnya. Di Alveen Clothing, kami berkomitmen untuk memberikan produk dan layanan terbaik, memastikan setiap pelanggan puas dengan pengalaman berbelanja dan hasil konveksi yang mereka terima</p>
