@@ -44,6 +44,8 @@
         </div>
       </div>
       <button class="btn btn-danger fw-bold text-white ms-auto" onclick="window.location='{{ route('exportPdf') }}';">Export PDF</button>
+      <button class="btn btn-success fw-bold text-white ms-auto" onclick="window.location='{{ route('exportPesanan') }}';">Export Pesanan CSV</button>
+      <button class="btn btn-success fw-bold text-white ms-auto" onclick="window.location='{{ route('exportPesananKonveksi') }}';">Export Pesanan Konveksi CSV</button>
     </div>
     <table class="table table-bordered">
       <thead>
@@ -199,9 +201,6 @@
     </div>
   </div>
 </div>
-@endsection
-
-@push('scripts')
 <script>
   function confirmDelete(id) {
     if (confirm('Apakah Anda yakin ingin menghapus pesanan ini?')) {
@@ -209,4 +208,4 @@
     }
   }
 </script>
-@endpush
+@endsection

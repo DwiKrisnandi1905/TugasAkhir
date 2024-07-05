@@ -80,6 +80,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     // Detail Konveksi
     Route::get('/konveksi/detailProdukKonveksi/{id}', [konveksiController::class, 'detailProdukKonveksi'])->name('detailProdukKonveksi');
+    Route::get('/konveksi/generateQRCodePDF/{id}', [konveksiController::class, 'generateQRCodePDF'])->name('generateQRCodePDFKonveksi');
     Route::get('/konveksi/editProdukKonveksi/{id}', [konveksiController::class, 'editProdukKonveksi'])->name('editProdukKonveksi');
     Route::put('/konveksi/updateProdukKonveksi/{id}', [konveksiController::class, 'updateProdukKonveksi'])->name('updateProdukKonveksi');
     Route::get('/konveksi/searchByDateKonveksi', [konveksiController::class, 'searchByDateKonveksi'])->name('searchByDateKonveksi');
@@ -107,6 +108,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     //Detail Tokobaju
     Route::get('/tokobaju/detailProdukTokobaju/{id}', [tokobajuController::class, 'detailProdukTokobaju'])->name('detailProdukTokobaju');
+    Route::get('/tokobaju/generateQRCodePDF/{id}', [tokobajuController::class, 'generateQRCodePDF'])->name('generateQRCodePDF');
     Route::get('/tokobaju/editProduk/{id}', [tokobajuController::class, 'editProduk'])->name('editProduk');
     Route::put('/tokobaju/updateProduk/{id}', [tokobajuController::class, 'updateProduk'])->name('updateProduk');
     Route::get('/tokobaju/searchByDate', [tokobajuController::class, 'searchByDate'])->name('searchByDate');
@@ -129,9 +131,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/transaksi/detailTransaksi/{type}/{id}', [TransaksiController::class, 'detailTransaksi'])->name('detailTransaksi');
     Route::post('/transaksi/update-status/{id}/{type}', [TransaksiController::class, 'updateStatus'])->name('updateStatus');
     Route::get('/transaksi/export-pdf', [transaksiController::class, 'exportPdf'])->name('exportPdf');
+    Route::get('/export-pesanan', [transaksiController::class, 'exportPesanan'])->name('exportPesanan');
+    Route::get('/export-pesanan-konveksi', [transaksiController::class, 'exportPesananKonveksi'])->name('exportPesananKonveksi');
 
     Route::get('/history', [TransaksiController::class, 'history'])->name('history');
     Route::get('/history/detailHistory/{type}/{id}', [TransaksiController::class, 'detailHistory'])->name('detailHistory');
+    Route::get('/history/export', [TransaksiController::class, 'exportHistory'])->name('exportHistory');
     Route::get('/notifikasi', [Controller::class, 'notifikasi'])->name('notifikasi');
     Route::get('/setting', [Controller::class, 'setting'])->name('setting');
     //end admin

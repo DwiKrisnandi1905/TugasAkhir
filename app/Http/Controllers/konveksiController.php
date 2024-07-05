@@ -8,6 +8,9 @@ use App\Models\VariasiProdukKonveksi;
 use App\Models\kategoriKonveksi;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Pagination\Paginator;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+// use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\PDF;
 
 
 class konveksiController extends Controller
@@ -128,5 +131,19 @@ class konveksiController extends Controller
             'name' => 'Konveksi',
             'title' => 'Konveksi',
         ]);
+    }
+
+    public function generateQRCodePDF($id)
+    {
+        $konveksi = Konveksi::findOrFail($id);
+
+        // Generate QR Code
+        $qrCode = base64_encode(QrCode::format('svg')->size(200)->generate($konveksi->nft_token_id));
+
+        // Generate PDF
+        $pdf = PDF::loadView('pdf.qrcodeKonveksi', ['qrCode' => $qrCode, 'konveksi' => $konveksi]);
+
+        // Download PDF
+        return $pdf->download('qrcode_konveksi_' . $konveksi->id . '.pdf');
     }
 }

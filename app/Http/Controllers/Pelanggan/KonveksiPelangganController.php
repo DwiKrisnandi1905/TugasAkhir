@@ -6,20 +6,40 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Konveksi;
 use App\Models\PesananKonveksi;
+use App\Models\kategoriKonveksi;
 use Illuminate\Support\Facades\DB;
 
 class KonveksiPelangganController extends Controller
 {
-    public function konveksii()
+    public function konveksii(Request $request)
     {
-        // Fetch products along with their highest price variation
+
+        $kategoris = kategoriKonveksi::all();
+
         $konveksis = Konveksi::with(['variasi' => function ($query) {
             $query->select('konveksi_id', DB::raw('MAX(harga) as highest_price'))
                   ->groupBy('konveksi_id');
-        }])->get();
+        }]);
+
+        if ($request->has('kategori')) {
+            $konveksis->where('kategori_id', $request->kategori);
+        }
+
+        if ($request->has('search')) {
+            $search = $request->search;
+            $konveksis->where(function($query) use ($search) {
+                $query->where('nama_produk', 'like', "%{$search}%")
+                      ->orWhereHas('variasi', function($q) use ($search) {
+                          $q->where('harga', 'like', "%{$search}%");
+                      });
+            });
+        }
+
+        $konveksis = $konveksis->get();
 
         return view('Pelanggan.Page.Konveksi.Konveksi', [
             'konveksis' => $konveksis,
+            'kategoris' => $kategoris,
             'name' => 'Konveksi',
             'title' => 'Konveksi',
         ]);

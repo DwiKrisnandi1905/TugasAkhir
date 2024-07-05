@@ -7,52 +7,55 @@ use App\Models\tambahMetode;
 use App\Models\Pesanan;
 use App\Models\PesananKonveksi;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\PesananExport;
+use App\Exports\PesananKonveksiExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class transaksiController extends Controller
 {
     public function transaksi(Request $request)
-{
-    $rowsPesanan = (int) $request->input('rows_pesanan', 10); 
-    $rowsPesananKonveksi = (int) $request->input('rows_pesanan_konveksi', 10); 
-    $query = $request->input('query');
-    $tgl = $request->input('tgl');
+    {
+        $rowsPesanan = (int) $request->input('rows_pesanan', 10); 
+        $rowsPesananKonveksi = (int) $request->input('rows_pesanan_konveksi', 10); 
+        $query = $request->input('query');
+        $tgl = $request->input('tgl');
 
-    $pesananPage = $request->input('pesanan_page', 1);
-    $pesananKonveksiPage = $request->input('pesanan_konveksi_page', 1);
+        $pesananPage = $request->input('pesanan_page', 1);
+        $pesananKonveksiPage = $request->input('pesanan_konveksi_page', 1);
 
-    $pesanan = Pesanan::query();
-    if ($query) {
-        $pesanan->where('nama_produk', 'like', '%' . $query . '%')
-                ->orWhereHas('user', function ($q) use ($query) {
-                    $q->where('name', 'like', '%' . $query . '%');
-                });
-    }
-    if ($tgl) {
-        $pesanan->whereDate('created_at', $tgl);
-    }
-    $pesanan = $pesanan->paginate($rowsPesanan, ['*'], 'pesanan_page', $pesananPage);
+        $pesanan = Pesanan::query();
+        if ($query) {
+            $pesanan->where('nama_produk', 'like', '%' . $query . '%')
+                    ->orWhereHas('user', function ($q) use ($query) {
+                        $q->where('name', 'like', '%' . $query . '%');
+                    });
+        }
+        if ($tgl) {
+            $pesanan->whereDate('created_at', $tgl);
+        }
+        $pesanan = $pesanan->paginate($rowsPesanan, ['*'], 'pesanan_page', $pesananPage);
 
-    $pesananKonveksi = PesananKonveksi::query();
-    if ($query) {
-        $pesananKonveksi->where('nama_produk', 'like', '%' . $query . '%')
-                        ->orWhereHas('user', function ($q) use ($query) {
-                            $q->where('name', 'like', '%' . $query . '%');
-                        });
-    }
-    if ($tgl) {
-        $pesananKonveksi->whereDate('created_at', $tgl);
-    }
-    $pesananKonveksi = $pesananKonveksi->paginate($rowsPesananKonveksi, ['*'], 'pesanan_konveksi_page', $pesananKonveksiPage);
+        $pesananKonveksi = PesananKonveksi::query();
+        if ($query) {
+            $pesananKonveksi->where('nama_produk', 'like', '%' . $query . '%')
+                            ->orWhereHas('user', function ($q) use ($query) {
+                                $q->where('name', 'like', '%' . $query . '%');
+                            });
+        }
+        if ($tgl) {
+            $pesananKonveksi->whereDate('created_at', $tgl);
+        }
+        $pesananKonveksi = $pesananKonveksi->paginate($rowsPesananKonveksi, ['*'], 'pesanan_konveksi_page', $pesananKonveksiPage);
 
-    return view('admin.page.Transaksi.Transaksi', [
-        'name' => 'Transaksi',
-        'title' => 'Transaksi',
-        'pesanan' => $pesanan,
-        'pesananKonveksi' => $pesananKonveksi,
-        'rows_pesanan' => $rowsPesanan,
-        'rows_pesanan_konveksi' => $rowsPesananKonveksi,
-    ]);
-}
+        return view('admin.page.Transaksi.Transaksi', [
+            'name' => 'Transaksi',
+            'title' => 'Transaksi',
+            'pesanan' => $pesanan,
+            'pesananKonveksi' => $pesananKonveksi,
+            'rows_pesanan' => $rowsPesanan,
+            'rows_pesanan_konveksi' => $rowsPesananKonveksi,
+        ]);
+    }
 
     public function detailTransaksi($type, $id)
     {
@@ -168,54 +171,52 @@ class transaksiController extends Controller
     }
 
     public function history(Request $request)
-{
-    $query = $request->input('query');
-    $tgl = $request->input('tgl');
-    $pesananRows = $request->input('pesanan_rows', 10);
-    $pesananKonveksiRows = $request->input('pesanan_konveksi_rows', 10);
+    {
+        $query = $request->input('query');
+        $tgl = $request->input('tgl');
+        $pesananRows = $request->input('pesanan_rows', 10);
+        $pesananKonveksiRows = $request->input('pesanan_konveksi_rows', 10);
 
-    // Query for Pesanan Selesai/Dibatalkan
-    $queryPesanan = Pesanan::with('user')
-        ->where(function ($q) use ($query) {
-            if ($query) {
-                $q->where('nama_produk', 'like', '%' . $query . '%');
-            }
-        })
-        ->where(function ($q) use ($tgl) {
-            if ($tgl) {
-                $q->whereDate('created_at', $tgl);
-            }
-        })
-        ->whereIn('status', ['selesai', 'dibatalkan'])
-        ->orderBy('created_at', 'desc')
-        ->paginate($pesananRows, ['*'], 'pesanan_page');
+        // Query for Pesanan Selesai/Dibatalkan
+        $queryPesanan = Pesanan::with('user')
+            ->where(function ($q) use ($query) {
+                if ($query) {
+                    $q->where('nama_produk', 'like', '%' . $query . '%');
+                }
+            })
+            ->where(function ($q) use ($tgl) {
+                if ($tgl) {
+                    $q->whereDate('created_at', $tgl);
+                }
+            })
+            ->whereIn('status', ['selesai', 'dibatalkan'])
+            ->orderBy('created_at', 'desc')
+            ->paginate($pesananRows, ['*'], 'pesanan_page');
 
-    $queryPesananKonveksi = PesananKonveksi::with('user')
-        ->where(function ($q) use ($query) {
-            if ($query) {
-                $q->where('nama_produk', 'like', '%' . $query . '%');
-            }
-        })
-        ->where(function ($q) use ($tgl) {
-            if ($tgl) {
-                $q->whereDate('created_at', $tgl);
-            }
-        })
-        ->whereIn('status', ['selesai', 'dibatalkan'])
-        ->orderBy('created_at', 'desc')
-        ->paginate($pesananKonveksiRows, ['*'], 'pesanan_konveksi_page');
+        $queryPesananKonveksi = PesananKonveksi::with('user')
+            ->where(function ($q) use ($query) {
+                if ($query) {
+                    $q->where('nama_produk', 'like', '%' . $query . '%');
+                }
+            })
+            ->where(function ($q) use ($tgl) {
+                if ($tgl) {
+                    $q->whereDate('created_at', $tgl);
+                }
+            })
+            ->whereIn('status', ['selesai', 'dibatalkan'])
+            ->orderBy('created_at', 'desc')
+            ->paginate($pesananKonveksiRows, ['*'], 'pesanan_konveksi_page');
 
-    return view('admin.page.History', [
-        'name' => 'History',
-        'title' => 'History',
-        'pesananSelesaiDibatalkan' => $queryPesanan,
-        'pesananKonveksiSelesaiDibatalkan' => $queryPesananKonveksi,
-        'pesananRows' => $pesananRows,
-        'pesananKonveksiRows' => $pesananKonveksiRows,
-    ]);
-}
-
-
+        return view('admin.page.History', [
+            'name' => 'History',
+            'title' => 'History',
+            'pesananSelesaiDibatalkan' => $queryPesanan,
+            'pesananKonveksiSelesaiDibatalkan' => $queryPesananKonveksi,
+            'pesananRows' => $pesananRows,
+            'pesananKonveksiRows' => $pesananKonveksiRows,
+        ]);
+    }
 
     public function detailHistory($type, $id)
     {
@@ -268,5 +269,62 @@ class transaksiController extends Controller
 
         // Download the PDF
         return $pdf->download('transaksi.pdf');
+    }
+
+    public function exportHistory(Request $request)
+    {
+        $query = $request->input('query');
+        $tgl = $request->input('tgl');
+        $pesananRows = $request->input('pesanan_rows', 10);
+        $pesananKonveksiRows = $request->input('pesanan_konveksi_rows', 10);
+
+        // Query for Pesanan Selesai/Dibatalkan
+        $queryPesanan = Pesanan::with('user')
+            ->where(function ($q) use ($query) {
+                if ($query) {
+                    $q->where('nama_produk', 'like', '%' . $query . '%');
+                }
+            })
+            ->where(function ($q) use ($tgl) {
+                if ($tgl) {
+                    $q->whereDate('created_at', $tgl);
+                }
+            })
+            ->whereIn('status', ['selesai', 'dibatalkan'])
+            ->orderBy('created_at', 'desc')
+            ->paginate($pesananRows, ['*'], 'pesanan_page');
+
+        $queryPesananKonveksi = PesananKonveksi::with('user')
+            ->where(function ($q) use ($query) {
+                if ($query) {
+                    $q->where('nama_produk', 'like', '%' . $query . '%');
+                }
+            })
+            ->where(function ($q) use ($tgl) {
+                if ($tgl) {
+                    $q->whereDate('created_at', $tgl);
+                }
+            })
+            ->whereIn('status', ['selesai', 'dibatalkan'])
+            ->orderBy('created_at', 'desc')
+            ->paginate($pesananKonveksiRows, ['*'], 'pesanan_konveksi_page');
+
+        $data = [
+            'pesananSelesaiDibatalkan' => $queryPesanan,
+            'pesananKonveksiSelesaiDibatalkan' => $queryPesananKonveksi,
+        ];
+
+        $pdf = Pdf::loadView('admin.page.history_pdf', $data);
+        return $pdf->download('history.pdf');
+    }
+
+    public function exportPesanan()
+    {
+        return Excel::download(new PesananExport, 'pesanan.csv');
+    }
+
+    public function exportPesananKonveksi()
+    {
+        return Excel::download(new PesananKonveksiExport, 'pesanan_konveksi.csv');
     }
 }
