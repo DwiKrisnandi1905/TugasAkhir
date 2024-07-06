@@ -9,6 +9,8 @@ use App\Models\PesananKonveksi;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\PesananExport;
 use App\Exports\PesananKonveksiExport;
+use App\Exports\HistoryPesananExport;
+use App\Exports\HistoryPesananKonveksiExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class transaksiController extends Controller
@@ -326,5 +328,15 @@ class transaksiController extends Controller
     public function exportPesananKonveksi()
     {
         return Excel::download(new PesananKonveksiExport, 'pesanan_konveksi.csv');
+    }
+
+    public function exportHistoryPesanan(Request $request)
+    {
+        return Excel::download(new HistoryPesananExport, 'history_pesanan.csv');
+    }
+
+    public function exportHistoryPesananKonveksi(Request $request)
+    {
+        return Excel::download(new HistoryPesananKonveksiExport, 'history_pesanan_konveksi.csv');
     }
 }

@@ -137,6 +137,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/history', [TransaksiController::class, 'history'])->name('history');
     Route::get('/history/detailHistory/{type}/{id}', [TransaksiController::class, 'detailHistory'])->name('detailHistory');
     Route::get('/history/export', [TransaksiController::class, 'exportHistory'])->name('exportHistory');
+    Route::get('/export-history-pesanan', [TransaksiController::class, 'exportHistoryPesanan'])->name('exportHistoryPesanan');
+    Route::get('/export-history-pesanan-konveksi', [TransaksiController::class, 'exportHistoryPesananKonveksi'])->name('exportHistoryPesananKonveksi');
     Route::get('/notifikasi', [Controller::class, 'notifikasi'])->name('notifikasi');
     Route::get('/setting', [Controller::class, 'setting'])->name('setting');
     //end admin

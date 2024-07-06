@@ -19,7 +19,16 @@
                     <input type="date" class="form-control" name="tgl" value="{{ request()->input('tgl') }}">
                     <button type="submit" class="btn btn-primary text-nowrap">Cari Tanggal</button>
                 </form>
-                <button class="btn btn-danger fw-bold text-white mx-2" onclick="window.location.href='{{ route('exportHistory', request()->all()) }}'">Export</button>
+                <div class="dropdown ms-2">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      Export
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="exportDropdown">
+                      <li><a class="dropdown-item" href="{{ route('exportHistory', request()->all()) }}">History PDF</a></li>
+                      <li><a class="dropdown-item" href="{{ route('exportHistoryPesanan', request()->all()) }}">History Pesanan CSV</a></li>
+                      <li><a class="dropdown-item" href="{{ route('exportHistoryPesananKonveksi', request()->all()) }}">History Pesanan Konveksi CSV</a></li>
+                    </ul>
+                </div>
             </div>
             <form action="{{ route('history') }}" method="GET" class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query" value="{{ request()->input('query') }}">

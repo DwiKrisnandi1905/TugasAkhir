@@ -43,9 +43,16 @@
           </button>
         </div>
       </div>
-      <button class="btn btn-danger fw-bold text-white ms-auto" onclick="window.location='{{ route('exportPdf') }}';">Export PDF</button>
-      <button class="btn btn-success fw-bold text-white ms-auto" onclick="window.location='{{ route('exportPesanan') }}';">Export Pesanan CSV</button>
-      <button class="btn btn-success fw-bold text-white ms-auto" onclick="window.location='{{ route('exportPesananKonveksi') }}';">Export Pesanan Konveksi CSV</button>
+      <div class="dropdown ms-auto">
+        <button class="btn btn-success dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          Export
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="exportDropdown">
+          <li><a class="dropdown-item" href="{{ route('exportPdf') }}">PDF</a></li>
+          <li><a class="dropdown-item" href="{{ route('exportPesanan') }}">Pesanan CSV</a></li>
+          <li><a class="dropdown-item" href="{{ route('exportPesananKonveksi') }}">Pesanan Konveksi CSV</a></li>
+        </ul>
+      </div>
     </div>
     <table class="table table-bordered">
       <thead>
