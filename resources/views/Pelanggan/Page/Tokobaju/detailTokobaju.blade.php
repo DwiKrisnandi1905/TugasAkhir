@@ -55,6 +55,11 @@
     }
 </style>
 <div class="container-detail">
+    <div class="d-flex">
+        <div class="mb-3 text-primary" onclick="window.location='{{ route('tokobajuu') }}';">
+            <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
+        </div>
+    </div>
     <div class="card p-4 mb-4">
         <div class="row g-0">
             <div class="col-md-4">
