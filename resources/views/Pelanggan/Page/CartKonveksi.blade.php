@@ -136,7 +136,7 @@
 <div class="container mt-4">
     <div class="header-container">
         <h2 class="mb-4 text-center">Keranjang Konveksi</h2>
-        <a href="{{ route('cart') }}" class="btn-konveksi">Cart Tokobaju</a>
+        <a href="{{ route('cart') }}" class="btn-konveksi loading">Cart Tokobaju</a>
     </div>
     @if(session('success'))
         <div class="alert alert-success">

@@ -82,6 +82,11 @@
                     showLoading();
                 });
             });
+            document.querySelectorAll('.loading').forEach(link => {
+                link.addEventListener('click', function (event) {
+                    showLoading();
+                });
+            });
 
             // Hide loading spinner when the page is fully loaded
             window.addEventListener('load', function () {

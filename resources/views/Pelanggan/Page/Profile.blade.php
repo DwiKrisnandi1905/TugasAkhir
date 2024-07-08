@@ -32,7 +32,7 @@
                     <div class="col-md-6"><input class="form-control" value="" placeholder="No. Akun" readonly></div>
                 </div>
                 <div class="mt-5 text-right">
-                    <a href="{{ route('statusPesanan') }}" class="btn btn-danger">Status Pesanan</a>
+                    <a href="{{ route('statusPesanan') }}" class="btn btn-danger loading">Status Pesanan</a>
                     <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#editProfileModal">Edit Profile</button>
                 </div>
                 <div class="mt-3 text-right">

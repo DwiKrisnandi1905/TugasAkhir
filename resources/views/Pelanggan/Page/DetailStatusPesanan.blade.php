@@ -43,7 +43,7 @@
 <div class="container mt-4">
     <div class="card">
         <div class="card-body">
-            <div class="mb-3 text-primary text-start" onclick="window.location='{{ route('statusPesanan') }}';">
+            <div class="mb-3 text-primary text-start loading" onclick="window.location='{{ route('statusPesanan') }}';">
                 <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
             </div>
             <div class="row">

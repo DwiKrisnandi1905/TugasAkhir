@@ -136,7 +136,7 @@
 <div class="container mt-4">
     <div class="header-container">
         <h2 class="mb-4 text-center">Keranjang Tokobaju</h2>
-        <a href="{{ route('cartKonveksi') }}" class="btn-konveksi">Cart Konveksi</a>
+        <a href="{{ route('cartKonveksi') }}" class="btn-konveksi loading">Cart Konveksi</a>
     </div>
     @if(session('success'))
         <div class="alert alert-success">
@@ -200,7 +200,7 @@
                 confirmButtonColor: '#ff6f00',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Hapus',
-                cancelButtonText: 'Batal'
+                cancelButtonText: 'Batal',
             }).then((result) => {
                 if (result.isConfirmed) {
                     form.submit();

@@ -32,7 +32,7 @@
             <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
                 <li><a class="dropdown-item" href="{{ route('tokobajuu') }}">Semua Kategori</a></li>
                 @foreach($kategoris as $kategori)
-                    <li><a class="dropdown-item" href="{{ route('tokobajuu', ['kategori' => $kategori->id]) }}">{{ $kategori->name }}</a></li>
+                    <li><a class="dropdown-item loading" href="{{ route('tokobajuu', ['kategori' => $kategori->id]) }}">{{ $kategori->name }}</a></li>
                 @endforeach
             </ul>
         </div>
@@ -40,7 +40,7 @@
     <div class="col-md-auto">
         <form class="d-flex" role="search" action="{{ route('tokobajuu') }}" method="GET">
             <input class="form-control me-2" type="search" name="search" placeholder="Search by name or price" aria-label="Search" value="{{ request()->search }}">
-            <button class="btn btn-outline-primary" type="submit">Search</button>
+            <button class="btn btn-outline-primary loading" type="submit">Search</button>
         </form>
     </div>
 </div>
@@ -57,7 +57,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $produk->nama_produk }}</h5>
                     <p class="card-text">Rp {{ number_format($produk->variasi->first()->highest_price, 2) }}</p>
-                    <a href="{{ route('detailTokobaju', $produk->id) }}" class="btn btn-primary">Detail</a>
+                    <a href="{{ route('detailTokobaju', $produk->id) }}" class="btn btn-primary loading">Detail</a>
                 </div>
             </div>
         </div>
