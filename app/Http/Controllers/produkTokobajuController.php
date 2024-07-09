@@ -80,7 +80,7 @@ class produkTokobajuController extends Controller
 
         // Buat NFT untuk foto produk utama
         $tokenURI = url('images/' . $imageName); 
-        $fromAddress = '0x6928b8e64a15Aec8b29f93973D0E02ADC502b41b'; 
+        $fromAddress = '0x8b0d0d9e3b5acba306972dD2b87C42deB0c58319'; 
         $transactionHash = $this->nftService->createToken($tokenURI, $fromAddress);
 
         $produk->nft_token_id = $transactionHash; 

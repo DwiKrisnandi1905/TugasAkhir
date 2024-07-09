@@ -74,5 +74,22 @@ class AuthController extends Controller
 
         return redirect('/login');
     }
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'gender' => 'required|string',
+            'birthdate' => 'required|date',
+            'phone' => 'required|string|max:15',
+        ]);
+
+        $user = Auth::user();
+        $user->gender = $request->input('gender');
+        $user->birthdate = $request->input('birthdate');
+        $user->phone = $request->input('phone');
+        $user->save();
+
+        return redirect()->back()->with('success', 'Profile updated successfully.');
+    }
 }
 

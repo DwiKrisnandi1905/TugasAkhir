@@ -174,4 +174,5 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/tokobajuu/detailTokobaju/{id}', [TokobajuPelangganController::class, 'detailTokobaju'])->name('detailTokobaju');
     Route::get('/statusPesanan', [StatusPesananController::class, 'statusPesanan'])->name('statusPesanan');
     Route::get('/detailStatusPesanan/{type}/{id}', [StatusPesananController::class, 'detailStatusPesanan'])->name('detailStatusPesanan');
+    Route::post('/update-profile', [AuthController::class, 'updateProfile'])->name('updateProfile');
 });
