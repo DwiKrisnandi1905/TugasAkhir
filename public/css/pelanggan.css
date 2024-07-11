@@ -136,6 +136,7 @@ transition: background 0.3s ease;
     background: #ff8a50;
     border: 2px solid #ff8a50;
     color: #fff;
+    min-height: 400px;
 }
 
 .card-produk:hover {
@@ -226,7 +227,10 @@ transition: background 0.3s ease;
         display: flex;
     }
     .kategori-pencarian .col-md-auto {
-    margin-bottom: 10px; /* Mengatur jarak antara elemen saat responsif */
-        
-}
+    margin-bottom: 10px; /* Mengatur jarak antara elemen saat responsif */    
+    }
+
+    .card-produk {
+        min-height: 350px;
+    }
 }

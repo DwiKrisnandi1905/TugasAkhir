@@ -167,7 +167,7 @@
             <div class="card shadow-sm border-0">
                 <div class="card-body">
                     <div class="d-flex">
-                        <div class="mb-3 text-primary" onclick="window.location='{{ route('profile') }}';">
+                        <div class="mb-3 text-primary loading" onclick="window.location='{{ route('profile') }}';">
                             <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
-                                <a href="{{ route('detailStatusPesanan', ['id' => $pesanan->id, 'type' => 'pesanan']) }}" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['id' => $pesanan->id, 'type' => 'pesanan']) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanan->warna }}<br>
@@ -199,7 +199,7 @@
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
-                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start text-start">
                                 <strong>Warna:</strong> {{ $pesanans->warna }}<br>
@@ -222,7 +222,7 @@
             <div class="card shadow-sm border-0">
                 <div class="card-body">
                     <div class="d-flex">
-                        <div class="mb-3 text-primary" onclick="window.location='{{ route('profile') }}';">
+                        <div class="mb-3 text-primary loading" onclick="window.location='{{ route('profile') }}';">
                             <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
                         </div>
                     </div>
@@ -232,7 +232,7 @@
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
-                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanan->warna }}<br>
@@ -254,7 +254,7 @@
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
-                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanans->warna }}<br>
@@ -277,7 +277,7 @@
             <div class="card shadow-sm border-0">
                 <div class="card-body">
                     <div class="d-flex">
-                        <div class="mb-3 text-primary" onclick="window.location='{{ route('profile') }}';">
+                        <div class="mb-3 text-primary loading" onclick="window.location='{{ route('profile') }}';">
                             <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
                         </div>
                     </div>
@@ -287,7 +287,7 @@
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
-                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanan->warna }}<br>
@@ -309,7 +309,7 @@
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
-                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanans->warna }}<br>
@@ -332,7 +332,7 @@
             <div class="card shadow-sm border-0">
                 <div class="card-body">
                     <div class="d-flex">
-                        <div class="mb-3 text-primary" onclick="window.location='{{ route('profile') }}';">
+                        <div class="mb-3 text-primary loading" onclick="window.location='{{ route('profile') }}';">
                             <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
                         </div>
                     </div>
@@ -342,7 +342,7 @@
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
-                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanan->warna }}<br>
@@ -364,7 +364,7 @@
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
-                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanans->warna }}<br>
@@ -387,7 +387,7 @@
             <div class="card shadow-sm border-0">
                 <div class="card-body">
                     <div class="d-flex">
-                        <div class="mb-3 text-primary" onclick="window.location='{{ route('profile') }}';">
+                        <div class="mb-3 text-primary loading" onclick="window.location='{{ route('profile') }}';">
                             <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
                         </div>
                     </div>
@@ -397,7 +397,7 @@
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
-                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanan->warna }}<br>
@@ -419,7 +419,7 @@
                         <div class="card-details">
                             <div class="card-header">
                                 <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
-                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link">Detail</a>
+                                <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
                                 <strong>Warna:</strong> {{ $pesanans->warna }}<br>

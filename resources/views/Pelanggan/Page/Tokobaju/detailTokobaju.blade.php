@@ -55,6 +55,11 @@
     }
 </style>
 <div class="container-detail">
+    <div class="d-flex">
+        <div class="mb-3 text-primary loading" onclick="window.location='{{ route('tokobajuu') }}';">
+            <i class="bi bi-arrow-left-square-fill" style="cursor: pointer; font-size: 30px;"></i>
+        </div>
+    </div>
     <div class="card p-4 mb-4">
         <div class="row g-0">
             <div class="col-md-4">
@@ -160,7 +165,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-primary">Keranjang</button>
+                <button type="button" class="btn btn-primary loading">Keranjang</button>
             </div>
         </div>
     </div>

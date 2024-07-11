@@ -9,6 +9,9 @@ use App\Models\kategoriTokobaju;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Pagination\Paginator;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+// use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\PDF;
 
 
 class tokobajuController extends Controller
@@ -131,5 +134,14 @@ class tokobajuController extends Controller
         ]);
     }
 
-    
+    public function generateQRCodePDF($id)
+    {
+        $produk = Produk::findOrFail($id);
+
+        $qrCode = base64_encode(QrCode::format('svg')->size(200)->generate($produk->nft_token_id));
+
+        $pdf = PDF::loadView('pdf.qrcode', ['qrCode' => $qrCode, 'produk' => $produk]);
+
+        return $pdf->download('qrcode_' . $produk->id . '.pdf');
+    }
 }

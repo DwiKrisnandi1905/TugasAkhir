@@ -6,20 +6,39 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\Pesanan;
+use App\Models\kategoriTokobaju;
 use Illuminate\Support\Facades\DB;
 
 class TokobajuPelangganController extends Controller
 {
-    public function tokobajuu()
+    public function tokobajuu(Request $request)
     {
-        // Fetch products along with their highest price variation
+        $kategoris = kategoriTokobaju::all();
+
         $produks = Produk::with(['variasi' => function ($query) {
             $query->select('produk_id', DB::raw('MAX(harga) as highest_price'))
                   ->groupBy('produk_id');
-        }])->get();
+        }]);
+
+        if ($request->has('kategori')) {
+            $produks->where('kategori_id', $request->kategori);
+        }
+
+        if ($request->has('search')) {
+            $search = $request->search;
+            $produks->where(function($query) use ($search) {
+                $query->where('nama_produk', 'like', "%{$search}%")
+                      ->orWhereHas('variasi', function($q) use ($search) {
+                          $q->where('harga', 'like', "%{$search}%");
+                      });
+            });
+        }
+
+        $produks = $produks->get();
 
         return view('Pelanggan.Page.Tokobaju.Tokobaju', [
             'produks' => $produks,
+            'kategoris' => $kategoris,
             'name' => 'Toko Baju',
             'title' => 'Toko Baju',
         ]);

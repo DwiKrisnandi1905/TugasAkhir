@@ -61,8 +61,26 @@
                     <th scope="row" class="col-4">Deskripsi</th>
                     <td id="deskripsi">{{ $konveksis->deskripsi }}</td>
                 </tr>
+                <tr>
+                    <th scope="row" class="col-4">Token NFT</th>
+                    <td id="deskripsi">{{ $konveksis->nft_token_id }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="col-4">QRcode Token NFT</th>
+                    <td id="deskripsi">
+                      @if(isset($konveksis->nft_token_id))
+                        <div>{!! QrCode::size(200)->generate($konveksis->nft_token_id) !!}</div>
+                      @else
+                        <p>QR code tidak tersedia</p>
+                      @endif
+                    </td>
+                </tr>
             </tbody>
         </table>
+        <div class="mb-3 justify-content-center d-flex gap-4">
+            <a href="{{ route('editProdukKonveksi', ['id' => $konveksis->id]) }}" class="btn btn-success w-75 fw-bold">Edit</a>
+            <a href="{{ route('generateQRCodePDFKonveksi', ['id' => $konveksis->id]) }}" class="btn btn-primary w-75 fw-bold">Download PDF</a>
+        </div>
         <h4>Detail warna dan ukuran bahan tersedia</h4>
         <table class="table table-bordered">
             <thead>
@@ -107,9 +125,6 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="mb-3 justify-content-center d-flex gap-4">
-            <a href="{{ route('editProdukKonveksi', ['id' => $konveksis->id]) }}" class="btn btn-success w-75 fw-bold">Edit</a>
-        </div>
     </div>
 </div>
 

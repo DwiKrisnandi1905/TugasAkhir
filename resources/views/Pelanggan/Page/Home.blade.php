@@ -30,15 +30,26 @@
                 Semua Kategori
             </button>
             <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
-                <li><a class="dropdown-item" href="#">Pakaian</a></li>
-                <li><a class="dropdown-item" href="#">Konveksi</a></li>
+                <li><a class="dropdown-item loading" href="{{ route('home') }}">Semua Kategori</a></li>
+                <li class="dropdown-header">Kategori Produk</li>
+                @foreach($kategoriProduk as $kategori)
+                    <li><a class="dropdown-item loading" href="{{ route('home', ['kategori' => $kategori->id, 'type' => 'produk']) }}">{{ $kategori->name }}</a></li>
+                @endforeach
+                <li class="dropdown-header">Kategori Konveksi</li>
+                @foreach($kategoriKonveksi as $kategori)
+                    <li><a class="dropdown-item loading" href="{{ route('home', ['kategori' => $kategori->id, 'type' => 'konveksi']) }}">{{ $kategori->name }}</a></li>
+                @endforeach
             </ul>
         </div>
     </div>
     <div class="col-md-auto">
-        <form class="d-flex" role="search">
-            {{-- <button class="btn btn-danger me-2" type="search">Search</button> --}}
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" role="search" method="GET" action="{{ route('home') }}">
+            <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ request()->get('search', '') }}">
+            <button class="btn btn-outline-success loading" type="submit">Search</button>
+            <input type="hidden" name="type" value="{{ $type }}">
+            @if (request()->has('kategori'))
+                <input type="hidden" name="kategori" value="{{ request()->get('kategori') }}">
+            @endif
         </form>
     </div>
 </div>
@@ -48,7 +59,7 @@
 </div>
 
 @php
-    $allProducts = array_merge($produks->all(), $konveksis->all());
+    $allProducts = ($type === 'all') ? array_merge($produks->all(), $konveksis->all()) : (($type === 'produk') ? $produks->all() : $konveksis->all());
     shuffle($allProducts);
 @endphp
 
@@ -61,9 +72,9 @@
                     <h5 class="card-title">{{ $product->nama_produk }}</h5>
                     <p class="card-text">Rp {{ number_format($product->variasi->first()->highest_price, 2) }}</p>
                     @if ($product instanceof App\Models\Produk)
-                        <a href="{{ route('detailTokobaju', $product->id) }}" class="btn btn-primary">Detail</a>
+                        <a href="{{ route('detailTokobaju', $product->id) }}" class="btn btn-primary loading">Detail</a>
                     @elseif ($product instanceof App\Models\Konveksi)
-                        <a href="{{ route('detailKonveksi', $product->id) }}" class="btn btn-primary">Detail</a>
+                        <a href="{{ route('detailKonveksi', $product->id) }}" class="btn btn-primary loading">Detail</a>
                     @endif
                 </div>
             </div>

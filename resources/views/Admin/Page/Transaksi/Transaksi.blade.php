@@ -43,7 +43,16 @@
           </button>
         </div>
       </div>
-      <button class="btn btn-danger fw-bold text-white ms-auto" onclick="window.location='{{ route('exportPdf') }}';">Export PDF</button>
+      <div class="dropdown ms-auto">
+        <button class="btn btn-success dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          Export
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="exportDropdown">
+          <li><a class="dropdown-item" href="{{ route('exportPdf') }}">PDF</a></li>
+          <li><a class="dropdown-item" href="{{ route('exportPesanan') }}">Pesanan CSV</a></li>
+          <li><a class="dropdown-item" href="{{ route('exportPesananKonveksi') }}">Pesanan Konveksi CSV</a></li>
+        </ul>
+      </div>
     </div>
     <table class="table table-bordered">
       <thead>
@@ -84,7 +93,7 @@
       </tbody>
     </table>
     <div class="d-flex justify-content-between mb-3">
-      <div class="d-flex align-items-center mb-5"> 
+      {{-- <div class="d-flex align-items-center mb-5"> 
         <span>Tampilkan</span>
         <div class="dropdown" style="padding: 0 8px;">
           <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -97,7 +106,19 @@
           </ul>
         </div>
         <span class="mr-2">Baris</span>
-      </div>
+      </div> --}}
+      <form class="d-flex align-items-center mb-5" action="{{ route('transaksi') }}" method="GET"> 
+        <span>Tampilkan</span>
+        <div class="dropdown" style="padding: 0 8px;">
+          <select name="rows_pesanan" class="form-select" onchange="this.form.submit()">
+            <option value="10" {{ request()->input('rows_pesanan') == 10 ? 'selected' : '' }}>10</option>
+            <option value="20" {{ request()->input('rows_pesanan') == 20 ? 'selected' : '' }}>20</option>
+            <option value="50" {{ request()->input('rows_pesanan') == 50 ? 'selected' : '' }}>50</option>
+          </select>
+        </div>
+        <span class="mr-2">Baris</span>
+        <input type="hidden" name="search" value="{{ request()->input('search') }}">
+      </form>
       <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item {{ $pesanan->previousPageUrl() ? '' : 'disabled' }}">
@@ -163,20 +184,18 @@
       </tbody>
     </table>
     <div class="d-flex justify-content-between mb-3">
-      <div class="d-flex align-items-center mb-5"> 
+      <form class="d-flex align-items-center mb-5" action="{{ route('transaksi') }}" method="GET"> 
         <span>Tampilkan</span>
         <div class="dropdown" style="padding: 0 8px;">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ $rows_pesanan_konveksi }}
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ route('transaksi', array_merge(request()->all(), ['rows_pesanan_konveksi' => 10])) }}">10</a></li>
-            <li><a class="dropdown-item" href="{{ route('transaksi', array_merge(request()->all(), ['rows_pesanan_konveksi' => 20])) }}">20</a></li>
-            <li><a class="dropdown-item" href="{{ route('transaksi', array_merge(request()->all(), ['rows_pesanan_konveksi' => 50])) }}">50</a></li>
-          </ul>
+          <select name="rows_pesanan_konveksi" class="form-select" onchange="this.form.submit()">
+            <option value="10" {{ request()->input('rows_pesanan_konveksi') == 10 ? 'selected' : '' }}>10</option>
+            <option value="20" {{ request()->input('rows_pesanan_konveksi') == 20 ? 'selected' : '' }}>20</option>
+            <option value="50" {{ request()->input('rows_pesanan_konveksi') == 50 ? 'selected' : '' }}>50</option>
+          </select>
         </div>
         <span class="mr-2">Baris</span>
-      </div>
+        <input type="hidden" name="search" value="{{ request()->input('search') }}">
+      </form>
       <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item {{ $pesananKonveksi->previousPageUrl() ? '' : 'disabled' }}">
@@ -199,14 +218,26 @@
     </div>
   </div>
 </div>
-@endsection
-
-@push('scripts')
 <script>
   function confirmDelete(id) {
-    if (confirm('Apakah Anda yakin ingin menghapus pesanan ini?')) {
-      document.getElementById('deleteForm' + id).submit();
-    }
+    Swal.fire({
+      title: 'Apakah Anda yakin?',
+      text: "Item ini akan dihapus dari daftar transaksi!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#ff6f00',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Hapus',
+      cancelButtonText: 'Batal',
+      preConfirm: () => {
+        Swal.getConfirmButton().classList.add('loading');
+        Swal.getConfirmButton().innerText = 'Loading...';
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        document.getElementById('deleteForm' + id).submit();
+      }
+    });
   }
 </script>
-@endpush
+@endsection

@@ -19,7 +19,16 @@
                     <input type="date" class="form-control" name="tgl" value="{{ request()->input('tgl') }}">
                     <button type="submit" class="btn btn-primary text-nowrap">Cari Tanggal</button>
                 </form>
-                <button class="btn btn-danger fw-bold text-white mx-2">Export</button>
+                <div class="dropdown ms-2">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      Export
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="exportDropdown">
+                      <li><a class="dropdown-item" href="{{ route('exportHistory', request()->all()) }}">History PDF</a></li>
+                      <li><a class="dropdown-item" href="{{ route('exportHistoryPesanan', request()->all()) }}">History Pesanan CSV</a></li>
+                      <li><a class="dropdown-item" href="{{ route('exportHistoryPesananKonveksi', request()->all()) }}">History Pesanan Konveksi CSV</a></li>
+                    </ul>
+                </div>
             </div>
             <form action="{{ route('history') }}" method="GET" class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query" value="{{ request()->input('query') }}">
@@ -62,20 +71,19 @@
             </tbody>
         </table>
         <div class="d-flex justify-content-between mb-3">
-            <div class="d-flex align-items-center mb-5"> 
+            <form class="d-flex align-items-center mb-5" action="{{ route('history') }}" method="GET"> 
                 <span>Tampilkan</span>
                 <div class="dropdown" style="padding: 0 8px;">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ request()->input('pesanan_rows', 10) }}
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('history', array_merge(request()->all(), ['pesanan_rows' => 10, 'pesanan_page' => $pesananSelesaiDibatalkan->currentPage()])) }}">10</a></li>
-                        <li><a class="dropdown-item" href="{{ route('history', array_merge(request()->all(), ['pesanan_rows' => 20, 'pesanan_page' => $pesananSelesaiDibatalkan->currentPage()])) }}">20</a></li>
-                        <li><a class="dropdown-item" href="{{ route('history', array_merge(request()->all(), ['pesanan_rows' => 50, 'pesanan_page' => $pesananSelesaiDibatalkan->currentPage()])) }}">50</a></li>
-                    </ul>
+                  <select name="pesanan_rows" class="form-select" onchange="this.form.submit()">
+                    <option value="10" {{ request()->input('pesanan_rows', 10) == 10 ? 'selected' : '' }}>10</option>
+                    <option value="20" {{ request()->input('pesanan_rows', 20) == 20 ? 'selected' : '' }}>20</option>
+                    <option value="50" {{ request()->input('pesanan_rows', 50) == 50 ? 'selected' : '' }}>50</option>
+                  </select>
                 </div>
                 <span class="mr-2">Baris</span>
-            </div>
+                <input type="hidden" name="search" value="{{ request()->input('search') }}">
+                <input type="hidden" name="pesanan_page" value="{{ $pesananSelesaiDibatalkan->currentPage() }}">
+            </form>              
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <!-- Paginasi -->
@@ -133,7 +141,7 @@
             </tbody>
         </table>
         <div class="d-flex justify-content-between mb-3">
-            <div class="d-flex align-items-center mb-5"> 
+            {{-- <div class="d-flex align-items-center mb-5"> 
                 <span>Tampilkan</span>
                 <div class="dropdown" style="padding: 0 8px;">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -146,7 +154,20 @@
                     </ul>
                 </div>
                 <span class="mr-2">Baris</span>
-            </div>
+            </div> --}}
+            <form class="d-flex align-items-center mb-5" action="{{ route('history') }}" method="GET"> 
+                <span>Tampilkan</span>
+                <div class="dropdown" style="padding: 0 8px;">
+                  <select name="pesanan_konveksi_rows" class="form-select" onchange="this.form.submit()">
+                    <option value="10" {{ request()->input('pesanan_konveksi_rows', 10) == 10 ? 'selected' : '' }}>10</option>
+                    <option value="20" {{ request()->input('pesanan_konveksi_rows', 20) == 20 ? 'selected' : '' }}>20</option>
+                    <option value="50" {{ request()->input('pesanan_konveksi_rows', 50) == 50 ? 'selected' : '' }}>50</option>
+                  </select>
+                </div>
+                <span class="mr-2">Baris</span>
+                <input type="hidden" name="search" value="{{ request()->input('search') }}">
+                <input type="hidden" name="pesanan_konveksi_page" value="{{ $pesananKonveksiSelesaiDibatalkan->currentPage() }}">
+            </form>              
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <!-- Paginasi -->
