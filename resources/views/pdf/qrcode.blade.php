@@ -16,11 +16,14 @@
     </style>
 </head>
 <body>
-    <h1>{{ $produk->nama_produk }}</h1>
+    <h1>Alveen Clothing</h1>
+    <h2>{{ $produk->nama_produk }}</h2>
+    <p>Type Produk: {{ $produk->type_produk }}</p>
     <p>Kategori: {{ $produk->kategori->name }}</p>
     <p>Deskripsi: {{ $produk->deskripsi_produk }}</p>
     <p>Tanggal Masuk: {{ $produk->tanggal_masuk }}</p>
     <p>Token NFT: {{ $produk->nft_token_id }}</p>
+    {{-- <img src="{{ asset('images/' . $produk->foto_produk) }}" alt="Foto Produk"> --}}
 
     <div class="qr-code">
         <p>QRCODE Token NFT Blockchain</p>

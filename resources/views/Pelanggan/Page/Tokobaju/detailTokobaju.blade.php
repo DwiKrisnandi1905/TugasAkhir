@@ -92,7 +92,7 @@
                                 <option value="{{ $warna }}">{{ $warna }}</option>
                             @endforeach
                         </select>
-                        <div class="d-flex flex-wrap mt-4">
+                        <div class="d-flex flex-wrap">
                             @php
                                 $warnaDitampilkan = [];
                             @endphp
@@ -118,22 +118,43 @@
                         @endforeach                     
                     </div>
                     <div id="sizeStockContainer" class="mb-4"></div>
-                    <div class="mb-4">
-                        <label for="quantity" class="form-label">Kuantitas:</label>
-                        <div class="input-group" style="max-width: 150px;">
-                            <button class="btn btn-outline-secondary" type="button" id="btnMinus">-</button>
-                            <input type="text" class="form-control text-center" value="1" id="quantity" aria-label="Kuantitas" readonly>
-                            <button class="btn btn-outline-secondary" type="button" id="btnPlus">+</button>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="quantity" class="form-label">Kuantitas:</label>
+                            <div class="input-group" style="max-width: 150px;">
+                                <button class="btn btn-outline-secondary" type="button" id="btnMinus">-</button>
+                                <input type="text" class="form-control text-center" value="1" id="quantity" aria-label="Kuantitas" readonly>
+                                <button class="btn btn-outline-secondary" type="button" id="btnPlus">+</button>
+                            </div>
+                            <div class="mt-4">
+                                <p class="fw-bold mb-0">Harga Satuan: <span id="hargaSatuan">Rp {{ number_format($hargaTertinggi, 2, ',', '.') }}</span></p>
+                                <p class="fw-bold mb-0">Total Harga: <span id="totalHarga">Rp {{ number_format($hargaTertinggi, 2, ',', '.') }}</span></p>
+                            </div>
+                            <div class="mt-4">
+                                <button class="btn btn-primary me-2" id="checkoutButton" data-bs-toggle="modal" data-bs-target="#checkoutModal">Keranjang</button>
+                                {{-- <button class="btn btn-success">Keranjang</button> --}}
+                            </div>
                         </div>
-                        <div class="mt-4">
-                            <p class="fw-bold mb-0">Harga Satuan: <span id="hargaSatuan">Rp {{ number_format($hargaTertinggi, 2, ',', '.') }}</span></p>
-                            <p class="fw-bold mb-0">Total Harga: <span id="totalHarga">Rp {{ number_format($hargaTertinggi, 2, ',', '.') }}</span></p>
+                        <div class="col-md-4 mt-4">
+                            {{-- <h4>QR Code</h4> --}}
+                            <div id="qrCodeContainer" class="text-center mb-4">
+                                @php
+                                    // Data yang akan digunakan untuk QR code
+                                    $qrData = [
+                                        'judul' => 'Alveen Clothing',
+                                        'nama_produk' => $produk->nama_produk,
+                                        'foto_produk' => asset('images/' . $produk->foto_produk),
+                                        'nft_token_id' => $produk->nft_token_id
+                                        // Tambahkan data lain yang diperlukan
+                                    ];
+                        
+                                    // URL untuk menampilkan QR code
+                                    $qrCodeUrl = route('displayQRCodeData', ['data' => json_encode($qrData)]);
+                                @endphp
+                        
+                                {!! QrCode::size(200)->generate($qrCodeUrl) !!}
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="mb-4">
-                        <button class="btn btn-primary me-2" id="checkoutButton" data-bs-toggle="modal" data-bs-target="#checkoutModal">Keranjang</button>
-                        {{-- <button class="btn btn-success">Keranjang</button> --}}
                     </div>
                 </div>
             </div>
@@ -161,11 +182,12 @@
                 <p><strong>Warna:</strong> <span id="modalWarna"></span></p>
                 <p><strong>Ukuran:</strong> <span id="modalUkuran"></span></p>
                 <p><strong>Kuantitas:</strong> <span id="modalKuantitas"></span></p>
+                <p><strong>Harga Satuan:</strong> <span id="modalHargaSatuan"></span></p>
                 <p><strong>Total Harga:</strong> <span id="modalTotalHarga"></span></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-primary loading">Keranjang</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary">Checkout</button>
             </div>
         </div>
     </div>

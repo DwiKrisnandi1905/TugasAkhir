@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('foto_produk');
             $table->date('tanggal_masuk')->nullable();
             $table->string('nft_token_id')->nullable();
+            $table->enum('type_produk', ['biasa', 'eksklusif'])->default('biasa');
             $table->timestamps();
         });
     }

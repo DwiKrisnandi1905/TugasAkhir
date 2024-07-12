@@ -74,6 +74,18 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label for="type_produk" class="form-label">Tipe Produk:</label>
+                <select class="form-select @error('type_produk') is-invalid @enderror" id="type_produk" name="type_produk">
+                    <option value="biasa" {{ old('type_produk') == 'biasa' ? 'selected' : '' }}>Biasa</option>
+                    <option value="eksklusif" {{ old('type_produk') == 'eksklusif' ? 'selected' : '' }}>Eksklusif</option>
+                </select>
+                @error('type_produk')
+                    <div class="invalid-feedback">
+                        Silahkan pilih tipe produk
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalWarnaProduk">Tambahkan Produk</button>
             </div>
             <div id="cardContainer" class="mb-3"></div>

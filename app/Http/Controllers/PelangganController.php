@@ -32,4 +32,14 @@ class pelangganController extends Controller
             'rowsPerPage' => $rowsPerPage,
         ]);
     }
+
+    public function detailUser($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.page.DetailPelanggan', [
+            'user' => $user,
+            'name' => 'Detail Pelanggan',
+            'title' => 'Detail Pelanggan',
+        ]);
+    }
 }

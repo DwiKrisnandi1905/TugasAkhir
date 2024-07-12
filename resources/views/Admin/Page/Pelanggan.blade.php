@@ -42,7 +42,7 @@
           <td>{{ $user->email }}</td>
           <td>
             <div class="d-flex justify-content-center align-items-center gap-1">
-              <i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i>
+              <a href="{{ route('detailUser', ['id' => $user->id]) }}"><i class="bi bi-info-circle-fill text-primary" style="font-size: 20px; cursor: pointer;"></i></a>
             </div>
           </td>
         </tr>

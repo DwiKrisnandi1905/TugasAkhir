@@ -35,6 +35,7 @@ class produkTokobajuController extends Controller
             'kategori_id' => 'required|exists:kategori_tokobajus,id',
             'foto_produk' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'deskripsi_produk' => 'required|string',
+            'type_produk' => 'required|in:biasa,eksklusif',
             'warna_produks' => 'required|array',
             'ukurans' => 'required|array',
             'hargas' => 'required|array',
@@ -58,6 +59,7 @@ class produkTokobajuController extends Controller
         $produk->kategori_id = $request->kategori_id;
         $produk->foto_produk = $imageName;
         $produk->deskripsi_produk = $request->deskripsi_produk;
+        $produk->type_produk = $request->type_produk;
         $produk->tanggal_masuk = now();
         $produk->save();
 
@@ -80,7 +82,7 @@ class produkTokobajuController extends Controller
 
         // Buat NFT untuk foto produk utama
         $tokenURI = url('images/' . $imageName); 
-        $fromAddress = '0x8b0d0d9e3b5acba306972dD2b87C42deB0c58319'; 
+        $fromAddress = '0xC9aB3f5d5261a23A6A9021fa45e32549A3C03fb2'; 
         $transactionHash = $this->nftService->createToken($tokenURI, $fromAddress);
 
         $produk->nft_token_id = $transactionHash; 

@@ -133,6 +133,26 @@
                     <div class="mb-4">
                         <button class="btn btn-primary me-2" id="checkoutButton" data-bs-toggle="modal" data-bs-target="#checkoutModal">Keranjang</button>
                     </div>
+                    <div class="col-md-4 mt-4">
+                        {{-- <h4>QR Code</h4> --}}
+                        <div id="qrCodeContainer" class="text-center mb-4">
+                            @php
+                                // Data yang akan digunakan untuk QR code
+                                $qrData = [
+                                    'judul' => 'Alveen Clothing',
+                                    'nama_produk' => $konveksi->nama_produk,
+                                    'foto_produk' => asset('images/' . $konveksi->foto_produk),
+                                    'nft_token_id' => $konveksi->nft_token_id
+                                    // Tambahkan data lain yang diperlukan
+                                ];
+                    
+                                // URL untuk menampilkan QR code
+                                $qrCodeUrl = route('displayQRCodeDataKonveksi', ['data' => json_encode($qrData)]);
+                            @endphp
+                    
+                            {!! QrCode::size(200)->generate($qrCodeUrl) !!}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

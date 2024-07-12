@@ -43,9 +43,9 @@
                 </tr>
                 <tr>
                     <th scope="row" class="col-4">Total Terjual</th>
-                    <td>75</td>
+                    <td>{{ $totalTerjual }}</td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <th scope="row" class="col-4">Penilaian Suka</th>
                     <td>72</td>
                 </tr>
@@ -56,7 +56,7 @@
                 <tr>
                     <th scope="row" class="col-4">Penilaian Rating</th>
                     <td>4.9</td>
-                </tr>
+                </tr> --}}
                 <tr>
                     <th scope="row" class="col-4">Deskripsi</th>
                     <td id="deskripsi">{{ $konveksis->deskripsi }}</td>
@@ -65,7 +65,7 @@
                     <th scope="row" class="col-4">Token NFT</th>
                     <td id="deskripsi">{{ $konveksis->nft_token_id }}</td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <th scope="row" class="col-4">QRcode Token NFT</th>
                     <td id="deskripsi">
                       @if(isset($konveksis->nft_token_id))
@@ -73,6 +73,27 @@
                       @else
                         <p>QR code tidak tersedia</p>
                       @endif
+                    </td>
+                </tr> --}}
+                <tr>
+                    <th scope="row" class="col-4">QRcode Token NFT</th>
+                    <td id="qrcode">
+                        @if(isset($konveksis->nft_token_id))
+                        @php
+                            $qrData = [
+                                'judul' => 'Alveen Clothing',
+                                'nama_produk' => $konveksis->nama_produk,
+                                'type_produk' => $konveksis->type_produk,
+                                'foto_produk' => asset('images/' . $konveksis->foto_produk),
+                                'nft_token_id' => $konveksis->nft_token_id
+                            ];
+            
+                            $qrCodeUrl = route('displayQRCodeDataKonveksi', ['data' => json_encode($qrData)]);
+                        @endphp
+                        <div>{!! QrCode::size(200)->generate($qrCodeUrl) !!}</div>
+                        @else
+                            <p>QR code tidak tersedia</p>
+                        @endif
                     </td>
                 </tr>
             </tbody>
