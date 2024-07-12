@@ -16,6 +16,7 @@
     </style>
 </head>
 <body>
+    <h1>Alveen Clothing</h1>
     <h1>{{ $konveksi->nama_produk }}</h1>
     <p>Kategori: {{ $konveksi->kategori->name }}</p>
     <p>Deskripsi: {{ $konveksi->deskripsi }}</p>

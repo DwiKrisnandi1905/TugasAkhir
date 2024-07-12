@@ -54,12 +54,15 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkReques
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset')->middleware(['guestt','guest']);
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+Route::get('/display_qrcode_data', [tokobajuController::class, 'displayQRCodeData'])->name('displayQRCodeData');
+Route::get('/display_qrcode_data', [konveksiController::class, 'displayQRCodeDataKonveksi'])->name('displayQRCodeDataKonveksi');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // admin
     // Route::get('/', [Controller::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard', [dashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/pelanggan', [pelangganController::class, 'pelanggan'])->name('pelanggan');
+    Route::get('/pelanggan/detail{id}', [PelangganController::class, 'detailUser'])->name('detailUser');
 
     // ---------------------------------------------------KONVEKSI---------------------------------------------------------------
     Route::get('/konveksi', [konveksiController::class, 'konveksi'])->name('konveksi');
@@ -104,6 +107,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/tokobaju/produkTokobaju', [produkTokobajuController::class, 'produkTokobaju'])->name('produkTokobaju');
     Route::post('/tokobaju/simpanProduk', [produkTokobajuController::class, 'simpanData'])->name('simpanProduk');
     Route::get('/verify-nft/{transactionHash}', [produkTokobajuController::class, 'verifyNFT'])->name('verify-nft');
+    // Route::get('/display_qrcode_data', [tokobajuController::class, 'displayQRCodeData'])->name('displayQRCodeData');
     //Tambah produk toko baju end
 
     //Detail Tokobaju
@@ -175,4 +179,5 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/statusPesanan', [StatusPesananController::class, 'statusPesanan'])->name('statusPesanan');
     Route::get('/detailStatusPesanan/{type}/{id}', [StatusPesananController::class, 'detailStatusPesanan'])->name('detailStatusPesanan');
     Route::post('/update-profile', [AuthController::class, 'updateProfile'])->name('updateProfile');
+    // Route::get('/display_qrcode_data', [tokobajuController::class, 'displayQRCodeData'])->name('displayQRCodeData');
 });

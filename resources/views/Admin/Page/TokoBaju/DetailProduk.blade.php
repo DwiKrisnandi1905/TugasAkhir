@@ -1,6 +1,14 @@
 @extends('Admin.Layout.index')
 
 @section('content')
+<style>
+    .btn.disabled,
+    .btn[aria-disabled=true] {
+    opacity: 0.6; 
+    pointer-events: none; 
+    background-color: #ccc;
+}
+</style>
 <div class="card" id="detailTokobaju">
     <div class="card-body">
         <div class="d-flex justify-content-between mb-3">
@@ -21,11 +29,15 @@
                 </tr>
                 <tr>
                     <th scope="row" class="col-4">Tanggal Masuk</th>
-                    <td id="kategori">{{ $produks->tanggal_masuk }}</td>
+                    <td id="tanggalMasuk">{{ $produks->tanggal_masuk }}</td>
                 </tr>
                 <tr>
                     <th scope="row" class="col-4">Nama Produk</th>
                     <td id="namaProduk">{{ $produks->nama_produk }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="col-4">Type Produk</th>
+                    <td id="typeProduk">{{ $produks->type_produk }}</td>
                 </tr>
                 <tr>
                     <th scope="row" class="col-4">Kategori</th>
@@ -39,9 +51,9 @@
                 </tr>
                 <tr>
                     <th scope="row" class="col-4">Total Terjual</th>
-                    <td>75</td>
+                    <td>{{ $totalTerjual }}</td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <th scope="row" class="col-4">Penilaian Suka</th>
                     <td>72</td>
                 </tr>
@@ -52,29 +64,41 @@
                 <tr>
                     <th scope="row" class="col-4">Penilaian Rating</th>
                     <td>4.9</td>
-                </tr>
+                </tr> --}}
                 <tr>
                     <th scope="row" class="col-4">Deskripsi</th>
                     <td id="deskripsi">{{ $produks->deskripsi_produk }}</td>
                 </tr>
                 <tr>
                     <th scope="row" class="col-4">Token NFT</th>
-                    <td id="deskripsi">{{ $produks->nft_token_id }}</td>
+                    <td id="nftToken">{{ $produks->nft_token_id }}</td>
                 </tr>
                 <tr>
                     <th scope="row" class="col-4">QRcode Token NFT</th>
-                    <td id="deskripsi">
-                      @if(isset($produks->nft_token_id))
-                        <div>{!! QrCode::size(200)->generate($produks->nft_token_id) !!}</div>
-                      @else
-                        <p>QR code tidak tersedia</p>
-                      @endif
+                    <td id="qrcode">
+                        @if(isset($produks->nft_token_id))
+                        @php
+                            $qrData = [
+                                'judul' => 'Alveen Clothing',
+                                'nama_produk' => $produks->nama_produk,
+                                'type_produk' => $produks->type_produk,
+                                'foto_produk' => asset('images/' . $produks->foto_produk),
+                                'nft_token_id' => $produks->nft_token_id
+                            ];
+            
+                            $qrCodeUrl = route('displayQRCodeData', ['data' => json_encode($qrData)]);
+                        @endphp
+                        <div>{!! QrCode::size(200)->generate($qrCodeUrl) !!}</div>
+                        @else
+                            <p>QR code tidak tersedia</p>
+                        @endif
                     </td>
                 </tr>
             </tbody>
         </table>
         <div class="mb-3 justify-content-center d-flex gap-4">
-            <a href="{{ route('editProduk', ['id' => $produks->id]) }}" class="btn btn-success w-75 fw-bold">Edit</a>
+            {{-- <a href="{{ route('editProduk', ['id' => $produks->id]) }}" class="btn btn-success w-75 fw-bold">Edit</a> --}}
+            <a href="{{ route('editProduk', ['id' => $produks->id]) }}" class="btn btn-success w-75 fw-bold {{ $produks->type_produk === 'eksklusif' ? 'disabled' : '' }}" {{ $produks->type_produk === 'eksklusif' ? 'aria-disabled=true' : '' }}>Edit</a>
             <a href="{{ route('generateQRCodePDF', ['id' => $produks->id]) }}" class="btn btn-primary w-75 fw-bold">Download PDF</a>
         </div>  
         <h4>Detail warna dan ukuran produk</h4>
@@ -87,7 +111,7 @@
                 <th scope="col">Stock</th>
                 <th scope="col">Gambar</th>
                 <th scope="col">Terjual</th>
-                <th scope="col">Aksi</th>
+                {{-- <th scope="col">Aksi</th> --}}
             </tr>
             </thead>
             <tbody>
@@ -101,7 +125,7 @@
                         <a href="#" data-bs-toggle="modal" data-bs-target="#modalImageModal_{{ $variasi->id }}" style="text-decoration: none; color: #FFF; background-color: #000; padding-left: 10px; padding-right: 10px; border-radius: 8px;">{{ $variasi->foto_produk_modal }}</a>
                     </td>
                     <td>15</td>
-                    <td><button class="btn btn-delete btn-danger btn-sm" style="display: none;" onclick="deleteRow(this)">Hapus</button></td>
+                    {{-- <td><button class="btn btn-delete btn-danger btn-sm" style="display: none;" onclick="deleteRow(this)">Hapus</button></td> --}}
                 </tr>
 
                 <!-- Modal for Variasi Images -->
