@@ -3,10 +3,11 @@
 @section('content')
 <style>
     .bg-light-orange {
-        background-color: #ff9d6d;
+        background-color: #f5f5f5;
     }
     .form-control {
         width: 100%;
+        border: 3px solid #e74900;
     }
     @media (min-width: 768px) {
     }
@@ -15,14 +16,10 @@
     <div class="text-center p-3">
         <img class="rounded-circle mt-3" src="images/profil.png" width="120">
         <h4 class="font-weight-bold mt-3">{{ Auth::user()->name }}</h4>
-        <p class="text-white">{{ Auth::user()->email }}</p>
+        <p class="text-black">{{ Auth::user()->email }}</p>
     </div>
     <div class="p-3">
         <h3 class="fw-bold mb-4 text-center">Profile Anda</h3>
-        <div class="form-group mb-3">
-            <label>ID Akun</label>
-            <input type="text" class="form-control" value="{{ Auth::user()->id }}" readonly>
-        </div>
         <div class="form-group mb-3">
             <label>Nama Lengkap</label>
             <input type="text" class="form-control" value="{{ Auth::user()->name }}" readonly>
