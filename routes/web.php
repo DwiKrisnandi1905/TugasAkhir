@@ -50,10 +50,8 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkReques
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset')->middleware(['guestt', 'guest']);
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
-
-// QR Code Display Routes
-Route::get('/display_qrcode_data/tokobaju', [tokobajuController::class, 'displayQRCodeData'])->name('displayQRCodeData');
-Route::get('/display_qrcode_data/konveksi', [konveksiController::class, 'displayQRCodeDataKonveksi'])->name('displayQRCodeDataKonveksi');
+Route::get('/display_qrcode_data', [tokobajuController::class, 'displayQRCodeData'])->name('displayQRCodeData');
+Route::get('/display_qrcode_data_konveksi', [konveksiController::class, 'displayQRCodeDataKonveksi'])->name('displayQRCodeDataKonveksi');
 
 // Admin Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {

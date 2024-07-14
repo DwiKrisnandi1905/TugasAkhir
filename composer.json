@@ -10,6 +10,7 @@
         "consoletvs/charts": "6.*",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "2.7.*",
+        "kornrunner/ethereum-offline-raw-tx": "^0.7.0",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",

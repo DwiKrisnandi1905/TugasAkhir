@@ -36,14 +36,16 @@ class tokobajuController extends Controller
         $produks = Produk::findOrFail($id);
         $variasiProduk = VariasiProduk::where('produk_id', $id)->get();
         $totalTerjual = Pesanan::where('nama_produk', $produks->nama_produk)->sum('kuantitas');
+        $totalVariasiTerjual = Pesanan::sum('kuantitas');
         return view('admin.page.TokoBaju.DetailProduk',[
             'produks' => $produks,
             'variasiProduk' => $variasiProduk,
             'totalTerjual' => $totalTerjual,
+            'totalVariasiTerjual' => $totalVariasiTerjual,
             'name' => 'Detail Produk Toko Baju',
             'title' => 'Detail Produk Toko Baju',
         ]);
-    }
+    } 
 
     public function editProduk($id)
     {

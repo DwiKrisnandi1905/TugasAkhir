@@ -71,7 +71,7 @@
                 </li>
             </ul>
         </li>
-        <li class="sidebar-item {{ Request::path() == 'notifikasi' ? 'active' : '' }}">
+        {{-- <li class="sidebar-item {{ Request::path() == 'notifikasi' ? 'active' : '' }}">
             <a href="{{ route('notifikasi') }}" class="sidebar-link collapsed has-dropdown" 
                 data-bs-target="#notifikasi" aria-expanded="false" aria-controls="notifikasi">
                 <i class="lni lni-popup"></i>
@@ -94,7 +94,7 @@
                     <a href="{{ route('setting') }}" class="sidebar-link">Setting</a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
     </ul>
     <div class="sidebar-footer">
         <form action="{{ route('logout') }}" method="POST" id="logout-form">

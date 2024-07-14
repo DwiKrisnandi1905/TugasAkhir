@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->date('birthdate')->nullable();
             $table->string('phone')->nullable();
+            $table->string('foto_profile')->nullable();
         });
     }
 
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->dropColumn('gender');
             $table->dropColumn('birthdate');
             $table->dropColumn('phone');
+            $table->dropColumn('foto_profile');
         });
     }
 };

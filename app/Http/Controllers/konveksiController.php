@@ -34,9 +34,12 @@ class konveksiController extends Controller
         $konveksis = Konveksi::findOrFail($id);
         $variasiProdukKonveksi = VariasiProdukKonveksi::where('konveksi_id', $id)->get();
         $totalTerjual = PesananKonveksi::where('nama_produk', $konveksis->nama_produk)->sum('kuantitas');
+        $totalVariasiTerjual = PesananKonveksi::get('kuantitas');
+
         return view('admin.page.Konveksi.DetailProduk',[
             'konveksis' => $konveksis,
             'variasiProdukKonveksi' => $variasiProdukKonveksi,
+            'totalVariasiTerjual' => $totalVariasiTerjual,
             'totalTerjual' => $totalTerjual,
             'name' => 'Detail Produk Konveksi',
             'title' => 'Detail Produk Konveksi',
@@ -171,7 +174,7 @@ class konveksiController extends Controller
     
         $qrCode = base64_encode(QrCode::format('svg')->size(200)->generate($qrCodeUrl));
     
-        $pdf = PDF::loadView('pdf.qrcode', ['qrCode' => $qrCode, 'konveksi' => $konveksi]);
+        $pdf = PDF::loadView('pdf.qrcodeKonveksi', ['qrCode' => $qrCode, 'konveksi' => $konveksi]);
     
         return $pdf->download('qrcode_' . $konveksi->id . '.pdf');
     }
@@ -199,7 +202,7 @@ class konveksiController extends Controller
         // Hitung total pesanan terjual
         $totalPesananTerjual = PesananKonveksi::sum('kuantitas');
 
-        return view('display_qrcode_data', [
+        return view('display_qrcode_data_konveksi', [
             'data' => $data,
             'totalPesananTerjual' => $totalPesananTerjual,
         ]);
