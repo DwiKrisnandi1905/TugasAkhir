@@ -140,7 +140,7 @@
         }
 
         #contact .container {
-            max-width: 600px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             background: #f0f0f0;
@@ -298,24 +298,38 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-5 text-light">
+    <section id="contact" class="py-5 text-light bg-primary-custom">
         <div class="container">
             <h2 class="text-center mb-5 fw-bold text-black">Hubungi Kami</h2>
-            <form>
-                <div class="mb-3">
-                    <label for="name" class="form-label text-black fw-bold">Nama</label>
-                    <input type="text" class="form-control" id="name" placeholder="Nama Anda">
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-dark-custom p-3 h-100">
+                        <div class="card-body">
+                            <i class="fas fa-envelope fa-3x mb-3"></i>
+                            <h5 class="card-title">Email</h5>
+                            <p class="card-text">contact@alveenclothing.com</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label text-black fw-bold">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-dark-custom p-3 h-100">
+                        <div class="card-body">
+                            <i class="fas fa-phone fa-3x mb-3"></i>
+                            <h5 class="card-title">No. Telepon</h5>
+                            <p class="card-text">085799647295</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="message" class="form-label text-black fw-bold">Pesan</label>
-                    <textarea class="form-control" id="message" rows="3" placeholder="Tulis pesan Anda di sini"></textarea>
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-dark-custom p-3 h-100">
+                        <div class="card-body">
+                            <i class="fas fa-map-marker-alt fa-3x mb-3"></i>
+                            <h5 class="card-title">Alamat</h5>
+                            <p class="card-text">perumahan tembalang pesona asri blok A1 no.5 tembalang, Semarang, Indonesia</p>
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="btn">Kirim Pesan</button>
-            </form>
+            </div>
         </div>
     </section>
 
