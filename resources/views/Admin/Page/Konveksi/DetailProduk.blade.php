@@ -112,7 +112,7 @@
                     <th scope="col">Stock Bahan</th>
                     <th scope="col">Gambar Contoh</th>
                     <th scope="col">Terjual</th>
-                    <th scope="col">Aksi</th>
+                    {{-- <th scope="col">Aksi</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -125,8 +125,7 @@
                     <td class="gambar">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#modalImageModal_{{ $variasiProduk->id }}" style="text-decoration: none; color: #FFF; background-color: #000; padding-left: 10px; padding-right: 10px; border-radius: 8px;">{{ $variasiProduk->foto_produk_modal }}</a>
                     </td>
-                    <td>15</td>
-                    <td><button class="btn btn-delete btn-danger btn-sm" style="display: none;" onclick="deleteRow(this)">Hapus</button></td>
+                    <td>{{$totalVariasiTerjual}}</td>
                 </tr>
 
                 <!-- Modal for Variasi Images -->

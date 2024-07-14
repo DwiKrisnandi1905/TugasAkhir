@@ -34,9 +34,12 @@ class konveksiController extends Controller
         $konveksis = Konveksi::findOrFail($id);
         $variasiProdukKonveksi = VariasiProdukKonveksi::where('konveksi_id', $id)->get();
         $totalTerjual = PesananKonveksi::where('nama_produk', $konveksis->nama_produk)->sum('kuantitas');
+        $totalVariasiTerjual = PesananKonveksi::get('kuantitas');
+
         return view('admin.page.Konveksi.DetailProduk',[
             'konveksis' => $konveksis,
             'variasiProdukKonveksi' => $variasiProdukKonveksi,
+            'totalVariasiTerjual' => $totalVariasiTerjual,
             'totalTerjual' => $totalTerjual,
             'name' => 'Detail Produk Konveksi',
             'title' => 'Detail Produk Konveksi',
