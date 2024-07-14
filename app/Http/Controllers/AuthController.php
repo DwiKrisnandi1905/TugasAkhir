@@ -81,12 +81,19 @@ class AuthController extends Controller
             'gender' => 'required|string',
             'birthdate' => 'required|date',
             'phone' => 'required|string|max:15',
+            'foto_profile' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $user = Auth::user();
         $user->gender = $request->input('gender');
         $user->birthdate = $request->input('birthdate');
         $user->phone = $request->input('phone');
+
+        if ($request->hasFile('foto_profile')) {
+            $imageName = time() . '_foto_profile.' . $request->foto_profile->extension();
+            $request->foto_profile->move(public_path('images/profile'), $imageName);
+            $user->foto_profile = $imageName; // Asumsikan Anda menyimpan nama file di kolom 'foto_profile'
+        }
         $user->save();
 
         return redirect()->back()->with('success', 'Profile updated successfully.');

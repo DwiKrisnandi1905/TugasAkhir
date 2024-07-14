@@ -7,7 +7,7 @@
     <div class="d-flex justify-content-between mb-3">
       <!-- Filter dropdown and Export button -->
       <div class="d-flex align-items-center"> 
-        <div class="dropdown" style="padding: 0 8px;">
+        {{-- <div class="dropdown" style="padding: 0 8px;">
           <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Filters
           </button>
@@ -15,7 +15,7 @@
             <li><a class="dropdown-item" href="#">A - Z</a></li>
           </ul>
         </div>
-        <button class="btn btn-danger fw-bold text-white">Export</button>
+        <button class="btn btn-danger fw-bold text-white">Export</button> --}}
       </div>
       <!-- Search form -->
       <form class="d-flex" role="search" action="{{ route('pelanggan') }}" method="GET">

@@ -171,7 +171,7 @@ class konveksiController extends Controller
     
         $qrCode = base64_encode(QrCode::format('svg')->size(200)->generate($qrCodeUrl));
     
-        $pdf = PDF::loadView('pdf.qrcode', ['qrCode' => $qrCode, 'konveksi' => $konveksi]);
+        $pdf = PDF::loadView('pdf.qrcodeKonveksi', ['qrCode' => $qrCode, 'konveksi' => $konveksi]);
     
         return $pdf->download('qrcode_' . $konveksi->id . '.pdf');
     }
@@ -199,7 +199,7 @@ class konveksiController extends Controller
         // Hitung total pesanan terjual
         $totalPesananTerjual = PesananKonveksi::sum('kuantitas');
 
-        return view('display_qrcode_data', [
+        return view('display_qrcode_data_konveksi', [
             'data' => $data,
             'totalPesananTerjual' => $totalPesananTerjual,
         ]);

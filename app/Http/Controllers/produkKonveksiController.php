@@ -82,7 +82,7 @@ class produkKonveksiController extends Controller
 
         // Buat NFT untuk foto produk utama
         $tokenURI = url('images/' . $imageName); // Gunakan URL publik gambar sebagai tokenURI
-        $fromAddress = '0xC9aB3f5d5261a23A6A9021fa45e32549A3C03fb2'; // Ganti dengan address Ethereum Anda
+        $fromAddress = '0x1cdEF82ee7B6AD764B3323b352477f5A79984184'; // Ganti dengan address Ethereum Anda
         $transactionHash = $this->nftService->createToken($tokenURI, $fromAddress);
 
         // Simpan ID token dan hash transaksi

@@ -83,7 +83,7 @@
                             $qrData = [
                                 'judul' => 'Alveen Clothing',
                                 'nama_produk' => $konveksis->nama_produk,
-                                'type_produk' => $konveksis->type_produk,
+                                // 'type_produk' => $konveksis->type_produk,
                                 'foto_produk' => asset('images/' . $konveksis->foto_produk),
                                 'nft_token_id' => $konveksis->nft_token_id
                             ];

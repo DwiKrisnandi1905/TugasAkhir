@@ -13,10 +13,10 @@
 </style>
 <div class="container bg-light-orange mt-5 p-4 rounded profile-container mx-auto">
     <div class="text-center p-3">
-        <img class="rounded-circle mt-3" src="images/profil.png" width="120">
+        <img class="rounded-circle mt-3" src="{{ Auth::user()->foto_profile ? asset('images/profile/' . Auth::user()->foto_profile) : 'images/profil.png' }}" width="120">
         <h4 class="font-weight-bold mt-3">{{ Auth::user()->name }}</h4>
         <p class="text-white">{{ Auth::user()->email }}</p>
-    </div>
+    </div>    
     <div class="p-3">
         <h3 class="fw-bold mb-4 text-center">Profile Anda</h3>
         <div class="form-group mb-3">
@@ -61,7 +61,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="editProfileForm" action="{{ route('updateProfile') }}" method="POST">
+                <form id="editProfileForm" action="{{ route('updateProfile') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label class="text-start fw-bold">Nama Lengkap</label>
@@ -85,6 +85,10 @@
                     <div class="form-group">
                         <label class="text-start fw-bold">No. Telepon</label>
                         <input type="text" class="form-control" name="phone" id="modalPhone" value="{{ Auth::user()->phone }}">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-start fw-bold">Foto Produk</label>
+                        <input type="file" class="form-control" name="foto_profile" id="modalFotoProduk">
                     </div>
                 </form>
             </div>
