@@ -4,13 +4,13 @@
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="https://via.placeholder.com/800x400?text=First+Slide" class="d-block w-100" alt="...">
+            <img src="images/bg7.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="https://via.placeholder.com/800x400?text=Second+Slide" class="d-block w-100" alt="...">
+            <img src="images/bg8.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="https://via.placeholder.com/800x400?text=Third+Slide" class="d-block w-100" alt="...">
+            <img src="images/bg9.jpg" class="d-block w-100" alt="...">
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">

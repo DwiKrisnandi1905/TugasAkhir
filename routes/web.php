@@ -26,7 +26,6 @@ use App\Http\Controllers\transaksiController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,10 +37,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
+// Guest Routes
 Route::get('/', [Controller::class, 'landingPage'])->name('landingPage')->middleware('guestt');
 Route::get('/landingPage', [Controller::class, 'landingPage'])->name('landingPage')->middleware('guestt');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guestt');
@@ -50,106 +46,109 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request')->middleware(['guestt','guest']);
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request')->middleware(['guestt', 'guest']);
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset')->middleware(['guestt','guest']);
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset')->middleware(['guestt', 'guest']);
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
-Route::get('/display_qrcode_data', [tokobajuController::class, 'displayQRCodeData'])->name('displayQRCodeData');
-Route::get('/display_qrcode_data', [konveksiController::class, 'displayQRCodeDataKonveksi'])->name('displayQRCodeDataKonveksi');
 
+// QR Code Display Routes
+Route::get('/display_qrcode_data/tokobaju', [tokobajuController::class, 'displayQRCodeData'])->name('displayQRCodeData');
+Route::get('/display_qrcode_data/konveksi', [konveksiController::class, 'displayQRCodeDataKonveksi'])->name('displayQRCodeDataKonveksi');
+
+// Admin Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    // admin
-    // Route::get('/', [Controller::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard', [dashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/pelanggan', [pelangganController::class, 'pelanggan'])->name('pelanggan');
-    Route::get('/pelanggan/detail{id}', [PelangganController::class, 'detailUser'])->name('detailUser');
+    Route::get('/pelanggan/detail{id}', [pelangganController::class, 'detailUser'])->name('detailUser');
 
-    // ---------------------------------------------------KONVEKSI---------------------------------------------------------------
-    Route::get('/konveksi', [konveksiController::class, 'konveksi'])->name('konveksi');
-    Route::delete('/konveksi/deleteProdukKonveksi/{id}', [konveksiController::class, 'deleteProdukKonveksi'])->name('deleteProdukKonveksi');
+    // Konveksi Routes
+    Route::prefix('konveksi')->group(function () {
+        Route::get('/', [konveksiController::class, 'konveksi'])->name('konveksi');
+        Route::delete('/deleteProdukKonveksi/{id}', [konveksiController::class, 'deleteProdukKonveksi'])->name('deleteProdukKonveksi');
+        
+        // Kategori Konveksi
+        Route::get('/kategoriKonveksi', [kategoriKonveksiController::class, 'kategoriKonveksi'])->name('kategoriKonveksi');
+        Route::post('/storeeKategori', [kategoriKonveksiController::class, 'storee'])->name('storeeKategori');
+        Route::delete('/deleteeKategori/{id}', [kategoriKonveksiController::class, 'deletee'])->name('deleteeKategori');
+        Route::get('/editKategoriKonveksi/{id}', [kategoriKonveksiController::class, 'edit'])->name('editKategoriKonveksi');
+        Route::put('/updateKategoriKonveksi/{id}', [kategoriKonveksiController::class, 'update'])->name('updateKategoriKonveksi');
 
-    // kategori Konveksi
-    Route::get('/konveksi/kategoriKonveksi', [kategoriKonveksiController::class, 'kategoriKonveksi'])->name('kategoriKonveksi');
-    Route::post('/konveksi/storeeKategori', [kategoriKonveksiController::class, 'storee'])->name('storeeKategori');
-    Route::delete('/konveksi/deleteeKategori/{id}', [kategoriKonveksiController::class, 'deletee'])->name('deleteeKategori');
-    Route::get('/konveksi/editKategoriKonveksi/{id}', [kategoriKonveksiController::class, 'edit'])->name('editKategoriKonveksi');
-    Route::put('/konveksi/updateKategoriKonveksi/{id}', [kategoriKonveksiController::class, 'update'])->name('updateKategoriKonveksi');
-    // kategori Konveksi end 
+        // Produk Konveksi
+        Route::get('/produkKonveksi', [produkKonveksiController::class, 'produkKonveksi'])->name('produkKonveksi');
+        Route::post('/simpanProdukKonveksi', [produkKonveksiController::class, 'simpanDataKonveksi'])->name('simpanProdukKonveksi');
+        Route::get('/verify-nft/{transactionHash}', [produkKonveksiController::class, 'verifyNFT'])->name('verify-nft');
+        
+        // Detail Konveksi
+        Route::get('/detailProdukKonveksi/{id}', [konveksiController::class, 'detailProdukKonveksi'])->name('detailProdukKonveksi');
+        Route::get('/generateQRCodePDF/{id}', [konveksiController::class, 'generateQRCodePDF'])->name('generateQRCodePDFKonveksi');
+        Route::get('/editProdukKonveksi/{id}', [konveksiController::class, 'editProdukKonveksi'])->name('editProdukKonveksi');
+        Route::put('/updateProdukKonveksi/{id}', [konveksiController::class, 'updateProdukKonveksi'])->name('updateProdukKonveksi');
+        Route::get('/searchByDateKonveksi', [konveksiController::class, 'searchByDateKonveksi'])->name('searchByDateKonveksi');
+        Route::get('/searchKonveksi', [konveksiController::class, 'searchKonveksi'])->name('searchKonveksi');
+    });
 
-    // Tambah produk konveksi
-    Route::get('/konveksi/produkKonveksi', [produkKonveksiController::class, 'produkKonveksi'])->name('produkKonveksi');
-    Route::post('/konveksi/simpanProdukKonveksi', [produkKonveksiController::class, 'simpanDataKonveksi'])->name('simpanProdukKonveksi');
-    // Tambah produk konveksi end
+    // Tokobaju Routes
+    Route::prefix('tokobaju')->group(function () {
+        Route::get('/', [tokobajuController::class, 'tokobaju'])->name('tokobaju');
+        Route::delete('/deleteProduk/{id}', [tokobajuController::class, 'deleteProduk'])->name('deleteProduk');
 
-    // Detail Konveksi
-    Route::get('/konveksi/detailProdukKonveksi/{id}', [konveksiController::class, 'detailProdukKonveksi'])->name('detailProdukKonveksi');
-    Route::get('/konveksi/generateQRCodePDF/{id}', [konveksiController::class, 'generateQRCodePDF'])->name('generateQRCodePDFKonveksi');
-    Route::get('/konveksi/editProdukKonveksi/{id}', [konveksiController::class, 'editProdukKonveksi'])->name('editProdukKonveksi');
-    Route::put('/konveksi/updateProdukKonveksi/{id}', [konveksiController::class, 'updateProdukKonveksi'])->name('updateProdukKonveksi');
-    Route::get('/konveksi/searchByDateKonveksi', [konveksiController::class, 'searchByDateKonveksi'])->name('searchByDateKonveksi');
-    Route::get('/konveksi/searchKonveksi', [konveksiController::class, 'searchKonveksi'])->name('searchKonveksi');
-    //Detail Konveksi end
-    // ---------------------------------------------------KONVEKSI---------------------------------------------------------------
+        // Kategori Tokobaju
+        Route::get('/kategoriTokobaju', [kategoriTokobajuController::class, 'kategoriTokobaju'])->name('kategoriTokobaju');
+        Route::post('/storeKategori', [kategoriTokobajuController::class, 'store'])->name('storeKategori');
+        Route::delete('/deleteKategori/{id}', [kategoriTokobajuController::class, 'delete'])->name('deleteKategori');
+        Route::get('/editKategori/{id}', [kategoriTokobajuController::class, 'edit'])->name('editKategori');
+        Route::put('/updateKategori/{id}', [kategoriTokobajuController::class, 'update'])->name('updateKategori');
 
-    // ---------------------------------------------------TOKOBAJU---------------------------------------------------------------
-    Route::get('/tokobaju', [tokobajuController::class, 'tokobaju'])->name('tokobaju');
-    Route::delete('/tokobaju/deleteProduk/{id}', [tokobajuController::class, 'deleteProduk'])->name('deleteProduk');
+        // Produk Tokobaju
+        Route::get('/produkTokobaju', [produkTokobajuController::class, 'produkTokobaju'])->name('produkTokobaju');
+        Route::post('/simpanProduk', [produkTokobajuController::class, 'simpanData'])->name('simpanProduk');
+        Route::get('/verify-nft/{transactionHash}', [produkTokobajuController::class, 'verifyNFT'])->name('verify-nft');
+        
+        // Detail Tokobaju
+        Route::get('/detailProdukTokobaju/{id}', [tokobajuController::class, 'detailProdukTokobaju'])->name('detailProdukTokobaju');
+        Route::get('/generateQRCodePDF/{id}', [tokobajuController::class, 'generateQRCodePDF'])->name('generateQRCodePDF');
+        Route::get('/editProduk/{id}', [tokobajuController::class, 'editProduk'])->name('editProduk');
+        Route::put('/updateProduk/{id}', [tokobajuController::class, 'updateProduk'])->name('updateProduk');
+        Route::get('/searchByDate', [tokobajuController::class, 'searchByDate'])->name('searchByDate');
+        Route::get('/search', [tokobajuController::class, 'search'])->name('search');
+    });
 
-    // kategori tokobaju 
-    Route::get('/tokobaju/kategoriTokobaju', [kategoriTokobajuController::class, 'kategoriTokobaju'])->name('kategoriTokobaju');
-    Route::post('/tokobaju/storeKategori', [kategoriTokobajuController::class, 'store'])->name('storeKategori');
-    Route::delete('/tokobaju/deleteKategori/{id}', [kategoriTokobajuController::class, 'delete'])->name('deleteKategori');
-    Route::get('/tokobaju/editKategori/{id}', [kategoriTokobajuController::class, 'edit'])->name('editKategori');
-    Route::put('/tokobaju/updateKategori/{id}', [kategoriTokobajuController::class, 'update'])->name('updateKategori');
-    // kategori toko baju end
+    // Transaksi Routes
+    Route::prefix('transaksi')->group(function () {
+        Route::get('/', [transaksiController::class, 'transaksi'])->name('transaksi');
+        
+        // Metode Transaksi
+        Route::get('/metodeTransaksi', [transaksiController::class, 'metodeTransaksi'])->name('metodeTransaksi');
+        Route::post('/tambahMetode', [transaksiController::class, 'tambahMetode'])->name('tambahMetode');
+        Route::delete('/deleteMetode/{id}', [transaksiController::class, 'deleteMetode'])->name('deleteMetode');
+        Route::get('/editMetode/{id}', [transaksiController::class, 'editMetode'])->name('editMetode');
+        Route::put('/updateMetode/{id}', [transaksiController::class, 'updateMetode'])->name('updateMetode');
+        Route::delete('/pesanan/{id}', [transaksiController::class, 'deletePesanan'])->name('deletePesanan');
+        Route::delete('/pesanan-konveksi/{id}', [transaksiController::class, 'deletePesananKonveksi'])->name('deletePesananKonveksi');
 
-    // Tambah produk toko baju 
-    Route::get('/tokobaju/produkTokobaju', [produkTokobajuController::class, 'produkTokobaju'])->name('produkTokobaju');
-    Route::post('/tokobaju/simpanProduk', [produkTokobajuController::class, 'simpanData'])->name('simpanProduk');
-    Route::get('/verify-nft/{transactionHash}', [produkTokobajuController::class, 'verifyNFT'])->name('verify-nft');
-    // Route::get('/display_qrcode_data', [tokobajuController::class, 'displayQRCodeData'])->name('displayQRCodeData');
-    //Tambah produk toko baju end
+        // Detail Transaksi
+        Route::get('/detailTransaksi/{type}/{id}', [transaksiController::class, 'detailTransaksi'])->name('detailTransaksi');
+        Route::post('/update-status/{id}/{type}', [transaksiController::class, 'updateStatus'])->name('updateStatus');
+        Route::get('/export-pdf', [transaksiController::class, 'exportPdf'])->name('exportPdf');
+        Route::get('/export-pesanan', [transaksiController::class, 'exportPesanan'])->name('exportPesanan');
+        Route::get('/export-pesanan-konveksi', [transaksiController::class, 'exportPesananKonveksi'])->name('exportPesananKonveksi');
+    });
 
-    //Detail Tokobaju
-    Route::get('/tokobaju/detailProdukTokobaju/{id}', [tokobajuController::class, 'detailProdukTokobaju'])->name('detailProdukTokobaju');
-    Route::get('/tokobaju/generateQRCodePDF/{id}', [tokobajuController::class, 'generateQRCodePDF'])->name('generateQRCodePDF');
-    Route::get('/tokobaju/editProduk/{id}', [tokobajuController::class, 'editProduk'])->name('editProduk');
-    Route::put('/tokobaju/updateProduk/{id}', [tokobajuController::class, 'updateProduk'])->name('updateProduk');
-    Route::get('/tokobaju/searchByDate', [tokobajuController::class, 'searchByDate'])->name('searchByDate');
-    Route::get('/tokobaju/search', [tokobajuController::class, 'search'])->name('search');
-    //Detail Tokobaju
-    // ---------------------------------------------------TOKOBAJU---------------------------------------------------------------
+    // History Routes
+    Route::prefix('history')->group(function () {
+        Route::get('/', [transaksiController::class, 'history'])->name('history');
+        Route::get('/detailHistory/{type}/{id}', [transaksiController::class, 'detailHistory'])->name('detailHistory');
+        Route::get('/export', [transaksiController::class, 'exportHistory'])->name('exportHistory');
+        Route::get('/export-history-pesanan', [transaksiController::class, 'exportHistoryPesanan'])->name('exportHistoryPesanan');
+        Route::get('/export-history-pesanan-konveksi', [transaksiController::class, 'exportHistoryPesananKonveksi'])->name('exportHistoryPesananKonveksi');
+    });
 
-    Route::get('/transaksi', [transaksiController::class, 'transaksi'])->name('transaksi');
-
-    //tambah metode transaksi
-    Route::get('/transaksi/metodeTransaksi', [transaksiController::class, 'metodeTransaksi'])->name('metodeTransaksi');
-    Route::post('/transaksi/tambahMetode', [transaksiController::class, 'tambahMetode'])->name('tambahMetode');
-    Route::delete('/transaksi/deleteMetode/{id}', [TransaksiController::class, 'deleteMetode'])->name('deleteMetode');
-    Route::get('/transaksi/editMetode/{id}', [transaksiController::class, 'editMetode'])->name('editMetode');
-    Route::put('/transaksi/updateMetode/{id}', [transaksiController::class, 'updateMetode'])->name('updateMetode');
-    Route::delete('/transaksi/pesanan/{id}', [transaksiController::class, 'deletePesanan'])->name('deletePesanan');
-    Route::delete('/transaksi/pesanan-konveksi/{id}', [transaksiController::class, 'deletePesananKonveksi'])->name('deletePesananKonveksi');
-    //tambah metode transaksi end
-
-    Route::get('/transaksi/detailTransaksi/{type}/{id}', [TransaksiController::class, 'detailTransaksi'])->name('detailTransaksi');
-    Route::post('/transaksi/update-status/{id}/{type}', [TransaksiController::class, 'updateStatus'])->name('updateStatus');
-    Route::get('/transaksi/export-pdf', [transaksiController::class, 'exportPdf'])->name('exportPdf');
-    Route::get('/export-pesanan', [transaksiController::class, 'exportPesanan'])->name('exportPesanan');
-    Route::get('/export-pesanan-konveksi', [transaksiController::class, 'exportPesananKonveksi'])->name('exportPesananKonveksi');
-
-    Route::get('/history', [TransaksiController::class, 'history'])->name('history');
-    Route::get('/history/detailHistory/{type}/{id}', [TransaksiController::class, 'detailHistory'])->name('detailHistory');
-    Route::get('/history/export', [TransaksiController::class, 'exportHistory'])->name('exportHistory');
-    Route::get('/export-history-pesanan', [TransaksiController::class, 'exportHistoryPesanan'])->name('exportHistoryPesanan');
-    Route::get('/export-history-pesanan-konveksi', [TransaksiController::class, 'exportHistoryPesananKonveksi'])->name('exportHistoryPesananKonveksi');
     Route::get('/notifikasi', [Controller::class, 'notifikasi'])->name('notifikasi');
     Route::get('/setting', [Controller::class, 'setting'])->name('setting');
-    //end admin
 });
 
+// User Routes
 Route::middleware(['auth', 'role:user'])->group(function () {
-    // Route::get('/', [UserController::class, 'home'])->name('home');
     Route::get('/home', [HomeController::class, 'home'])->name('home');
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
     Route::get('/cart', [CartController::class, 'cart'])->name('cart');
@@ -179,5 +178,6 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/statusPesanan', [StatusPesananController::class, 'statusPesanan'])->name('statusPesanan');
     Route::get('/detailStatusPesanan/{type}/{id}', [StatusPesananController::class, 'detailStatusPesanan'])->name('detailStatusPesanan');
     Route::post('/update-profile', [AuthController::class, 'updateProfile'])->name('updateProfile');
-    // Route::get('/display_qrcode_data', [tokobajuController::class, 'displayQRCodeData'])->name('displayQRCodeData');
 });
+
+?>
