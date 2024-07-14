@@ -45,7 +45,7 @@ class tokobajuController extends Controller
             'name' => 'Detail Produk Toko Baju',
             'title' => 'Detail Produk Toko Baju',
         ]);
-    }
+    } 
 
     public function editProduk($id)
     {
