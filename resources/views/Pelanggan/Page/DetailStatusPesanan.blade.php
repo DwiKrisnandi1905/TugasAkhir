@@ -1,4 +1,4 @@
-@extends('Pelanggan.Layout.index')
+@extends('pelanggan.layout.index')
 
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -74,15 +74,17 @@
                         @endif
                     </p>
                     <p class="card-text text-start"><strong>Metode Pembayaran:</strong> <span class="text-end">{{ $pesanan->metode_pembayaran }}</span></p>
-                    <p class="card-text text-start"><strong>No Rekening:</strong> <span class="text-end">{{ $pesanan->no_rekening ? $pesanan->no_rekening : '-' }}</span></p>
-                    <p class="card-text text-start"><strong>Bukti Pembayaran:</strong>
+                    <p class="card-text text-start"><strong>Order Id:</strong> <span class="text-end">{{ $pesanan->order_id }}</span></p>
+                    <p class="card-text text-start"><strong>Status Pembayaran:</strong> <span class="text-end fw-bold text-danger">{{ $pesanan->status_pembayaran }}</span></p>
+                    {{-- <p class="card-text text-start"><strong>No Rekening:</strong> <span class="text-end">{{ $pesanan->no_rekening ? $pesanan->no_rekening : '-' }}</span></p> --}}
+                    {{-- <p class="card-text text-start"><strong>Bukti Pembayaran:</strong>
                         @if($pesanan->bukti_pembayaran)
                             <span class="modal-link" data-bs-toggle="modal" data-bs-target="#buktiPembayaranModal">Lihat Bukti Pembayaran</span>
                         @else
                             -
                         @endif
-                    </p>
-                    <p class="card-text text-start"><strong>Status:</strong> <span class="text-end">{{ $pesanan->status }}</span></p>
+                    </p> --}}
+                    <p class="card-text text-start"><strong>Status:</strong> <span class="text-end fw-bold text-primary">{{ $pesanan->status }}</span></p>
                 </div>
             </div>
         </div>

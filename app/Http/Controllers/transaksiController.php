@@ -49,7 +49,7 @@ class transaksiController extends Controller
         }
         $pesananKonveksi = $pesananKonveksi->paginate($rowsPesananKonveksi, ['*'], 'pesanan_konveksi_page', $pesananKonveksiPage);
 
-        return view('admin.page.Transaksi.Transaksi', [
+        return view('admin.page.transaksi.transaksi', [
             'name' => 'Transaksi',
             'title' => 'Transaksi',
             'pesanan' => $pesanan,
@@ -69,7 +69,7 @@ class transaksiController extends Controller
             abort(404);
         }
 
-        return view('admin.page.Transaksi.detailTransaksi', [
+        return view('admin.page.transaksi.detailTransaksi', [
             'name' => 'Detail Transaksi',
             'title' => 'Detail Transaksi',
             'order' => $order,
@@ -100,7 +100,7 @@ class transaksiController extends Controller
     public function metodeTransaksi ()
     {
         $metode_transaksi = TambahMetode::all();
-        return view('admin.page.Transaksi.metodeTransaksi',[
+        return view('admin.page.transaksi.metodeTransaksi',[
             'metode_transaksi' => $metode_transaksi,
             'name' => 'Metode Transaksi',
             'title' => 'Metode Transaksi',
@@ -125,7 +125,7 @@ class transaksiController extends Controller
     public function editMetode($id)
     {
         $metode = TambahMetode::findOrFail($id);
-        return view('admin.page.Transaksi.editMetode', [
+        return view('admin.page.transaksi.editMetode', [
             'name' => 'Edit Metode Transaksi',
             'title' => 'Edit Metode Transaksi',
             'metode' => $metode,
@@ -210,7 +210,7 @@ class transaksiController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate($pesananKonveksiRows, ['*'], 'pesanan_konveksi_page');
 
-        return view('admin.page.History', [
+        return view('admin.page.history', [
             'name' => 'History',
             'title' => 'History',
             'pesananSelesaiDibatalkan' => $queryPesanan,
@@ -267,7 +267,7 @@ class transaksiController extends Controller
         $pesananKonveksi = $pesananKonveksi->get();
 
         // Load the view and pass the data
-        $pdf = Pdf::loadView('admin.page.Transaksi.exportPdf', compact('pesanan', 'pesananKonveksi'));
+        $pdf = Pdf::loadView('admin.page.transaksi.exportPdf', compact('pesanan', 'pesananKonveksi'));
 
         // Download the PDF
         return $pdf->download('transaksi.pdf');

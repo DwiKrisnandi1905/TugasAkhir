@@ -1,4 +1,4 @@
-@extends('Pelanggan.Layout.index')
+@extends('pelanggan.layout.index')
 
 @section('content')
 <style>
@@ -39,10 +39,7 @@
         <div class="text-center">
             <a href="{{ route('statusPesanan') }}" class="btn btn-danger mr-2 mb-2 loading">Status Pesanan</a>
             <button class="btn btn-danger mr-2 mb-2" type="button" data-toggle="modal" data-target="#editProfileModal">Edit Profile</button>
-            <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                @csrf
-                <button type="submit" class="btn btn-danger mb-2">Logout</button>
-            </form>
+            <button type="button" class="btn btn-danger mb-2" id="logoutButton">Logout</button>
         </div>
     </div>
 </div>
@@ -84,7 +81,7 @@
                         <input type="text" class="form-control" name="phone" id="modalPhone" value="{{ Auth::user()->phone }}">
                     </div>
                     <div class="form-group">
-                        <label class="text-start fw-bold">Foto Produk</label>
+                        <label class="text-start fw-bold">Foto Profile</label>
                         <input type="file" class="form-control" name="foto_profile" id="modalFotoProduk">
                     </div>
                 </form>
@@ -99,9 +96,37 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function submitEditProfileForm() {
         document.getElementById('editProfileForm').submit();
     }
+
+    document.getElementById('logoutButton').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Apakah Anda yakin ingin keluar?',
+            text: "Anda akan keluar dari sesi ini.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ff8a50',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Keluar',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Logout berhasil!',
+                    text: 'Anda telah logout dari akun Anda.',
+                    icon: 'success',
+                    confirmButtonColor: '#ff8a50'
+                }).then(() => {
+                    document.getElementById('logout-form').submit();
+                });
+            }
+        });
+    });
 </script>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
 @endsection

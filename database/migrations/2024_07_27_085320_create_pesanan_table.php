@@ -28,10 +28,13 @@ return new class extends Migration
             $table->string('alamat_lengkap')->nullable();
             $table->string('kode_pos')->nullable();
             $table->string('link_lokasi')->nullable();
-            $table->string('metode_pembayaran')->nullable();
+            $table->string('metode_pembayaran')->default('COD');
             $table->string('no_rekening')->nullable();
             $table->string('bukti_pembayaran')->nullable();
             $table->string('status')->default('pending');
+            $table->string('status_pembayaran')->default('belum dibayar');
+            $table->string('order_id')->nullable();
+            $table->string('snap_token')->nullable();
             $table->timestamps();
         });
     }

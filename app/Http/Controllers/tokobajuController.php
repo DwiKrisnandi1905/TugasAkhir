@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Pagination\Paginator;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 // use Barryvdh\DomPDF\Facade as PDF;
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Pesanan;
 
@@ -24,7 +24,7 @@ class tokobajuController extends Controller
 
         $produks = Produk::paginate($rows);
 
-        return view('admin.page.TokoBaju.Tokobaju', [
+        return view('admin.page.tokoBaju.tokobaju', [
             'produks' => $produks,
             'name' => 'Toko Baju',
             'title' => 'Toko Baju',
@@ -37,7 +37,7 @@ class tokobajuController extends Controller
         $variasiProduk = VariasiProduk::where('produk_id', $id)->get();
         $totalTerjual = Pesanan::where('nama_produk', $produks->nama_produk)->sum('kuantitas');
         $totalVariasiTerjual = Pesanan::sum('kuantitas');
-        return view('admin.page.TokoBaju.DetailProduk',[
+        return view('admin.page.tokoBaju.detailProduk',[
             'produks' => $produks,
             'variasiProduk' => $variasiProduk,
             'totalTerjual' => $totalTerjual,
@@ -52,7 +52,7 @@ class tokobajuController extends Controller
         $produks = Produk::findOrFail($id);
         $kategoriTokobaju = kategoriTokobaju::all();
         
-        return view('admin.page.TokoBaju.EditProduk', [
+        return view('admin.page.tokoBaju.editProduk', [
             'produks' => $produks,
             'kategoriTokobaju' => $kategoriTokobaju,
             'name' => 'Edit Produk',
@@ -111,7 +111,7 @@ class tokobajuController extends Controller
         $rows = (int) $request->input('rows', 10);
         $produks = Produk::whereDate('tanggal_masuk', $tgl)->paginate($rows);
 
-        return view('admin.page.TokoBaju.Tokobaju', [
+        return view('admin.page.tokoBaju.tokobaju', [
             'produks' => $produks,
             'name' => 'Toko Baju',
             'title' => 'Toko Baju',
@@ -133,7 +133,7 @@ class tokobajuController extends Controller
         })
         ->paginate($rows);
 
-        return view('admin.page.TokoBaju.Tokobaju', [
+        return view('admin.page.tokoBaju.tokobaju', [
             'produks' => $produks,
             'name' => 'Toko Baju',
             'title' => 'Toko Baju',
@@ -173,7 +173,7 @@ class tokobajuController extends Controller
     
         $qrCode = base64_encode(QrCode::format('svg')->size(200)->generate($qrCodeUrl));
     
-        $pdf = PDF::loadView('pdf.qrcode', ['qrCode' => $qrCode, 'produk' => $produk]);
+        $pdf = Pdf::loadView('pdf.qrcode', ['qrCode' => $qrCode, 'produk' => $produk]);
     
         return $pdf->download('qrcode_' . $produk->id . '.pdf');
     }

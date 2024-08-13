@@ -1,4 +1,4 @@
-@extends('Pelanggan.Layout.index')
+@extends('pelanggan.layout.index')
 
 @section('content')
 

@@ -49,4 +49,11 @@ class UserController extends Controller
     //         'title' => 'Detail Konveksi',
     //     ]);
     // }
+    public function privacyPolicy()
+    {
+        return view('pelanggan.page.privacyPolicy' ,[
+            'name' => 'Privacy Policy',
+            'title' => 'Privacy Policy',
+        ]);
+    }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -56,14 +57,16 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'user',
         ]);
 
-        return redirect()->route('register')->with('status', 'Registrasi berhasil, silahkan kembali ke halaman login');
+        event(new Registered($user));
+
+        return redirect()->route('register')->with('status', 'Registrasi berhasil, silahkan cek email untuk melakukan verifikasi aktivasi akun');
     }
 
     public function logout(Request $request)

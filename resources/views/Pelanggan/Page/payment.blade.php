@@ -1,4 +1,4 @@
-@extends('Pelanggan.Layout.index')
+@extends('pelanggan.layout.index')
 
 @section('content')
 
@@ -29,8 +29,8 @@
     <form action="{{ route('pesanan.storePayment') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <label for="metode_pembayaran">Metode Pembayaran</label>
-            <select class="form-control" id="metode_pembayaran" name="metode_pembayaran" required>
+            {{-- <label for="metode_pembayaran">Metode Pembayaran</label> --}}
+            <select class="form-control" id="metode_pembayaran" name="metode_pembayaran" hidden>
                 <option value="">Pilih Metode Pembayaran</option>
                 @foreach($metode_transaksi as $metode)
                     <option value="{{ $metode->nama_bank }} - {{ $metode->no_rekening }}">{{ $metode->nama_bank }} - {{ $metode->no_rekening }}</option>
@@ -48,12 +48,55 @@
     </form>
 </div>
 
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
 <script>
+    document.getElementById('pay-button').addEventListener('click', function (event) {
+        event.preventDefault();
+        fetch('{{ route('pesanan.storePayment') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                pesanan: document.querySelector('input[name="pesanan"]').value,
+                metode_pembayaran: document.querySelector('select[name="metode_pembayaran"]').value
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.snap_token) {
+                snap.pay(data.snap_token, {
+                    onSuccess: function(result){
+                        window.location.href = "{{ route('statusPesanan') }}";
+                    },
+                    onPending: function(result){
+                        window.location.href = "{{ route('statusPesanan') }}";
+                    },
+                    onError: function(result){
+                        console.error(result);
+                        alert('Transaksi gagal!');
+                    }
+                });
+            } else {
+                alert('Transaksi gagal! Silakan coba lagi.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan! Silakan coba lagi.');
+        });
+    });
+
     document.getElementById('metode_pembayaran').addEventListener('change', function() {
+        const buktiPembayaran = document.getElementById('bukti_pembayaran');
+        const buktiPembayaranContainer = document.getElementById('bukti_pembayaran_container');
         if (this.value !== 'COD') {
-            document.getElementById('bukti_pembayaran_container').style.display = 'block';
+            buktiPembayaranContainer.style.display = 'block';
+            buktiPembayaran.required = true;
         } else {
-            document.getElementById('bukti_pembayaran_container').style.display = 'none';
+            buktiPembayaranContainer.style.display = 'none';
+            buktiPembayaran.required = false;
         }
     });
 

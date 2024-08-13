@@ -25,7 +25,7 @@ class dashboardController extends Controller
         $totalTerjual = $TotalPesananTerjual + $TotalPesananKonveksiTerjual;
         $totalTransaksi = $totalHargaPesanan + $totalHargaPesananKonveksi;
 
-        return view('admin.page.Dashboard',[
+        return view('admin.page.dashboard',[
             'name' => 'Dashboard',
             'title' => 'Dashboard',
             'totalUsers' => $totalUsers,

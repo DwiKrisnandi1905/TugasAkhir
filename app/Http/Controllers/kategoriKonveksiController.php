@@ -10,7 +10,7 @@ class kategoriKonveksiController extends Controller
     public function kategoriKonveksi()
     {
         $kategoriKonveksi = kategoriKonveksi::all();
-        return view('admin.page.Konveksi.TambahKategori', [
+        return view('admin.page.konveksi.tambahKategori', [
             'kategoriKonveksi' => $kategoriKonveksi,
             'name' => 'Tambah Kategori', 
             'title' => 'Tambah Kategori',
@@ -40,7 +40,7 @@ class kategoriKonveksiController extends Controller
     public function edit($id)
     {
         $kategori = kategoriKonveksi::findOrFail($id);
-        return view('admin.page.Konveksi.EditKategori', [
+        return view('admin.page.konveksi.editKategori', [
             'kategori' => $kategori,
             'name' => 'Edit Kategori',
             'title' => 'Edit Kategori'

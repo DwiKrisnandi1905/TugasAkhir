@@ -21,7 +21,7 @@ class produkTokobajuController extends Controller
     public function produkTokobaju()
     {
         $kategoriTokobaju = kategoriTokobaju::all();
-        return view('admin.page.TokoBaju.TambahProduk', [
+        return view('admin.page.tokoBaju.tambahProduk', [
             'kategoriTokobaju' => $kategoriTokobaju,
             'name' => 'Tambah Produk', 
             'title' => 'Tambah Produk',
@@ -51,7 +51,7 @@ class produkTokobajuController extends Controller
         $imageName = time() . '_foto_produk.' . $request->foto_produk->extension();  
         $imagePath = public_path('images/' . $imageName);
         $img = Image::make($request->foto_produk);
-        $img->insert(public_path('watermark.png'), 'bottom-right', 10, 10);
+        $img->insert(public_path('Logo.png'), 'bottom-right', 10, 10);
         $img->save($imagePath);
 
         $produk = new Produk();
@@ -68,7 +68,7 @@ class produkTokobajuController extends Controller
             $imageNameModal = time() . '_foto_produk_modal_' . $i . '.' . $foto_produk_modal->extension();  
             $imagePathModal = public_path('images/' . $imageNameModal);
             $imgModal = Image::make($foto_produk_modal);
-            $imgModal->insert(public_path('watermark.png'), 'bottom-right', 10, 10); 
+            $imgModal->insert(public_path('Logo.png'), 'bottom-right', 10, 10); 
             $imgModal->save($imagePathModal);
 
             $produk->variasi()->create([
@@ -82,7 +82,7 @@ class produkTokobajuController extends Controller
 
         // Buat NFT untuk foto produk utama
         $tokenURI = url('images/' . $imageName); 
-        $fromAddress = '0x4f8bc1DAEE89aa26f800825Cd9a361f231dF4d64'; 
+        $fromAddress = '0x4EEab155eC9718475768e88D4f14E1e43e542fEd'; 
         $transactionHash = $this->nftService->createToken($tokenURI, $fromAddress);
 
         $produk->nft_token_id = $transactionHash; 

@@ -27,6 +27,9 @@ class Pesanan extends Model
         'metode_pembayaran',
         'no_rekening',
         'bukti_pembayaran',
+        'status_pembayaran',
+        'order_id',
+        'snap_token'
     ];
 
     public function user()

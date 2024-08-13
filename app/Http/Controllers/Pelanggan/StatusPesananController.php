@@ -26,7 +26,7 @@ class StatusPesananController extends Controller
         $pesananKonveksiSelesai = PesananKonveksi::where('user_id', $userId)->where('status', 'selesai')->get();
         $pesananKonveksiDibatalkan = PesananKonveksi::where('user_id', $userId)->where('status', 'dibatalkan')->get();
 
-        return view('Pelanggan.Page.statusPesanan', [
+        return view('pelanggan.page.statusPesanan', [
             'name' => 'Status Pesanan',
             'title' => 'Status Pesanan',
             'pesananPending' => $pesananPending,
@@ -51,7 +51,7 @@ class StatusPesananController extends Controller
         abort(404);
     }
 
-    return view('Pelanggan.Page.DetailStatusPesanan', [
+    return view('pelanggan.page.detailStatusPesanan', [
         'pesanan' => $pesanan,
         'type' => $type,
         'name' => 'Detail Status Pesanan',

@@ -1,4 +1,4 @@
-@extends('Pelanggan.Layout.index')
+@extends('pelanggan.layout.index')
 
 @section('content')
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">

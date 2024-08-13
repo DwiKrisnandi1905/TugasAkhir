@@ -13,7 +13,7 @@ class CartKonveksiController extends Controller
     {
         $cart = CartKonveksi::where('user_id', Auth::id())->get();
 
-        return view('Pelanggan.Page.CartKonveksi', [
+        return view('pelanggan.page.cartKonveksi', [
             'name' => 'Cart',
             'title' => 'Cart',
             'cart' => $cart,

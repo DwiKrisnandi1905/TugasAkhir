@@ -1,4 +1,4 @@
-@extends('Admin.Layout.index')
+@extends('admin.layout.index')
 
 @section('content')
 <div class="card mb-3" id="Filter-Konveksi">

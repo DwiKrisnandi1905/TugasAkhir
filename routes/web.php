@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\dashboardController;
-use App\Http\Controllers\pelangganController;
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\kategoriTokobajuController;
 use App\Http\Controllers\kategoriKonveksiController;
 use App\Http\Controllers\produkTokobajuController;
@@ -25,6 +25,8 @@ use App\Http\Controllers\Pelanggan\StatusPesananController;
 use App\Http\Controllers\transaksiController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,11 +55,27 @@ Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name(
 Route::get('/display_qrcode_data', [tokobajuController::class, 'displayQRCodeData'])->name('displayQRCodeData');
 Route::get('/display_qrcode_data_konveksi', [konveksiController::class, 'displayQRCodeDataKonveksi'])->name('displayQRCodeDataKonveksi');
 
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('status', 'Link verifikasi sudah dikirim!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
 // Admin Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [dashboardController::class, 'dashboard'])->name('dashboard');
-    Route::get('/pelanggan', [pelangganController::class, 'pelanggan'])->name('pelanggan');
-    Route::get('/pelanggan/detail{id}', [pelangganController::class, 'detailUser'])->name('detailUser');
+    Route::get('/pelanggan', [PelangganController::class, 'pelanggan'])->name('pelanggan');
+    Route::get('/pelanggan/detail{id}', [PelangganController::class, 'detailUser'])->name('detailUser');
 
     // Konveksi Routes
     Route::prefix('konveksi')->group(function () {
@@ -146,7 +164,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 // User Routes
-Route::middleware(['auth', 'role:user'])->group(function () {
+Route::middleware(['auth', 'role:user', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'home'])->name('home');
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
     Route::get('/cart', [CartController::class, 'cart'])->name('cart');
@@ -176,6 +194,9 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/statusPesanan', [StatusPesananController::class, 'statusPesanan'])->name('statusPesanan');
     Route::get('/detailStatusPesanan/{type}/{id}', [StatusPesananController::class, 'detailStatusPesanan'])->name('detailStatusPesanan');
     Route::post('/update-profile', [AuthController::class, 'updateProfile'])->name('updateProfile');
+    Route::get('/privacyPolicy', [UserController::class, 'privacyPolicy'])->name('privacyPolicy');
+    Route::post('/midtrans/callback', [PesananController::class, 'handleMidtransCallback'])->name('midtrans.callback');
+    Route::post('/pesanan/update-status/{order_id}', [PesananController::class, 'updateStatus'])->name('pesanan.updateStatus');
 });
 
 ?>

@@ -1,4 +1,4 @@
-@extends('Pelanggan.Layout.index')
+@extends('pelanggan.layout.index')
 
 @section('content')
 <style>
@@ -53,6 +53,24 @@
         border: 1px solid #ddd;
         cursor: pointer;
     }
+    html, body {
+        user-select: none; /* Disable text selection */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+
+    .no-screenshot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(10px);
+        z-index: 9999;
+        display: none;
+    }
 </style>
 <div class="container-detail">
     <div class="d-flex">
@@ -65,14 +83,14 @@
             <div class="col-md-4">
                 <img src="{{ asset('images/' . $produk->foto_produk) }}" class="img-fluid" alt="Product Image" style="border: 1px solid black;">
                 <div class="d-flex justify-content-center align-items-center mt-4 mb-5 gap-4">
-                    <div>
+                    {{-- <div>
                         <button class="btn btn-outline-danger me-2">
                             <i class="bi bi-hand-thumbs-up"></i> Like
                         </button>
                         <button class="btn btn-outline-secondary">
                             <i class="bi bi-hand-thumbs-down"></i> Dislike
                         </button>
-                    </div>
+                    </div> --}}
                     <div>
                         <p class="text-muted mb-0">Terjual: {{ $totalTerjual }}</p>
                     </div>
@@ -80,9 +98,10 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body text-start">
-                    <h2 class="card-title">{{ $produk->id }}</h2>
-                    <h2 class="card-title">{{ $produk->nama_produk }}</h2>
+                    {{-- <h2 class="card-title">{{ $produk->id }}</h2> --}}
+                    <h2 class="card-title fw-bold">{{ $produk->nama_produk }}</h2>
                     <p class="card-text text-muted">Kategori: {{ $produk->kategori->name }}</p>
+                    <p class="card-text text-muted">Tipe Produk: <span style="font-weight: bold; color: red;">{{ $produk->type_produk }}</span></p>
                     <h4 class="text-primary">Rp {{ number_format($hargaTertinggi, 2, ',', '.') }} - Rp {{ number_format($hargaTerendah, 2, ',', '.') }}</h4>
                     <div class="mb-4">
                         <label for="colorSelect" class="form-label">Pilih Warna:</label>
@@ -182,7 +201,7 @@
                 <p><strong>Warna:</strong> <span id="modalWarna"></span></p>
                 <p><strong>Ukuran:</strong> <span id="modalUkuran"></span></p>
                 <p><strong>Kuantitas:</strong> <span id="modalKuantitas"></span></p>
-                <p><strong>Harga Satuan:</strong> <span id="modalHargaSatuan"></span></p>
+                {{-- <p><strong>Harga Satuan:</strong> <span id="modalHargaSatuan"></span></p> --}}
                 <p><strong>Total Harga:</strong> <span id="modalTotalHarga"></span></p>
             </div>
             <div class="modal-footer">
@@ -192,6 +211,7 @@
         </div>
     </div>
 </div>
+<div class="no-screenshot" id="noScreenshotOverlay"></div>
 
 <script>
     let hargaSatuan = {{ $hargaTertinggi }};
@@ -273,11 +293,25 @@
                 document.getElementById(`size${variasi.ukuran}`).addEventListener('change', function() {
                     updateHargaSatuan(parseFloat(this.getAttribute('data-harga')));
                     document.getElementById('quantity').value = 1;
-                    document.getElementById('quantity').setAttribute('max', this.getAttribute('data-stock'));
+                    var maxStock = parseInt(this.getAttribute('data-stock'));
+                    document.getElementById('quantity').setAttribute('max', maxStock);
+                    if (maxStock === 0) {
+                        alert('Ukuran ini sedang tidak tersedia.');
+                        document.getElementById('quantity').value = 0;
+                    }
                     updateTotalHarga();
                 });
             });
         }
+    });
+
+    document.getElementById('quantity').addEventListener('input', function() {
+        var maxQuantity = parseInt(this.getAttribute('max'));
+        var currentQuantity = parseInt(this.value);
+        if (currentQuantity > maxQuantity) {
+            this.value = maxQuantity;
+        }
+        updateTotalHarga();
     });
 
     document.getElementById('checkoutButton').addEventListener('click', function() {
@@ -335,6 +369,31 @@
 
         document.body.appendChild(form);
         form.submit();
+    });
+
+    // Disable Print Screen Key
+    document.addEventListener('keyup', function (e) {
+        if (e.key === 'PrintScreen') {
+            navigator.clipboard.writeText(''); // Clear clipboard
+            alert('Tangkapan layar tidak diizinkan dihalaman ini.');
+        }
+    });
+
+    // Disable Ctrl+P (Print)
+    document.addEventListener('keydown', function (e) {
+        if (e.ctrlKey && e.key === 'p') {
+            e.preventDefault();
+            alert('Tangkapan layar tidak diizinkan dihalaman ini.');
+        }
+    });
+
+    // Show overlay when page visibility changes
+    document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'hidden') {
+            document.getElementById('noScreenshotOverlay').style.display = 'block';
+        } else {
+            document.getElementById('noScreenshotOverlay').style.display = 'none';
+        }
     });
 </script>
 @endsection

@@ -1,4 +1,4 @@
-@extends('Pelanggan.Layout.index')
+@extends('pelanggan.layout.index')
 
 @section('content')
 <style>
@@ -116,7 +116,7 @@
             padding: 1rem;
         }
         .card-title {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
         }
         .card-text {
             font-size: .875rem;
@@ -126,8 +126,8 @@
             min-height: auto;
         }
         .card-img {
-            max-width: 100px;
-            max-height: 100px;
+            max-width: 80px;
+            max-height: 80px;
         }
         .card-details {
             margin-left: 0;
@@ -176,7 +176,7 @@
                         <img src="{{ asset('images/' . $pesanan->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
+                                <h5 class="card-title text-start">{{ $pesanan->nama_produk }}</h5>
                                 <a href="{{ route('detailStatusPesanan', ['id' => $pesanan->id, 'type' => 'pesanan']) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
@@ -189,6 +189,8 @@
                             <div class="card-footer">
                                 <div></div>
                                 <div class="card-status">{{ $pesanan->status }}</div>
+                                {{-- <div class="card-status">{{ $pesanan->order_id }}</div> --}}
+                                <button class="btn btn-primary mt-2 ms-2 pay-button" data-order-id="{{ $pesanan->order_id }}" data-snap-token="{{ $pesanan->snap_token }}">Bayar</button>
                             </div>
                         </div>
                     </div>
@@ -198,7 +200,7 @@
                         <img src="{{ asset('images/' . $pesanans->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
+                                <h5 class="card-title text-start">{{ $pesanans->nama_produk }}</h5>
                                 <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start text-start">
@@ -231,7 +233,7 @@
                         <img src="{{ asset('images/' . $pesanan->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
+                                <h5 class="card-title text-start">{{ $pesanan->nama_produk }}</h5>
                                 <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
@@ -253,7 +255,7 @@
                         <img src="{{ asset('images/' . $pesanans->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
+                                <h5 class="card-title text-start">{{ $pesanans->nama_produk }}</h5>
                                 <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
@@ -286,7 +288,7 @@
                         <img src="{{ asset('images/' . $pesanan->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
+                                <h5 class="card-title text-start">{{ $pesanan->nama_produk }}</h5>
                                 <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
@@ -308,7 +310,7 @@
                         <img src="{{ asset('images/' . $pesanans->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
+                                <h5 class="card-title text-start">{{ $pesanans->nama_produk }}</h5>
                                 <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
@@ -341,7 +343,7 @@
                         <img src="{{ asset('images/' . $pesanan->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
+                                <h5 class="card-title text-start">{{ $pesanan->nama_produk }}</h5>
                                 <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
@@ -363,7 +365,7 @@
                         <img src="{{ asset('images/' . $pesanans->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
+                                <h5 class="card-title text-start">{{ $pesanans->nama_produk }}</h5>
                                 <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
@@ -396,7 +398,7 @@
                         <img src="{{ asset('images/' . $pesanan->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $pesanan->nama_produk }}</h5>
+                                <h5 class="card-title text-start">{{ $pesanan->nama_produk }}</h5>
                                 <a href="{{ route('detailStatusPesanan', ['type' => 'pesanan', 'id' => $pesanan->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
@@ -418,7 +420,7 @@
                         <img src="{{ asset('images/' . $pesanans->image) }}" alt="Product Image" class="card-img mx-2">
                         <div class="card-details">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $pesanans->nama_produk }}</h5>
+                                <h5 class="card-title text-start">{{ $pesanans->nama_produk }}</h5>
                                 <a href="{{ route('detailStatusPesanan', ['type' => 'pesananKonveksi', 'id' => $pesanans->id]) }}" class="card-detail-link loading">Detail</a>
                             </div>
                             <p class="card-text text-start">
@@ -441,10 +443,74 @@
     </div>
 </div>
 
+<!-- Midtrans Snap JS -->
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
+
 <!-- Bootstrap 5.3.0 JS and dependencies -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybH6VbJ8QIT5m8yLfeE3FELROUL6aI1XWrKj1dKC7lz18d3k" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-geQ5B5lOZmzJCcA3RCu7WIb5M1zV3Vj0LF0SA2FWzYvHGcVQ4G5KHKd9pX/E+cNB" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Bootstrap Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+<script>
+    $(document).ready(function () {
+        // Set CSRF token for all AJAX requests
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Klik tombol bayar
+        document.querySelectorAll('.pay-button').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var orderId = this.getAttribute('data-order-id');
+                var snapToken = this.getAttribute('data-snap-token');
+
+                snap.pay(snapToken, {
+                    onSuccess: function(result) {
+                        // Payment is successful
+                        console.log('Payment successful:', result);
+
+                        // Make an AJAX request to update the status
+                        $.ajax({
+                            url: '/pesanan/update-status/' + result.order_id, // Adjust the URL to match your route
+                            method: 'POST',
+                            data: {
+                                _token: $('meta[name="csrf-token"]').attr('content'), // Add CSRF token if necessary
+                                status: 'diproses',
+                                status_pembayaran: 'sudah dibayar'
+                            },
+                            success: function(response) {
+                                console.log('Status updated successfully:', response);
+                                // Redirect or show a success message to the user
+                                window.location.href = '/statusPesanan'; // Adjust the URL to your success page
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('Failed to update status:', error);
+                                // Handle the error, show an error message to the user
+                            }
+                        });
+                    },
+                    onPending: function(result) {
+                        console.log('Payment pending:', result);
+                        // Handle the pending state
+                    },
+                    onError: function(result) {
+                        console.error('Payment error:', result);
+                        // Handle the error state
+                    },
+                    onClose: function() {
+                        console.log('Payment popup closed');
+                        // Handle the close event
+                    }
+                });
+            });
+        });
+    });
+</script>
 @endsection

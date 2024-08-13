@@ -1,4 +1,4 @@
-@extends('Pelanggan.Layout.index')
+@extends('pelanggan.layout.index')
 
 @section('content')
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -45,7 +45,7 @@
     <div class="col-md-auto">
         <form class="d-flex" role="search" method="GET" action="{{ route('home') }}">
             <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ request()->get('search', '') }}">
-            <button class="btn btn-outline-success loading" type="submit">Search</button>
+            <button class="btn btn-outline-danger loading" type="submit">Search</button>
             <input type="hidden" name="type" value="{{ $type }}">
             @if (request()->has('kategori'))
                 <input type="hidden" name="kategori" value="{{ request()->get('kategori') }}">

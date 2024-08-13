@@ -12,7 +12,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        return view('Pelanggan.Page.profile', [
+        return view('pelanggan.page.profile', [
             'name' => 'profile',  
             'title' => 'Profile',   
             'user' => $user,        

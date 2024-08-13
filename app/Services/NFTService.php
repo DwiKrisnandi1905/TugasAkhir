@@ -11,7 +11,7 @@ class NFTService
 {
     protected $web3;
     protected $contract;
-    protected $contractAddress = '0x3b1d3114bAf942c1FF2A0574AE9517AA21A859CF';
+    protected $contractAddress = '0x90DE4f9baA5924799757dEE2Ad75D00b8b477E55';
     protected $abi = '[
     {
       "inputs": [],

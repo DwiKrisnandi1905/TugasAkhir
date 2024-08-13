@@ -1,4 +1,4 @@
-@extends('Admin.Layout.index')
+@extends('admin.layout.index')
 
 @section('content')
 <style>
@@ -124,7 +124,7 @@
                     <td class="gambar">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#modalImageModal_{{ $variasi->id }}" style="text-decoration: none; color: #FFF; background-color: #000; padding-left: 10px; padding-right: 10px; border-radius: 8px;">{{ $variasi->foto_produk_modal }}</a>
                     </td>
-                    <td>{{ $totalVariasiTerjual }}</td>
+                    <td>0</td>
                 </tr>
 
                 <!-- Modal for Variasi Images -->

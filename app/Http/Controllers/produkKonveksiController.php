@@ -22,7 +22,7 @@ class produkKonveksiController extends Controller
     public function produkKonveksi()
     {
         $kategoriKonveksi = kategoriKonveksi::all();
-        return view('admin.page.Konveksi.TambahProduk', [
+        return view('admin.page.konveksi.tambahProduk', [
             'kategoriKonveksi' => $kategoriKonveksi,
             'name' => 'Tambah Produk Konveksi', 
             'title' => 'Tambah Produk Konveksi',
@@ -51,7 +51,7 @@ class produkKonveksiController extends Controller
         $imageName = time() . '_foto_produk.' . $request->foto_produk->extension();  
         $imagePath = public_path('images/' . $imageName);
         $img = Image::make($request->foto_produk);
-        $img->insert(public_path('watermark.png'), 'bottom-right', 10, 10); // tambahkan watermark
+        $img->insert(public_path('Logo.png'), 'bottom-right', 10, 10); // tambahkan watermark
         $img->save($imagePath);
 
         $konveksi = new Konveksi();
@@ -68,7 +68,7 @@ class produkKonveksiController extends Controller
             $imageNameModal = time() . '_foto_produk_modals_' . $i . '.' . $foto_produk_modal->extension();  
             $imagePathModal = public_path('images/' . $imageNameModal);
             $imgModal = Image::make($foto_produk_modal);
-            $imgModal->insert(public_path('watermark.png'), 'bottom-right', 10, 10); 
+            $imgModal->insert(public_path('Logo.png'), 'bottom-right', 10, 10); 
             $imgModal->save($imagePathModal);
             
             $konveksi->variasi()->create([
@@ -82,7 +82,7 @@ class produkKonveksiController extends Controller
 
         // Buat NFT untuk foto produk utama
         $tokenURI = url('images/' . $imageName); // Gunakan URL publik gambar sebagai tokenURI
-        $fromAddress = '0x4f8bc1DAEE89aa26f800825Cd9a361f231dF4d64'; // Ganti dengan address Ethereum Anda
+        $fromAddress = '0x4EEab155eC9718475768e88D4f14E1e43e542fEd'; // Ganti dengan address Ethereum Anda
         $transactionHash = $this->nftService->createToken($tokenURI, $fromAddress);
 
         // Simpan ID token dan hash transaksi

@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\Pesanan;
 use App\Models\Produk;
 use App\Models\VariasiProduk;
-use App\Models\TambahMetode;
+use App\Models\tambahMetode;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
+use Midtrans\Config;
+use Midtrans\Snap;
+use Illuminate\Support\Str;
+use Midtrans\Notification;
+
 
 class PesananController extends Controller
 {
@@ -58,7 +63,7 @@ class PesananController extends Controller
 
     public function alamatForm()
     {
-        return view('Pelanggan.Page.alamat', [
+        return view('pelanggan.page.alamat', [
             'name' => 'Alamat',
             'title' => 'Alamat',
         ]);
@@ -99,11 +104,11 @@ class PesananController extends Controller
     public function paymentForm()
     {
         $userId = Auth::id();
-        $pesanan = Pesanan::where('user_id', $userId)->whereNull('metode_pembayaran')->get();
+        $pesanan = Pesanan::where('user_id', $userId)->where('metode_pembayaran', 'COD')->get();
         $total_biaya = $pesanan->sum('total_harga');
-        $metode_transaksi = TambahMetode::all();
+        $metode_transaksi = tambahMetode::all();
 
-        return view('Pelanggan.Page.payment', compact('pesanan', 'total_biaya', 'metode_transaksi'), [
+        return view('pelanggan.page.payment', compact('pesanan', 'total_biaya', 'metode_transaksi'), [
             'name' => 'Pembayaran',
             'title' => 'Pembayaran',
         ]);
@@ -112,7 +117,7 @@ class PesananController extends Controller
     public function storePayment(Request $request)
     {
         $request->validate([
-            'metode_pembayaran' => 'required|string|max:255',
+            'metode_pembayaran' => 'nullable|string|max:255',
             'bukti_pembayaran' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
             'pesanan' => 'required|json',
         ]);
@@ -139,6 +144,48 @@ class PesananController extends Controller
 
         $userId = Auth::id();
 
+        // Konfigurasi Midtrans
+        Config::$serverKey = config('midtrans.server_key');
+        Config::$isProduction = config('midtrans.is_production');
+        Config::$isSanitized = config('midtrans.is_sanitized');
+        Config::$is3ds = config('midtrans.is_3ds');
+
+        // Membuat ID pesanan unik
+        $orderId = 'order-' . Str::uuid();
+
+        $transactionDetails = [
+            'order_id' => $orderId,
+            'gross_amount' => collect($pesanan)->sum('total_harga')
+        ];
+
+        $itemDetails = [];
+        foreach ($pesanan as $item) {
+            $itemDetails[] = [
+                'id' => $item['produk_id'],
+                'price' => $item['harga_satuan'],
+                'quantity' => $item['kuantitas'],
+                'name' => $item['nama_produk']
+            ];
+        }
+
+        $customerDetails = [
+            'first_name' => Auth::user()->name,
+            'email' => Auth::user()->email,
+            'phone' => '081234567890' // Sesuaikan dengan data user
+        ];
+
+        $params = [
+            'transaction_details' => $transactionDetails,
+            'item_details' => $itemDetails,
+            'customer_details' => $customerDetails
+        ];
+
+        try {
+            $snapToken = Snap::getSnapToken($params);
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Failed to create transaction. Please try again.']);
+        }
+
         // Update stok produk berdasarkan pesanan
         foreach ($pesanan as $item) {
             $variasi = VariasiProduk::where('id', $item['produk_id'])->first();
@@ -158,11 +205,14 @@ class PesananController extends Controller
         //     'bukti_pembayaran' => $buktiPembayaranPath,
         //     'status' => 'pending',
         // ]);
-        Pesanan::whereNull('metode_pembayaran')->update([
-            'metode_pembayaran' => $nama_bank,
+        Pesanan::where('metode_pembayaran', 'COD')->update([
+            'metode_pembayaran' => 'midtrans',
             'no_rekening' => $no_rekening,
             'bukti_pembayaran' => $buktiPembayaranPath,
             'status' => 'pending',
+            'status_pembayaran' => 'belum dibayar',
+            'order_id' => $orderId,
+            'snap_token' => $snapToken,
         ]);
 
         $selectedItemIds = array_column($pesanan, 'id');
@@ -176,8 +226,61 @@ class PesananController extends Controller
         $userId = Auth::id();
 
         // Delete the orders and cart items for the authenticated user
-        Pesanan::where('user_id', $userId)->whereNull('metode_pembayaran')->delete();
+        Pesanan::where('user_id', $userId)->where('metode_pembayaran', 'COD')->delete();
 
         return response()->json(['success' => true]);
+    }
+
+    public function handleMidtransCallback(Request $request)
+    {
+        $notification = new Notification();
+
+        $transaction = $notification->transaction_status;
+        $order_id = $notification->order_id;
+
+        $pesanan = Pesanan::where('order_id', $order_id)->first();
+
+        if ($transaction == 'capture') {
+            $pesanan->status = 'sudah dibayar';
+        } elseif ($transaction == 'settlement') {
+            $pesanan->status = 'sudah dibayar';
+        } elseif ($transaction == 'pending') {
+            $pesanan->status = 'belum dibayar';
+        } elseif ($transaction == 'deny') {
+            $pesanan->status = 'dibatalkan';
+        } elseif ($transaction == 'expire') {
+            $pesanan->status = 'kadaluarsa';
+        } elseif ($transaction == 'cancel') {
+            $pesanan->status = 'dibatalkan';
+        }
+
+        $pesanan->save();
+
+        return response()->json(['status' => 'success']);
+    }
+
+    public function updateStatus(Request $request, $order_id)
+    {
+        $request->validate([
+            'status' => 'required|string|in:pending,diproses,dikirim,selesai,dibatalkan',
+            'status_pembayaran' => 'required|string|in:belum dibayar,sudah dibayar',
+        ]);
+
+        // Ambil semua pesanan berdasarkan order_id
+        $orders = Pesanan::where('order_id', $order_id)->get();
+
+        // Periksa apakah ada pesanan yang ditemukan
+        if ($orders->isEmpty()) {
+            return response()->json(['success' => false, 'message' => 'Pesanan tidak ditemukan'], 404);
+        }
+
+        // Update status untuk setiap pesanan
+        foreach ($orders as $order) {
+            $order->status = $request->status;
+            $order->status_pembayaran = $request->status_pembayaran;
+            $order->save();
+        }
+
+        return response()->json(['success' => true, 'message' => 'Status berhasil diupdate untuk semua produk']);
     }
 }

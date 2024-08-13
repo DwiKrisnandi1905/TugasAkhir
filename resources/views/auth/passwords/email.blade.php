@@ -106,6 +106,7 @@
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
+                        <p class="text-success">Silahkan cek email anda untuk langkah selanjutnya dalam melakukan reset password.</p>
                     @endif
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf

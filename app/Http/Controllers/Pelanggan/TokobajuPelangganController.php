@@ -36,7 +36,7 @@ class TokobajuPelangganController extends Controller
 
         $produks = $produks->get();
 
-        return view('Pelanggan.Page.Tokobaju.Tokobaju', [
+        return view('pelanggan.page.tokobaju.tokobaju', [
             'produks' => $produks,
             'kategoris' => $kategoris,
             'name' => 'Toko Baju',
@@ -56,7 +56,7 @@ class TokobajuPelangganController extends Controller
         $hargaTerendah = $produk->variasi->min('harga');
         $totalTerjual = Pesanan::where('nama_produk', $produk->nama_produk)->sum('kuantitas');
 
-        return view('Pelanggan.Page.Tokobaju.detailTokobaju', [
+        return view('pelanggan.page.tokobaju.detailTokobaju', [
             'produk' => $produk,
             'variasi' => $variasi,
             'hargaTertinggi' => $hargaTertinggi,

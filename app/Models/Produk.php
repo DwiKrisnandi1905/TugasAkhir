@@ -17,7 +17,7 @@ class Produk extends Model
 
     public function kategori()
     {
-        return $this->belongsTo(KategoriTokobaju::class, 'kategori_id');
+        return $this->belongsTo(kategoriTokobaju::class, 'kategori_id');
     }
 }
 

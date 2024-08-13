@@ -68,7 +68,7 @@ class HomeController extends Controller
         $konveksis = $konveksis->get();
     }
 
-    return view('Pelanggan.Page.home', [
+    return view('pelanggan.page.home', [
         'produks' => $produks,
         'konveksis' => $konveksis,
         'kategoriProduk' => $kategoriProduk,

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\PesananKonveksi;
 use App\Models\Konveksi;
 use App\Models\VariasiProdukKonveksi;
-use App\Models\TambahMetode;
+use App\Models\tambahMetode;
 use App\Models\CartKonveksi;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,7 +59,7 @@ class PesananKonveksiController extends Controller
 
     public function alamatFormKonveksi()
     {
-        return view('Pelanggan.Page.alamatKonveksi', [
+        return view('pelanggan.page.alamatKonveksi', [
             'name' => 'Alamat',
             'title' => 'Alamat',
         ]);
@@ -102,9 +102,9 @@ class PesananKonveksiController extends Controller
          $userId = Auth::id();
         $pesanan = PesananKonveksi::where('user_id', $userId)->whereNull('metode_pembayaran')->get();
         $total_biaya = $pesanan->sum('total_harga');
-        $metode_transaksi = TambahMetode::all();
+        $metode_transaksi = tambahMetode::all();
 
-        return view('Pelanggan.Page.paymentKonveksi', compact('pesanan', 'total_biaya', 'metode_transaksi'), [
+        return view('pelanggan.page.paymentKonveksi', compact('pesanan', 'total_biaya', 'metode_transaksi'), [
             'name' => 'Pembayaran',
             'title' => 'Pembayaran',
         ]);

@@ -1,4 +1,4 @@
-@extends('Pelanggan.Layout.index')
+@extends('pelanggan.layout.index')
 
 @section('content')
 <style>
@@ -53,6 +53,25 @@
         border: 1px solid #ddd;
         cursor: pointer;
     }
+
+    html, body {
+        user-select: none; /* Disable text selection */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+
+    .no-screenshot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(10px);
+        z-index: 9999;
+        display: none;
+    }
 </style>
 <div class="container-detail">
     <div class="d-flex">
@@ -80,53 +99,63 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body text-start">
-                    <h2 class="card-title">{{ $konveksi->nama_produk }}</h2>
+                    <h2 class="card-title fw-bold">{{ $konveksi->nama_produk }}</h2>
                     <p class="card-text text-muted">Kategori: {{ $konveksi->kategori->name }}</p>
                     <h4 class="text-primary">Rp {{ number_format($hargaTertinggi, 2, ',', '.') }} - Rp {{ number_format($hargaTerendah, 2, ',', '.') }}</h4>
-                    <div class="mb-4">
-                        <label for="colorSelect" class="form-label">Pilih Warna:</label>
-                        <select class="form-select" id="colorSelect">
-                            <option selected>Pilih warna</option>
-                            @foreach($konveksi->variasi->groupBy('warna_produk') as $warna => $variasi)
-                                <option value="{{ $warna }}">{{ $warna }}</option>
-                            @endforeach
-                        </select>
-                        <div class="d-flex flex-wrap mt-4">
-                            @php
-                                $warnaDitampilkan = [];
-                            @endphp
-                            @foreach($konveksi->variasi as $variasi)
-                                @if($variasi->foto_produk_modal && !isset($warnaDitampilkan[$variasi->warna_produk]))
-                                <img src="{{ asset('images/' . $variasi->foto_produk_modal) }}" class="thumbnail" alt="Variasi Foto Produk" data-bs-toggle="modal" data-bs-target="#modal{{$variasi->id}}">
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <div class="mb-4">
+                                <label for="colorSelect" class="form-label">Pilih Warna:</label>
+                                <select class="form-select" id="colorSelect">
+                                    <option selected>Pilih warna</option>
+                                    @foreach($konveksi->variasi->groupBy('warna_produk') as $warna => $variasi)
+                                        <option value="{{ $warna }}">{{ $warna }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="d-flex flex-wrap mt-4">
                                     @php
-                                        $warnaDitampilkan[$variasi->warna_produk] = true;
+                                        $warnaDitampilkan = [];
                                     @endphp
-                                @endif
-                            @endforeach
-                        </div>   
-                        @foreach($konveksi->variasi as $variasi)
-                        <div class="modal fade" id="modal{{$variasi->id}}" tabindex="-1" aria-labelledby="modal{{$variasi->id}}Label" aria-hidden="true">
-                            <div class="modal-dialog modal-sm d-flex justify-content-center align-items-center">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <img src="{{ asset('images/' . $variasi->foto_produk_modal) }}" class="img-fluid" alt="Variasi Foto Produk">
+                                    @foreach($konveksi->variasi as $variasi)
+                                        @if($variasi->foto_produk_modal && !isset($warnaDitampilkan[$variasi->warna_produk]))
+                                        <img src="{{ asset('images/' . $variasi->foto_produk_modal) }}" class="thumbnail" alt="Variasi Foto Produk" data-bs-toggle="modal" data-bs-target="#modal{{$variasi->id}}">
+                                            @php
+                                                $warnaDitampilkan[$variasi->warna_produk] = true;
+                                            @endphp
+                                        @endif
+                                    @endforeach
+                                </div>   
+                                @foreach($konveksi->variasi as $variasi)
+                                <div class="modal fade" id="modal{{$variasi->id}}" tabindex="-1" aria-labelledby="modal{{$variasi->id}}Label" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm d-flex justify-content-center align-items-center">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <img src="{{ asset('images/' . $variasi->foto_produk_modal) }}" class="img-fluid" alt="Variasi Foto Produk">
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
+                                @endforeach                     
+                            </div>
+                            <div id="sizeStockContainer" class="mb-4"></div>
+                            <div class="mb-4">
+                                <label for="quantity" class="form-label">Kuantitas:</label>
+                                <div class="input-group" style="max-width: 150px;">
+                                    <button class="btn btn-outline-secondary" type="button" id="btnMinus">-</button>
+                                    <input type="text" class="form-control text-center" value="1" id="quantity" aria-label="Kuantitas" readonly>
+                                    <button class="btn btn-outline-secondary" type="button" id="btnPlus">+</button>
+                                </div>
+                                <div class="mt-4">
+                                    <p class="fw-bold mb-0">Harga Satuan: <span id="hargaSatuan">Rp {{ number_format($hargaTertinggi, 2, ',', '.') }}</span></p>
+                                    <p class="fw-bold mb-0">Total Harga: <span id="totalHarga">Rp {{ number_format($hargaTertinggi, 2, ',', '.') }}</span></p>
                                 </div>
                             </div>
                         </div>
-                        @endforeach                     
-                    </div>
-                    <div id="sizeStockContainer" class="mb-4"></div>
-                    <div class="mb-4">
-                        <label for="quantity" class="form-label">Kuantitas:</label>
-                        <div class="input-group" style="max-width: 150px;">
-                            <button class="btn btn-outline-secondary" type="button" id="btnMinus">-</button>
-                            <input type="text" class="form-control text-center" value="1" id="quantity" aria-label="Kuantitas" readonly>
-                            <button class="btn btn-outline-secondary" type="button" id="btnPlus">+</button>
-                        </div>
-                        <div class="mt-4">
-                            <p class="fw-bold mb-0">Harga Satuan: <span id="hargaSatuan">Rp {{ number_format($hargaTertinggi, 2, ',', '.') }}</span></p>
-                            <p class="fw-bold mb-0">Total Harga: <span id="totalHarga">Rp {{ number_format($hargaTertinggi, 2, ',', '.') }}</span></p>
+                        <div class="col-12 col-lg-6 align-content-center">
+                            <div class="custom-card text-center text-white" style="background-color:#ff5722; border-radius: 10px;">
+                                <h5>Custom Nama</h5>
+                                <p>Contact: 098765432109</p>
+                            </div>
                         </div>
                     </div>
 
@@ -187,6 +216,7 @@
         </div>
     </div>
 </div>
+<div class="no-screenshot" id="noScreenshotOverlay"></div>
 
 <script>
     let hargaSatuan = {{ $hargaTertinggi }};
@@ -269,11 +299,24 @@
                 document.getElementById(`size${variasi.ukuran}`).addEventListener('change', function() {
                     updateHargaSatuan(parseFloat(this.getAttribute('data-harga')));
                     document.getElementById('quantity').value = 1;
-                    document.getElementById('quantity').setAttribute('max', this.getAttribute('data-stock'));
+                    var maxStock = parseInt(this.getAttribute('data-stock'));
+                    document.getElementById('quantity').setAttribute('max', maxStock);
+                    if (maxStock === 0) {
+                        alert('Ukuran ini sedang tidak tersedia.');
+                        document.getElementById('quantity').value = 0;
+                    }
                     updateTotalHarga();
                 });
             });
         }
+    });
+    document.getElementById('quantity').addEventListener('input', function() {
+        var maxQuantity = parseInt(this.getAttribute('max'));
+        var currentQuantity = parseInt(this.value);
+        if (currentQuantity > maxQuantity) {
+            this.value = maxQuantity;
+        }
+        updateTotalHarga();
     });
 
     document.getElementById('checkoutButton').addEventListener('click', function() {
@@ -331,6 +374,31 @@
 
         document.body.appendChild(form);
         form.submit();
+    });
+
+    // Disable Print Screen Key
+    document.addEventListener('keyup', function (e) {
+        if (e.key === 'PrintScreen') {
+            navigator.clipboard.writeText(''); // Clear clipboard
+            alert('Tangkapan layar tidak diizinkan dihalaman ini.');
+        }
+    });
+
+    // Disable Ctrl+P (Print)
+    document.addEventListener('keydown', function (e) {
+        if (e.ctrlKey && e.key === 'p') {
+            e.preventDefault();
+            alert('Tangkapan layar tidak diizinkan dihalaman ini.');
+        }
+    });
+
+    // Show overlay when page visibility changes
+    document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'hidden') {
+            document.getElementById('noScreenshotOverlay').style.display = 'block';
+        } else {
+            document.getElementById('noScreenshotOverlay').style.display = 'none';
+        }
     });
 </script>
 @endsection

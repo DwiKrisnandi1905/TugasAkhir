@@ -13,7 +13,7 @@
                     <ul class="list-unstyled">
                         <li><a href="/home">Home</a></li>
                         <li><a href="/profile">Profile</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="/privacyPolicy">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>

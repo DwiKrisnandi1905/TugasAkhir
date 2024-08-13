@@ -37,7 +37,7 @@ class KonveksiPelangganController extends Controller
 
         $konveksis = $konveksis->get();
 
-        return view('Pelanggan.Page.Konveksi.Konveksi', [
+        return view('pelanggan.page.konveksi.konveksi', [
             'konveksis' => $konveksis,
             'kategoris' => $kategoris,
             'name' => 'Konveksi',
@@ -57,7 +57,7 @@ class KonveksiPelangganController extends Controller
         $hargaTerendah = $konveksi->variasi->min('harga');
         $totalTerjual = PesananKonveksi::where('nama_produk', $konveksi->nama_produk)->sum('kuantitas');
 
-        return view('Pelanggan.Page.Konveksi.detailKonveksi', [
+        return view('pelanggan.page.konveksi.detailKonveksi', [
             'konveksi' => $konveksi,
             'variasi' => $variasi,
             'hargaTertinggi' => $hargaTertinggi,

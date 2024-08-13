@@ -13,7 +13,7 @@ class CartController extends Controller
     {
         $cart = Cart::where('user_id', Auth::id())->get();
 
-        return view('Pelanggan.Page.cart', [
+        return view('pelanggan.page.cart', [
             'name' => 'Cart',
             'title' => 'Cart',
             'cart' => $cart,

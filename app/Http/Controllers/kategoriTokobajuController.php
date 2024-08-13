@@ -10,7 +10,7 @@ class kategoriTokobajuController extends Controller
     public function kategoriTokobaju()
     {
         $kategoriTokobaju = kategoriTokobaju::all();
-        return view('admin.page.TokoBaju.TambahKategori', [
+        return view('admin.page.tokoBaju.tambahKategori', [
             'kategoriTokobaju' => $kategoriTokobaju,
             'name' => 'Tambah Kategori', 
             'title' => 'Tambah Kategori',
@@ -40,7 +40,7 @@ class kategoriTokobajuController extends Controller
     public function edit($id)
     {
         $kategori = kategoriTokobaju::findOrFail($id);
-        return view('admin.page.TokoBaju.EditKategori', [
+        return view('admin.page.tokoBaju.editKategori', [
             'kategori' => $kategori,
             'name' => 'Edit Kategori',
             'title' => 'Edit Kategori'

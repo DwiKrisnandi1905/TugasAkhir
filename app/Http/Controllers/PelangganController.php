@@ -24,7 +24,7 @@ class pelangganController extends Controller
 
         $users = $query->paginate($rowsPerPage);
 
-        return view('admin.page.Pelanggan', [
+        return view('admin.page.pelanggan', [
             'name' => 'Pelanggan',
             'title' => 'Pelanggan',
             'users' => $users,
@@ -36,7 +36,7 @@ class pelangganController extends Controller
     public function detailUser($id)
     {
         $user = User::findOrFail($id);
-        return view('admin.page.DetailPelanggan', [
+        return view('admin.page.detailPelanggan', [
             'user' => $user,
             'name' => 'Detail Pelanggan',
             'title' => 'Detail Pelanggan',

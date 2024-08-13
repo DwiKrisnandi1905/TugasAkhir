@@ -21,7 +21,7 @@ class Controller extends BaseController
 
     public function dashboard ()
     {
-        return view('admin.page.Dashboard',[
+        return view('admin.page.dashboard',[
             'name' => 'Dashboard',
             'title' => 'Dashboard',
         ]);

@@ -22,7 +22,7 @@ class konveksiController extends Controller
 
         $konveksis = Konveksi::paginate($rows);
         
-        return view('admin.page.Konveksi.Konveksi', [
+        return view('admin.page.konveksi.konveksi', [
             'konveksis' => $konveksis, 
             'name' => 'Konveksi',
             'title' => 'Konveksi',
@@ -36,7 +36,7 @@ class konveksiController extends Controller
         $totalTerjual = PesananKonveksi::where('nama_produk', $konveksis->nama_produk)->sum('kuantitas');
         $totalVariasiTerjual = PesananKonveksi::get('kuantitas');
 
-        return view('admin.page.Konveksi.DetailProduk',[
+        return view('admin.page.konveksi.detailProduk',[
             'konveksis' => $konveksis,
             'variasiProdukKonveksi' => $variasiProdukKonveksi,
             'totalVariasiTerjual' => $totalVariasiTerjual,
@@ -51,7 +51,7 @@ class konveksiController extends Controller
         $konveksis = Konveksi::findOrFail($id);
         $kategoriKonveksi = kategoriKonveksi::all();
         
-        return view('admin.page.Konveksi.EditProduk', [
+        return view('admin.page.konveksi.editProduk', [
             'konveksis' => $konveksis,
             'kategoriKonveksi' => $kategoriKonveksi,
             'name' => 'Edit Produk',
@@ -110,7 +110,7 @@ class konveksiController extends Controller
         $rows = (int) $request->input('rows', 10);
         $konveksis = Konveksi::whereDate('tanggal_masuk', $tgl)->paginate($rows);
 
-        return view('admin.page.Konveksi.Konveksi', [
+        return view('admin.page.konveksi.konveksi', [
             'konveksis' => $konveksis,
             'name' => 'Konveksi',
             'title' => 'Konveksi',
@@ -132,7 +132,7 @@ class konveksiController extends Controller
                         })
                         ->paginate($rows);
 
-        return view('admin.page.Konveksi.Konveksi', [
+        return view('admin.page.konveksi.konveksi', [
             'konveksis' => $konveksis,
             'name' => 'Konveksi',
             'title' => 'Konveksi',

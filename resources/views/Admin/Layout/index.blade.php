@@ -18,10 +18,10 @@
 
 <body>
     <div class="wrapper">
-        @include('Admin.Component.sidebar') 
+        @include('admin.component.sidebar') 
         <div class="main">
             <div style="padding: 22px 22px 0 22px;">
-                @include('Admin.Component.navbar') 
+                @include('admin.component.navbar') 
             </div>
             <div class="container-fluid p-4">
                 @yield('content')
